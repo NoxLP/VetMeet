@@ -1,0 +1,14 @@
+footer {
+  height: 50px !important;
+}
+
+:root {
+  --main-prim-color: #966dd0;
+  --main-prim-trans-color: #966dd091;
+  --main-second-color: #d1f5dc;
+  --main-second-trans-color: #d1f5dc91;
+}
+
+.bg-prim-transp {
+  background-color: #966dd091;
+}
