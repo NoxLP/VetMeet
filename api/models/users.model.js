@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   },
   telephone: { type: Number, required: [true, 'Telephone number is required'] },
   contactPerson: { type: String, maxLength: 128 },
-  createdAt: { type: Number, default: Date.now() // Get a timestamp :) }
+  createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
 })
 
 const userModel = mongoose.model('user', userSchema)
