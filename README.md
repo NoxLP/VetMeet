@@ -84,7 +84,7 @@ All the endpoints below require the user to be authenticated.
 |Verb|Route|Description|
 |-|-|-|
 |GET|**/users**|Get current authenticated user's data|
-|PUT|**/users**|Get current authenticated user's data|
+|PUT|**/users**|Update current authenticated user's data|
 
 - ### Patients
 |Verb|Route|Description|Pag.|
