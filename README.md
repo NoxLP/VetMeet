@@ -91,14 +91,14 @@ All the endpoints below require the user to be authenticated.
 |-|-|-|-|
 |GET|**/patients/dtos**|Get all *Patient DTO* objects|Yes|
 |POST|**/patients**|Create new patient with data patient's name in the body
-|PUT|**/patients/:patientId**|Update patient with id in the parameter with data in the body|
-|DELETE|**/patients/:patientId**|Remove patient with id in the parameter
+|PUT|**/patients/patientId**|Update patient with id in the parameter with data in the body|
+|DELETE|**/patients/patientId**|Remove patient with id in the parameter
 
 
 - ### Meetings
 |Verb|Route|Description|Pag.|
 |-|-|-|-|
-|GET|**/meetings/dtos/date**|Get query filtered *Meeting date DTO* objects|Yes
+|GET|**/meetings/dtos/date**|Get all *Meeting date DTO* objects|Yes
 |GET|**/meetings/dtos/filter**|Get query filtered *Meetings/Patients filter DTO* objects|Yes
 |GET|**/meetings/patientId**|Get meeting and meeting's patient data to show meeting file
 |POST|**/meetings**|Create new meeting with data in the body|
