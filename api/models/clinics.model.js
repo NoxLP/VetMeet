@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
+const clinicsSchema = new mongoose.Schema({
   name: { type: String, required: [true, 'Name is required'] },
   email: {
     type: String,
@@ -13,13 +13,15 @@ const userSchema = new mongoose.Schema({
     unique: [true, 'This email is registered']
   },
   password: { type: String, required: true },
-  role: {
+  address: {
     type: String,
-    enum: ['admin', 'user'],
-    required: true
+    required: [true, 'Address is required'],
+    maxlength: 128
   },
+  telephone: { type: Number, required: [true, 'Telephone number is required'] },
+  contactPerson: { type: String, maxLength: 128 },
   createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
 })
 
-const usersModel = mongoose.model('users', userSchema)
-module.exports = usersModel
+const clinicsModel = mongoose.model('clinics', clinicsSchema)
+module.exports = clinicsModel
