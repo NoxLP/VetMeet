@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="./styles/headerStyles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Veterinaria oftalmología</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid">
+        <a id="signOutMobile" class="nav-link invisible" href="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(115, 115, 115)" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+          </svg>
+        </a>
+        <a class="navbar-brand mx-auto mx-md-0" href="./index.html">
+          <img alt="logo" src="./images/LogoWeb.png" 
+            srcset="./images/LogoMobile.png 150w,
+                    ./images/LogoWeb.png 250w" 
+            sizes="(max-width: 376px) 150px, 250px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto me-4 fs-4 text-center">
+            <li class="nav-item header-navbar-tab">
+              <a href="./quienes-somos.html" class="nav-link">
+                Quiénes somos
+              </a>
+            </li>
+            <li class="nav-item header-navbar-tab">
+              <a href="./enfermedades-sintomas.html" class="nav-link">
+                Enfermedades oculares y sus síntomas
+              </a>
+            </li>
+            <li class="nav-item header-navbar-tab">
+              <a href="./servicios.html" class="nav-link active">
+                Servicios
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--bg-prim-transp-->
+              <a id="loginHeaderTab" href="./citas.html" class="nav-link fs-4">
+                Citas para clínicas veterinarias
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!--Header menu toggler button dropdown when mobile-->
+  <nav class="collapse border-top border-bottom" id="navbarToggleExternalContent">
+    <ul class="fs-6 ms-3 me-3 px-0 pb-0 pt-2">
+      <li class="nav-item justify-content-start border-bottom">
+        <a href="./quienes-somos.html" class="nav-link">
+          Quiénes somos
+        </a>
+      </li>
+      <li class="nav-item justify-content-start border-bottom">
+        <a href="./enfermedades-sintomas.html" class="nav-link">
+          Enfermedades oculares y sus síntomas
+        </a>
+      </li>
+      <li class="nav-item justify-content-start border-bottom">
+        <a href="./servicios.html" class="nav-link active">
+          Servicios
+        </a>
+      </li>
+      <li class="nav-item justify-content-start">
+        <!--bg-prim-transp-->
+        <a href="./citas.html" class="nav-link">
+          Citas para clínicas veterinarias
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+  <footer>
+    <div class="container-fluid bg-dark mx-0 px-0 fixed-bottom text-white">
+      <div class="row">
+        <p class="col-3 fs-5">@Patricia... | Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
