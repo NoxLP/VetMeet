@@ -21,5 +21,5 @@ const userSchema = new mongoose.Schema({
   createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
 })
 
-const userModel = mongoose.model('users', userSchema)
-module.exports = userModel
+const usersModel = mongoose.model('users', userSchema)
+module.exports = usersModel

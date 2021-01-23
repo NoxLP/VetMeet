@@ -2,11 +2,6 @@ const mongoose = require('mongoose')
 
 const clinicsSchema = new mongoose.Schema({
   name: { type: String, required: [true, 'Name is required'] },
-  address: {
-    type: String,
-    required: [true, 'Address is required'],
-    maxlength: 128
-  },
   email: {
     type: String,
     required: [true, 'Email is required'],
@@ -18,10 +13,15 @@ const clinicsSchema = new mongoose.Schema({
     unique: [true, 'This email is registered']
   },
   password: { type: String, required: true },
+  address: {
+    type: String,
+    required: [true, 'Address is required'],
+    maxlength: 128
+  },
   telephone: { type: Number, required: [true, 'Telephone number is required'] },
   contactPerson: { type: String, maxLength: 128 },
   createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
 })
 
-const userModel = mongoose.model('clinics', userSchema)
-module.exports = userModel
+const clinicsModel = mongoose.model('clinics', clinicsSchema)
+module.exports = clinicsModel

@@ -81,8 +81,8 @@ All the endpoints are preceeded by `/api`.
 - ### Auth
 |Verb|Route|Description|
 |-|-|-|
-|POST| **/auth/users/login** |Typical log in with data in the body.
-|POST|**/auth/users/signup**|More typical sign up with data in the body.
+|POST| **/auth/users/login** |Typical log in with data in the body.<a name="fn1"><sup>1</sup></a>
+|POST|**/auth/users/signup**|More typical sign up with data in the body.<a name="fn1"><sup>1</sup></a>
 |POST| **/auth/clinics/login** |Typical log in with data in the body.
 |POST|**/auth/clinics/signup**|More typical sign up with data in the body.|
 
@@ -93,9 +93,9 @@ The endpoints below require to be authenticated as user.
 - ### Users (requires to be authenticated as user)
 |Verb|Route|Description|
 |-|-|-|
-|GET|**/users**|Get current authenticated user's data|
-|PUT|**/users/userEmail**|Update current authenticated user's data|
-|DELETE|**/users/userEmail**|Delete an user
+|GET|**/users**|Get current authenticated user's data<a name="fn1"><sup>1</sup></a>|
+|PUT|**/users/userEmail**|Update current authenticated user's data<a name="fn1"><sup>1</sup></a>|
+|DELETE|**/users/userEmail**|Delete an user<a name="fn1"><sup>1</sup></a>
 
 ## 
 
@@ -128,3 +128,6 @@ All the endpoints below require to be authenticated as clinic or user.
 # 
 
 That's all, enjoy.
+
+---
+<sup>[1](#fn1)</sup>: These endpoints has no access from public web page (front) right now... maybe later.

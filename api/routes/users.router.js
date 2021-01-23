@@ -1,16 +1,27 @@
 const router = require('express').Router()
-const { authUser } = require('../utils') // Authenticated Route
+const { 
+  authUser,
+  authAdmin
+} = require('../utils') // Authenticated Route
 
 const {
   getAllUsers,
   getUserById,
+  getMe,
   deleteUserById,
-  updateUser
+  updateMe,
+  updateUserById
 } = require('../controllers/users.controller')
 
-router.get('/', authUser, getAllUsers)
-router.get('/:id', getUserById)
-router.delete('/:id', deleteUserById)
-router.put('/:id', updateUser)
+router
+  .get('/me', authUser, getMe)
+  .get('/:userId', authAdmin, getUserById)
+  .get('/', authAdmin, getAllUsers)
+
+router
+  .put('/me', authUser, updateMe)
+  .put('/:userId', authAdmin, updateUserById)
+
+router.delete('/:userId', authAdmin, deleteUserById)
 
 module.exports = router
