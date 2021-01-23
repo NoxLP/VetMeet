@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 2222
 app.listen(PORT, (err) => {
   if (err) { throw new Error(err) }
   console.info('>'.repeat(40))
-  console.info('💻  Reboot Server Live')
+  console.info('💻  VetMeet Live')
   console.info(`📡  PORT: http://localhost:${PORT}`)
   console.info('>'.repeat(40) + '\n')
 })

@@ -20,16 +20,24 @@ Simple enough, run `npm install` in your console and you're ready to go.
 ## Database model
 As said before, the database used is [non relational MongoDB database](https://www.mongodb.com/).
 
-The model consists on the 3 collections described below:
+The model consists on the 4 collections described below:
 
 ### Users:
+| Field | Type |
+|-------|------|
+|name|String|
+|email|String|
+|password|String|
+|role|String|
+|createdAt|Number(timestamp)|
+
+### Clinics:
 | Field | Type |
 |-------|------|
 |name|String|
 |address|String|
 |email|String|
 |password|String|
-|role|String|
 |telephone|Number|
 |contactPerson|String|
 |createdAt|Number(timestamp)|
@@ -67,24 +75,37 @@ fields:
     - Meetings: date, disease, surgery, confirmed, done
     - Patients: name, species
 
-## Planned API endpoints @ 22.01.2021
+## Planned API endpoints @ 23.01.2021
 All the endpoints are preceeded by `/api`.
 
-- ### POST /auth/login
-    Typical log in with data in the body.
-
-- ### POST /auth/signup
-    More typical sign up with data in the body.
+- ### Auth
+|Verb|Route|Description|
+|-|-|-|
+|POST| **/auth/users/login** |Typical log in with data in the body.
+|POST|**/auth/users/signup**|More typical sign up with data in the body.
+|POST| **/auth/clinics/login** |Typical log in with data in the body.
+|POST|**/auth/clinics/signup**|More typical sign up with data in the body.|
 
 ## 
 
-All the endpoints below require the user to be authenticated.
+The endpoints below require to be authenticated as user.
 
-- ### Users
+- ### Users (requires to be authenticated as user)
 |Verb|Route|Description|
 |-|-|-|
 |GET|**/users**|Get current authenticated user's data|
-|PUT|**/users**|Update current authenticated user's data|
+|PUT|**/users/userEmail**|Update current authenticated user's data|
+|DELETE|**/users/userEmail**|Delete an user
+
+## 
+
+All the endpoints below require to be authenticated as clinic or user.
+
+- ### Clinics
+|Verb|Route|Description|
+|-|-|-|
+|GET|**/clinics**|Get current authenticated user's data|
+|PUT|**/clinics**|Update current authenticated user's data|
 
 - ### Patients
 |Verb|Route|Description|Pag.|
