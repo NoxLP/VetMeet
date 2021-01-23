@@ -10,5 +10,8 @@ footer {
 }
 
 .bg-prim-transp {
-  background-color: #966dd091;
+  background-color: var(--main-prim-color);
+}
+.color-prim-transp {
+  color: var(--main-prim-color);
 }
