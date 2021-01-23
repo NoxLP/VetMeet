@@ -8,7 +8,6 @@
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/headerStyles.css">
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <title>Veterinaria oftalmología</title>
 </head>
 
@@ -62,7 +61,7 @@
     </nav>
   </header>
   <!--Header menu toggler button dropdown when mobile-->
-  <nav class="collapse border-top border-bottom" id="navbarToggleExternalContent">
+  <nav class="collapse border-top border-bottom mb-4" id="navbarToggleExternalContent">
     <ul class="fs-6 ms-3 me-3 px-0 pb-0 pt-2">
       <li class="nav-item justify-content-start border-bottom">
         <a href="./quienes-somos.html" class="nav-link">
@@ -95,7 +94,7 @@
     </div>
     <div class="row justify-content-center mb-4">
       <hr class="bg-prim-transp mb-4">
-      <button class="w-75">Google button</button>
+      <button id="googleButton" class="w-75">Google button</button>
     </div>
     <div class="row justify-content-center align-items-center mb-2">
       <hr class="col-4">
@@ -104,11 +103,9 @@
     </div>
     <div class="row justify-content-center align-items-center mb-3">
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Email</span>
         <input id="loginEmail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="login-email">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Contraseña</span>
         <input id="loginPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="login-password">
       </div>
       <button id="loginButton" class="btn btn-success bg-prim-transp border-0 w-50">LOG IN</button>
@@ -126,10 +123,11 @@
     </div>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
-  <script src="js/script.js"></script>
+  <script src="js/login.js" type="module"></script>
   <footer>
     <div class="container-fluid bg-dark mx-0 px-0 fixed-bottom text-white">
       <div class="row">
