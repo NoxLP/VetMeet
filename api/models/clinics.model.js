@@ -20,6 +20,8 @@ const clinicsSchema = new mongoose.Schema({
   },
   telephone: { type: Number, required: [true, 'Telephone number is required'] },
   contactPerson: { type: String, maxLength: 128 },
+  patients: [{type: mongoose.Schema.Types.ObjectId, ref: 'patients'}],
+  meetings: [{type: mongoose.Schema.Types.ObjectId, ref: 'meetings'}],
   createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
 })
 

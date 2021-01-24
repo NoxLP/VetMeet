@@ -14,6 +14,7 @@ document.getElementById('signupButton').addEventListener('click', e => {
   Helpers.api.post('/auth/clinics/signup', clinic)
     .then(res => {
       localStorage.setItem('token', res.data.token)
+      localStorage.setItem('name', res.data.name)
       localStorage.setItem('email', res.data.email)
       Helpers.goToApp()
     })

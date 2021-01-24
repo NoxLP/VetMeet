@@ -8,6 +8,7 @@ document.getElementById('loginButton').addEventListener('click', e => {
     .then(res => {
       if (res.data && res.data.token) {
         localStorage.setItem('token', res.data.token)
+        localStorage.setItem('name', res.data.name)
         localStorage.setItem('email', res.data.email)
         goToApp()
       } else {

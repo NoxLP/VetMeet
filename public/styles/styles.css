@@ -5,8 +5,11 @@
   --main-second-trans-color: #d1f5dc91;
 }
 
-.bg-prim-transp {
+.bg-prim {
   background-color: var(--main-prim-color);
+}
+.bg-prim-trans {
+  background-color: var(--main-prim-trans-color);
 }
 .color-prim-transp {
   color: var(--main-prim-color);

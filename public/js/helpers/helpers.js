@@ -11,3 +11,4 @@ export const api = axios.create({
 });
 
 export const goToApp = () => { window.location = APP_URL }
+export const goToHome = () => { window.location = './index.html' }

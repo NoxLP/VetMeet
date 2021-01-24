@@ -61,8 +61,8 @@ function clinicsSignUp(req, res) {
     clinic['contactPerson'] = req.body.contactPerson
 
   ClinicModel.create(clinic)
-    .then(user => {
-      const data = { email: user.email, name: user.name }
+    .then(clinic => {
+      const data = { email: clinic.email, name: clinic.name }
       const token = jwt.sign(data, process.env.SECRET, { expiresIn: '24h' })
       
       res.status(200).json({ token: token, ...data })
@@ -70,6 +70,7 @@ function clinicsSignUp(req, res) {
     .catch(err => res.status(500).json(err))
 }
 function clinicsLogin(req, res) {
+  console.log(res.locals)
   ClinicModel.findOne({ email: req.body.email })
     .then(clinic => {
       if(!clinic) 
@@ -80,7 +81,7 @@ function clinicsLogin(req, res) {
           return res.status(500).json({ error: 'wrong password or email' })
         }
 
-        const clinic_data = { name: req.body.name, email: req.body.email }
+        const clinic_data = { name: clinic.name, email: clinic.email }
         const token = jwt.sign(clinic_data, process.env.SECRET, { expiresIn: '24h' })
 
         return res.status(200).json({ token: token, ...clinic_data })

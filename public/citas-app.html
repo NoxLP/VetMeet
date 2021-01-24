@@ -17,7 +17,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
-        <a id="signOutMobile" class="nav-link invisible" href="">
+        <a id="signOutMobile" class="nav-link d-md-none" href="">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(115, 115, 115)" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
             <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
@@ -52,7 +52,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--bg-prim-transp-->
+              <!--bg-prim-->
               <a id="loginHeaderTab" href="./citas-login.html" class="nav-link fs-4">
                 Citas para clínicas veterinarias
               </a>
@@ -81,7 +81,7 @@
         </a>
       </li>
       <li class="nav-item justify-content-start">
-        <!--bg-prim-transp-->
+        <!--bg-prim-->
         <a href="./citas-login.html" class="nav-link">
           Citas para clínicas veterinarias
         </a>
@@ -91,15 +91,35 @@
   <!--desktop sidebar menu-->
   <nav class="d-none d-md-block float-md-start mt-md-5">
     <div class="list-group fs-5" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="myClinicTab" data-bs-toggle="list" href="#myClinicContent" role="tab" aria-controls="home">Mi Clínica</a>
-      <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list" href="#newMeetingContent" role="tab" aria-controls="home">Concertar cita</a>
-      <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#filterMeetingsContent" role="tab" aria-controls="home">Filtrar mis citas</a>
-      <a class="list-group-item list-group-item-action" id="meetingsFilesTab" data-bs-toggle="list" href="#meetingsFilesContent" role="tab" aria-controls="home">Fichas de mis citas</a>
+      <a class="list-group-item list-group-item-action active" id="myClinicTab" data-bs-toggle="list" href="#myClinicContent" role="tab" aria-controls="miClinica">Mi Clínica</a>
+      <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list" href="#newMeetingContent" role="tab" aria-controls="newMeeting">Concertar cita</a>
+      <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#filterMeetingsContent" role="tab" aria-controls="filterMeetings">Filtrar mis citas</a>
+      <a class="list-group-item list-group-item-action" id="meetingsFilesTab" data-bs-toggle="list" href="#meetingsFilesContent" role="tab" aria-controls="meetingsFiles">Fichas de mis citas</a>
     </div>
   </nav>
 
-  <section id="content" class="container mt-5">
-    
+  <section class="container-fluid card w-75 mt-3 mt-md-5 bg-prim-trans border-0">
+    <p class="text-center text-wrap fw-bold fs-4" id="clinicNameCardText"></p>
+  </section>
+  <section class="container mt-5">
+    <div class="tab-content" id="appNavTabContent">
+      <div class="tab-pane fade show active" id="myClinicContent" role="tabpanel" aria-labelledby="list-miClinica">
+        <input id="myClinicName" type="text" class="form-control mb-3" placeholder="Nombre de mi clínica" aria-label="Nombre de mi clínica" aria-describedby="Nombre de mi clínica">
+        <input id="myClinicAddress" type="text" class="form-control mb-3" placeholder="Direccion postal" aria-label="Direccion postal" aria-describedby="Direccion postal">
+        <input id="myClinicEmail" type="email" class="form-control mb-3" placeholder="Email" aria-label="Email" aria-describedby="Email" disabled>
+        <input id="myClinicTelephone" type="number" class="form-control mb-3" placeholder="Número de teléfono" aria-label="Teléfono" aria-describedby="Teléfono">
+        <input id="myClinicContactPerson" type="text" class="form-control mb-3" placeholder="Persona de contacto" aria-label="Persona de contacto" aria-describedby="Persona de contacto">
+      </div>
+      <div class="tab-pane fade" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
+
+      </div>
+      <div class="tab-pane fade" id="filterMeetingsContent" role="tabpanel" aria-labelledby="list-filtrarMisCitas">
+
+      </div>
+      <div class="tab-pane fade" id="meetingsFilesContent" role="tabpanel" aria-labelledby="list-fichasDeMisCitas">
+
+      </div>
+    </div>
   </section>
 
   <!--footer-->
@@ -119,6 +139,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
-  <script src="js/index.js"></script>
+  <script src="js/app.js" type="module"></script>
 </body>
 </html>
