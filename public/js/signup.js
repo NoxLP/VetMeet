@@ -1,6 +1,6 @@
 import { api, goToApp } from "./helpers/helpers.js";
 
-document.getElementById('signupButton').addEventListener('click', e => {
+const getClinicFromInputs = () => {
   const clinic = {
     name: document.getElementById('nameInput').value,
     address: document.getElementById('addressInput').value,
@@ -10,6 +10,10 @@ document.getElementById('signupButton').addEventListener('click', e => {
   }
   const contactPerson = document.getElementById('contactPInput').value
   if(contactPerson) { clinic['contactPerson'] = contactPerson }
+  return clinic
+}
+document.getElementById('signupButton').addEventListener('click', e => {
+  const clinic = getClinicFromInputs()
   
   Helpers.api.post('/auth/clinics/signup', clinic)
     .then(res => {
