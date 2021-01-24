@@ -57,9 +57,7 @@ const getBDFieldNameByInputId = inputId => {
 
 //#region event callbacks
 function signOut() {
-  localStorage.removeItem('name')
-  localStorage.removeItem('email')
-  localStorage.removeItem('token')
+  localStorage.clear()
   goToHome()
 }
 function updateFieldIfNecessary(e, clinicInputs) {
