@@ -1,4 +1,4 @@
-.nav-item {
+.navbar-nav .nav-item {
   max-width: 350px !important;
   min-width: 250px;
   display: flex;
@@ -10,9 +10,17 @@
   background-color: var(--main-second-trans-color);
   cursor: pointer;
 }
-.nav-link {
+.nav-item .nav-link {
   color: rgb(59, 59, 59) !important;
+}
+.nav-link.active {
+  background-color: var(--main-second-trans-color) !important;
 }
 .nav-item:hover .nav-link {
   color: black !important;
+}
+.list-group-item.active {
+  background-color: var(--main-second-trans-color) !important;
+  color: black;
+  border-color: gray;
 }
