@@ -8,7 +8,7 @@ module.exports = {
   updateMe
 }
 
-const getUserAccesibleData = (clinic, includeId = false) => {
+const getClinicAccesibleData = (clinic, includeId = false) => {
   const data = { 
     name: clinic.name, 
     email: clinic.email, 
@@ -30,7 +30,7 @@ function getMe(req, res) {
     .findOne({ email: res.locals.clinic.email })
     .then(response => {
       console.log('ok', response)
-      res.status(200).json(getUserAccesibleData(response))
+      res.status(200).json(getClinicAccesibleData(response))
     })
     .catch((err) => {
       console.log('me not found with error: ' + err)
@@ -39,5 +39,15 @@ function getMe(req, res) {
 }
 
 function updateMe(req, res) {
-  console.log()
+  console.log('update me controller; body: ', req.body)
+  clinicModel
+    .findOneAndUpdate({ email: res.locals.clinic.email }, req.body)
+    .then(response => {
+      console.log('ok')
+      res.status(200).json(getClinicAccesibleData(response))
+    })
+    .catch((err) => {
+      console.log('error: ' + err)
+      handleError(err, res)
+    })
 }
