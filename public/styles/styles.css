@@ -2,7 +2,7 @@
   --main-prim-color: #966dd0;
   --main-prim-trans-color: #966dd091;
   --main-second-color: #d1f5dc;
-  --main-second-trans-color: #d1f5dc91;
+  --main-second-trans-color: #D9FFE3;
 }
 
 .bg-prim {
@@ -13,4 +13,10 @@
 }
 .color-prim-transp {
   color: var(--main-prim-color);
+}
+.scrollable {
+  overflow-y: scroll;
+}
+.btn-outline-secondary.dropdown-toggle.show {
+  background-color: var(--main-prim-trans-color) !important;
 }
