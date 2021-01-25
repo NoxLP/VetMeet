@@ -25,5 +25,4 @@ const clinicsSchema = new mongoose.Schema({
   createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
 })
 
-const clinicsModel = mongoose.model('clinics', clinicsSchema)
-module.exports = clinicsModel
+module.exports = mongoose.model('clinics', clinicsSchema)
