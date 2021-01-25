@@ -1,10 +1,10 @@
 import { api, goToApp } from "./helpers/helpers.js";
 
-document.getElementById('loginButton').addEventListener('click', e => {
+function loginButtonOnClick() {
   api.post('/auth/clinics/login', {
-      email: document.getElementById('loginEmail').value,
-      password: document.getElementById('loginPassword').value
-    })
+    email: document.getElementById('loginEmail').value,
+    password: document.getElementById('loginPassword').value
+  })
     .then(res => {
       if (res.data && res.data.token) {
         localStorage.setItem('token', res.data.token)
@@ -18,4 +18,13 @@ document.getElementById('loginButton').addEventListener('click', e => {
     .catch(err => {
       alert('Email or Password Wrong!')
     });
-})
+}
+function passwordInputOnKeyUp(e) {
+  if (e.key === 'Enter')
+  document.getElementById('loginButton').click()
+}
+
+window.onload = () => {
+  document.getElementById('loginButton').addEventListener('click', loginButtonOnClick)
+  document.getElementById('loginPassword').addEventListener('keyup', passwordInputOnKeyUp)
+}
