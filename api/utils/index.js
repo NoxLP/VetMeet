@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const usersModel = require('../models/users.model')
-const clinicModel = require('../models/clinics.model')
+const clinicsModel = require('../models/clinics.model')
 
 // Authenticate Middleware
 function authUser(req, res, next) {
@@ -9,7 +9,7 @@ function authUser(req, res, next) {
     res.status(403).json({ error: 'No Token found' })
   } else {
     jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
-      if (err) { res.status(403).json({ error: 'Token not valid' }) }
+      if (err) { return res.status(403).json({ error: 'Token not valid' }) }
       console.log('token: ', token)
       usersModel.findOne({ email: token.email })
         .then(user => {
@@ -26,7 +26,7 @@ function authAdmin(req, res, next) {
     res.status(403).json({ error: 'No Token found' })
   } else {
     jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
-      if (err) { res.status(403).json({ error: 'Token not valid' }) }
+      if (err) { return res.status(403).json({ error: 'Token not valid' }) }
       console.log('token: ', token)
 
       usersModel.findOne({ email: token.email })
@@ -47,14 +47,14 @@ function authAdmin(req, res, next) {
   }
 }
 function authClinic(req, res, next) {
-  console.log('auth clinic: ', req.headers.toksn)
+  console.log('auth clinic: ', req.headers)
   if (!req.headers.token) {
     res.status(403).json({ error: 'No Token found' })
   } else {
     jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
-      if (err) { res.status(403).json({ error: 'Token not valid' }) }
+      if (err) { return res.status(403).json({ error: 'Token not valid' }) }
 
-      clinicModel.findOne({ email: token.email })
+      clinicsModel.findOne({ email: token.email })
         .then(clinic => {
           res.locals.clinic = { name: clinic.name, email: clinic.email }
           next()
@@ -68,20 +68,23 @@ function authUserOrClinic(req, res, next) {
     res.status(403).json({ error: 'No Token found' })
   } else {
     jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
-      if (err) { res.status(403).json({ error: 'Token not valid' }) }
+      if (err) { return res.status(403).json({ error: 'Token not valid' }) }
 
-      clinicModel.findOne({ email: token.email })
+      clinicsModel.findOne({ email: token.email })
         .then(clinic => {
           res.locals.clinic = { name: clinic.name, email: clinic.email }
           next()
           return
         })
-      usersModel.findOne({ email: token.email })
-        .then(user => {
-          res.locals.user = { name: user.name, email: user.email }
-          next()
+        .catch(err0 => {
+          usersModel.findOne({ email: token.email })
+            .then(user => {
+              res.locals.user = { name: user.name, email: user.email }
+              next()
+              return
+            })
+            .catch(err => res.status(404).send('user not found'))
         })
-        .catch(err => res.status(404).send('user not found'))
     })
   }
 }

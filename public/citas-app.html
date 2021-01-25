@@ -144,17 +144,22 @@
         <div class="row mt-4"><hr></div>
         <div class="row align-items-center mt-1">
           <h5 class="col-10">Información del paciente</h5>
-          <button class="col-2 btn btn-outline-secondary" type="button">DIcon</button>
+          <button id="newMetingSaveButton" class="col-2 btn btn-outline-secondary" type="button">DIcon</button>
         </div>
         <div class="row mt-2 scrollable h-75">
           <label class="form-label">
-            Nombre del paciente
-            <div class="input-group mb-3">
+            Nombre
+            <div class="input-group mb-1">
+              <input class="form-control" list="patientsList" id="patientsListInput" placeholder="Nombre del paciente">
+              <datalist id="patientsList">
+              </datalist>
+              <!--
               <input type="text" class="form-control" aria-label="Nombre del paciente">
               <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Pacientes</button>
               <ul class="dropdown-menu dropdown-menu-end" id="patientsList">
                 <li><a id="newPatient" class="dropdown-item" href="#">Nuevo paciente</a></li>
                 <li><hr class="dropdown-divider"></li>
+              -->
               </ul>
             </div>
           </label>
