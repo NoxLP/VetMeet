@@ -1,7 +1,5 @@
 const clinicsModel = require('../models/clinics.model')
 const patientsModel = require('../models/patients.model')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const { handleError } = require('../utils')
 
 module.exports = {
@@ -41,9 +39,8 @@ function getPatientsDTOs(req, res) {
 async function createPatient(req, res) {
   console.log('create patient: ', req.body)
 
-  let patient;
   try {
-    patient = patientsModel.create(req.body)
+    let patient = patientsModel.create(req.body)
     let clinic = await clinicsModel.findOne({ email: res.locals.clinic.email })
 
     patient = await patient

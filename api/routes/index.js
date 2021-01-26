@@ -4,6 +4,7 @@ const authRouter = require('./auth.router')
 const usersRouter = require('./users.router')
 const clinicsRouter = require('./clinics.router')
 const patientsRouter = require('./patients.router')
+const meetingsRouter = require('./meetings.router')
 const { authUser } = require('../utils') // Authenticated Route
 
 router
@@ -11,6 +12,7 @@ router
   .use('/users', usersRouter)
   .use('/clinics', clinicsRouter)
   .use('/patients', patientsRouter)
+  .use('/meetings', meetingsRouter)
 
 router.get('/whoami', authUser, (req, res) => {
   res.send(`hi there! ${res.locals.user.name}`)

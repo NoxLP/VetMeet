@@ -114,34 +114,12 @@
       </div>
       <div class="tab-pane fade container" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
         <div class="row">
-          <div class="col-6">
-            <select id="selectDate" class="form-select" aria-label="Elija hora de la cita">
-              <option selected>   /   /</option>
-              <!--<option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>-->
-            </select>
-            <!--<div class="input-group">
-              <input type="text" class="form-control" placeholder="  /   /" aria-label="Fecha de cita" aria-describedby="Fecha de cita">
-              <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="datepickerButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-event mb-1" viewBox="0 0 16 16">
-                  <path d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                  <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                </svg>
-              </button>
-            </div>-->
-          </div>
-          <div class="col-6">
-            <select id="selectTime" class="form-select" aria-label="Elija hora de la cita">
-              <option selected>   :</option>
-              <!--<option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>-->
-            </select>
-          </div>
+          <label class="form-label col">
+            Fecha y hora
+            <input id="meetingDateInput" type="datetime-local" class="form-control">
+          </label>
         </div>
-        <div class="row mt-4"><hr></div>
+        <div class="row mt-3"><hr></div>
         <div class="row align-items-center mt-1">
           <h5 class="col-10">Información del paciente</h5>
           <button id="newMetingSaveButton" class="col-2 btn btn-outline-secondary" type="button">DIcon</button>
@@ -153,13 +131,6 @@
               <input class="form-control" list="patientsList" id="patientsListInput" placeholder="Nombre del paciente">
               <datalist id="patientsList">
               </datalist>
-              <!--
-              <input type="text" class="form-control" aria-label="Nombre del paciente">
-              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Pacientes</button>
-              <ul class="dropdown-menu dropdown-menu-end" id="patientsList">
-                <li><a id="newPatient" class="dropdown-item" href="#">Nuevo paciente</a></li>
-                <li><hr class="dropdown-divider"></li>
-              -->
               </ul>
             </div>
           </label>

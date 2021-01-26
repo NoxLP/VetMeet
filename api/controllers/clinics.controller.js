@@ -1,6 +1,4 @@
 const clinicModel = require('../models/clinics.model')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const { handleError } = require('../utils')
 
 module.exports = { 

@@ -4,6 +4,7 @@ api.defaults.headers.common['token'] = localStorage.getItem('token')
 
 const clinicData = {};
 const patientsDTOs = [];
+const meetingsDatesDTOs = [];
 let selectedPatientIndex = -1;
 let newPatient;
 
@@ -35,6 +36,18 @@ const getPatientsDTOs = (async function () {
   } catch(err) {
     //TODO => go to a page where the error get shown and explained
     console.log('error retrieving patients dtos: ', err)
+    goToHome()
+  }
+})()
+const getMeetingsDateDTOs = (async function () {
+  try {
+    //this endpoint have pagination, need more testing to see if pagination here is needed
+    Object.assign(
+      meetingsDatesDTOs, 
+      (await api.get('/meetings/dtos/date')).data)
+  } catch(err) {
+    //TODO => go to a page where the error get shown and explained
+    console.log('error retrieving meetings dtos: ', err)
     goToHome()
   }
 })()
