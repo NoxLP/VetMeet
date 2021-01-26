@@ -8,8 +8,16 @@
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/navStyles.css">
+  
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./js/protect.js"></script>
+  
+  <!--<link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">-->
+  <!--<link rel="stylesheet" href="./js-datepicker/dist/datepicker.min.css">
+  <script src="./js-datepicker/dist/datepicker.min.js"></script>-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <!--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">-->
+
   <title>Veterinaria oftalmología</title>
 </head>
 
@@ -114,9 +122,29 @@
       </div>
       <div class="tab-pane fade container" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
         <div class="row">
-          <label class="form-label col">
-            Fecha y hora
-            <input id="meetingDateInput" type="datetime-local" class="form-control">
+          <label class="form-label col-6">
+            Fecha
+            <div class="flatpickr input-group" id="mDIGroup">
+              <input id="meetingDateInput" type="text" class="form-control" placeholder="Fecha" aria-label="Fecha" aria-describedby="mDIButton" data-input>
+              <button class="btn btn-outline-secondary pb-2" type="button" id="mDIButton" data-toggle>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                </svg>
+              </button>
+            </div>
+          </label>
+          <label class="form-label col-6">
+            Hora
+            <div class="flatpickr input-group" id="mTIGroup">
+              <input id="meetingTimeInput" type="text" class="form-control" placeholder="Hora" list="meetingsTimesList" aria-label="Hora"data-input>
+              <datalist id="meetingsTimesList">
+              </datalist>
+              <span class="btn btn-outline-secondary pb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass" viewBox="0 0 16 16">
+                  <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702c0 .7-.478 1.235-1.011 1.491A3.5 3.5 0 0 0 4.5 13v1h7v-1a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351v-.702c0-.7.478-1.235 1.011-1.491A3.5 3.5 0 0 0 11.5 3V2h-7z"/>
+                </svg>
+              </span>
+            </div>
           </label>
         </div>
         <div class="row mt-3"><hr></div>
@@ -175,5 +203,17 @@
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
   <script src="js/app.js" type="module"></script>
+  <!--<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>-->
+  <!--<script src="https://unpkg.com/js-datepicker"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    const datePicker = flatpickr("#mDIGroup", {
+      dateFormat: 'd/m/Y',
+      wrap: true,
+      allowInput: true
+    });
+    //const picker = datepicker('#meetingDateInput')
+    //console.log(picker)
+  </script> 
 </body>
 </html>

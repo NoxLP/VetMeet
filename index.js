@@ -31,7 +31,7 @@ const app = express()
 
 // Init server
 const PORT = process.env.PORT || 2222
-app.listen(PORT, 'DESKTOP-206PU97', (err) => {
+app.listen(PORT, (err) => {
   if (err) { throw new Error(err) }
   console.info('>'.repeat(40))
   console.info('💻  VetMeet Live')

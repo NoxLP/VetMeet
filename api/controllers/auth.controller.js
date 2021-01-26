@@ -70,7 +70,7 @@ function clinicsSignUp(req, res) {
     .catch(err => res.status(500).json(err))
 }
 function clinicsLogin(req, res) {
-  console.log(res.locals)
+  console.log('clinics login')
   ClinicModel.findOne({ email: req.body.email })
     .then(clinic => {
       if(!clinic) 
