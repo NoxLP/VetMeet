@@ -131,31 +131,35 @@
       <!--Concertar cita-->
       <div class="tab-pane fade container" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
         <!--Fila de fecha y hora-->
-        <div class="row card">
-          <label class="form-label col-6">
-            Fecha
-            <div class="flatpickr input-group" id="mDIGroup">
-              <input id="meetingDateInput" type="text" class="form-control" placeholder="Fecha" aria-label="Fecha" aria-describedby="mDIButton" autocomplete="off" data-input>
-              <button class="btn btn-outline-secondary pb-2" type="button" id="mDIButton" data-toggle>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                </svg>
-              </button>
+        <div class="row p-0 mt-3">
+          <div class="card container d-flex flex-nowrap">
+            <div class="row">
+              <label class="form-label col-6">
+                Fecha
+                <div class="flatpickr input-group" id="mDIGroup">
+                  <input id="meetingDateInput" type="text" class="form-control" placeholder="Fecha" aria-label="Fecha" aria-describedby="mDIButton" autocomplete="off" data-input>
+                  <button class="btn btn-outline-secondary pb-2" type="button" id="mDIButton" data-toggle>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                  </button>
+                </div>
+              </label>
+              <label class="form-label col-6">
+                Hora
+                <div class="flatpickr input-group" id="mTIGroup">
+                  <input id="meetingTimeInput" type="text" class="form-control" placeholder="Hora" list="meetingsTimesList" aria-label="Hora" autocomplete="off" data-input>
+                  <datalist id="meetingsTimesList">
+                  </datalist>
+                  <span class="btn btn-outline-secondary pb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass" viewBox="0 0 16 16">
+                      <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702c0 .7-.478 1.235-1.011 1.491A3.5 3.5 0 0 0 4.5 13v1h7v-1a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351v-.702c0-.7.478-1.235 1.011-1.491A3.5 3.5 0 0 0 11.5 3V2h-7z"/>
+                    </svg>
+                  </span>
+                </div>
+              </label>
             </div>
-          </label>
-          <label class="form-label col-6">
-            Hora
-            <div class="flatpickr input-group" id="mTIGroup">
-              <input id="meetingTimeInput" type="text" class="form-control" placeholder="Hora" list="meetingsTimesList" aria-label="Hora" autocomplete="off" data-input>
-              <datalist id="meetingsTimesList">
-              </datalist>
-              <span class="btn btn-outline-secondary pb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass" viewBox="0 0 16 16">
-                  <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702c0 .7-.478 1.235-1.011 1.491A3.5 3.5 0 0 0 4.5 13v1h7v-1a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351v-.702c0-.7.478-1.235 1.011-1.491A3.5 3.5 0 0 0 11.5 3V2h-7z"/>
-                </svg>
-              </span>
-            </div>
-          </label>
+          </div>
         </div>
         <div class="row mt-3"><hr></div>
         <!--Fila de título y subir-->
@@ -206,7 +210,7 @@
           <div class="row align-items-center me-0 pe-0">
             <label class="form-label col-10">
               Filtrar por
-              <select class="form-select" aria-label="Default select example">
+              <select id="meetingsFilterSelect" class="form-select" aria-label="Default select example">
                 <option value="1">Nombre paciente</option>
                 <option value="2">Fecha</option>
                 <option value="3">Patología</option>
@@ -221,17 +225,20 @@
             </button>
           </div>
         </div>
+        <!--separator-->
         <div class="row mb-2 me-3 d-flex justify-content-end">
           <hr class="col-10 me-3 w-75 my-auto">
-          <span class="col-2 badge rounded-pill bg-prim-trans d-inline" style="width: 30px;">
+          <button id="goStartEndButton" class="col-1 btn rounded-pill bg-prim-trans text-white d-flex justify-content-center p-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
             </svg>
-          </span>
+          </button>
         </div>
-        <div class="row container-fluid d-flex flex-column flex-wrap mx-auto py-0 px-1 scrollable" style="max-height: 310px;">
+        <!--cards container-->
+        <div id="meetingsFilterDTOsCardsContainer" class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable mb-0" style="max-height: 310px;">
         </div>
-        <div class="row">
+        <!--spinner-->
+        <div class="row justify-content-center">
           <div id="filterSpinner" class="spinner-border text-info mx-3 hide collapse" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>

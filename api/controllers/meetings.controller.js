@@ -10,51 +10,78 @@ module.exports = {
   deleteMeeting
 }
 
+const FIRST_HOUR = 9
+const LAST_HOUR = 20
+
 //#region helpers
 const getPatientsMeetingsPopulatedFromQuery = async (req, clinic, queryHasName) => {
   const patientQuery = { clinics: clinic._id }
-  if(queryHasName) patientQuery['name'] = req.query.name
-  else patientQuery['species'] = req.query.species
-  
+  if (queryHasName) {
+    patientQuery['name'] = { '$regex': req.query.name, '$options': 'i' }
+  } else {
+    patientQuery['species'] = { '$regex': req.query.species, '$options': 'i' }
+  }
+
   const data = await Promise.all([
-    patientsModel.find(patientQuery, {name: 1, species: 1, _id: 0})
-      .populate({
-        path: 'meetings',
-        select: 'date disease surgery confirmed done'
-      }),
-    patientsModel.find(patientQuery, {name: 1, species: 1, _id: 0})
+    patientsModel.find(patientQuery, { name: 1, species: 1, _id: 0 })
+      .populate({ path: 'meetings' }),
+    patientsModel.find(patientQuery, { name: 1, species: 1, _id: 0 })
       .populate({
         path: 'meetings',
         select: 'date disease surgery confirmed done',
-        options: { 
+        options: {
           limit: req.query.limit,
           skip: req.query.limit * req.query.page,
           sort: { date: 1 }
         }
       })
   ])
-  const [ allPatients, limitedPatients ] = data
+  const [allPatients, limitedPatients] = data
 
-  return [ 
+  return [
     allPatients.reduce((acc, patient) => acc + patient.meetings.length, 0),
     limitedPatients
   ]
 }
+const parseLocaleDate = str => {
+  let split = decodeURIComponent(str).split(/[\/\:\.]/g)
+  if (split.length !== 3)
+    return null
+
+  return new Date(parseInt(split[2]), parseInt(split[1]) - 1, parseInt(split[0]))
+}
 const getMeetingsQuery = query => {
   let meetingQuery = {}
-  for(let paramName in query) {
-    if(paramName === 'limit' || paramName === 'page')
+  for (let paramName in query) {
+    if (paramName === 'limit' || paramName === 'page')
       continue
-      
-    meetingQuery[paramName] = query[paramName]
+
+    if (paramName === 'date') {
+      let parsedDate = parseLocaleDate(query['date'])
+      if (isNaN(parsedDate))
+        return null
+
+      let nextDay = new Date(parsedDate)
+      nextDay.setDate(nextDay.getDate() + 1)
+      meetingQuery['date'] = {
+        $gte: parsedDate,
+        $lt: nextDay
+      }
+    } else {
+      meetingQuery[paramName] = { '$regex': query[paramName], '$options': 'i' }
+    }
   }
 
   return meetingQuery
 }
 const getMeetingsFromQuery = async (req, clinic) => {
   const meetingQuery = getMeetingsQuery(req.query)
+  if (!meetingQuery)
+    return null
+    
   meetingQuery['clinic'] = clinic._id
-  
+  console.log(meetingQuery)
+
   const data = await Promise.all([
     await meetingsModel.find(meetingQuery).count(),
     await meetingsModel.find(meetingQuery)
@@ -63,13 +90,11 @@ const getMeetingsFromQuery = async (req, clinic) => {
       .skip(req.query.limit * req.query.page)
       .sort({ date: 1 })
   ])
-  const [ meetingsCount, limitedMeetings ] = data
-  console.log('lim meets: ', limitedMeetings)
+  const [meetingsCount, limitedMeetings] = data
 
-  return [ meetingsCount, limitedMeetings ]
+  return [meetingsCount, limitedMeetings]
 }
 const mapMeetingsFilterDTOsFromPopulatedPatients = patients => {
-  console.log(patients[0].meetings)
   return patients
     .reduce((acc, patient) => {
       acc = acc.concat(patient.meetings.map(m => {
@@ -126,26 +151,25 @@ async function getFilterDTOs(req, res) {
   req.query.page = parseInt(req.query.page)
   try {
     const clinic = await clinicsModel.findOne({ email: res.locals.clinic.email })
-    console.log('Clinic:', clinic)
     const queryHasName = req.query.hasOwnProperty('name')
     const queryHasSpecies = req.query.hasOwnProperty('species')
     let meetings = [];
 
-    if( queryHasName || queryHasSpecies ) {
+    if (queryHasName || queryHasSpecies) {
       const patients = await getPatientsMeetingsPopulatedFromQuery(req, clinic, queryHasName)
 
-      if(!patients[0] === 0) {
+      if (!patients[0] === 0) {
         res.status(404).send('No meetings found')
         return
       }
-      
+
       meetings.push(patients[0])
       meetings.push(mapMeetingsFilterDTOsFromPopulatedPatients(patients[1]))
     } else {
       meetings = await getMeetingsFromQuery(req, clinic)
 
-      if(!meetings[0] === 0) {
-        res.status(404).send('No meetings found')
+      if (!meetings || meetings[0] === 0) {
+        res.status(200).send('No meetings found')
         return
       }
 
@@ -153,7 +177,7 @@ async function getFilterDTOs(req, res) {
     }
 
     res.status(200).json(meetings)
-  } catch(err) {
+  } catch (err) {
     console.log(err)
     res.status(400).json(err)
   }
@@ -167,18 +191,16 @@ async function createMeeting(req, res) {
 
     let data = await Promise.all([
       clinicsModel.findOne({ email: res.locals.clinic.email }),
-      patientId ? 
+      patientId ?
         patientsModel.findById(patientId) :
         patientsModel.create({ name, species, history })
     ])
     let [clinic, patient] = data
-    console.log(clinic, patient)
 
     let meetingData = { date, disease }
     meetingData['clinic'] = clinic._id
     meetingData['patient'] = patient._id
     let meeting = await meetingsModel.create(meetingData)
-    console.log(meeting)
 
     if (!patientId) {
       clinic.patients.push(patient._id)
@@ -216,10 +238,10 @@ async function deleteMeeting(req, res) {
       clinicsModel.findOne({ email: res.locals.clinic.email })
     ])
     let [meeting, clinic] = data
-    
+
     let patient = await patientsModel.findById(meeting.patient)
     let removeMeeting = meetingsModel.findByIdAndRemove(req.params.meetingId)
-    
+
     clinic.meetings.splice(clinic.meetings.findIndex(x => x === req.params.meetingId), 1)
     patient.meetings.splice(patient.meetings.findIndex(x => x === req.params.meetingId), 1)
     await Promise.all([clinic.save(), patient.save()])

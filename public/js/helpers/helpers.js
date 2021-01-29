@@ -6,7 +6,7 @@ export const api = axios.create({
 });
 
 export const MEETINGS_FILTER_CARDS_HTML = [
-  'row container-fluid card shadow-sm px-0 py-2 mx-auto g-0 flex-nowrap overflow-hidden',
+  'row container-fluid card shadow-sm px-0 py-2 me-3 g-0 flex-nowrap overflow-hidden',
   '180px'
 ]
 

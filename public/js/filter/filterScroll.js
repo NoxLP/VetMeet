@@ -1,59 +1,189 @@
-let limit = 1
-let currentPage = 0
+import { api, MEETINGS_FILTER_CARDS_HTML } from "../helpers/helpers.js";
+
+const SPINNER = document.getElementById('filterSpinner')
+const FILTER_CHANGE_WAIT_MS = 2500
+const SCROLL_THRESHOLD = 5
+let limit = 2
+let currentPage = -1
+let lastFilterValue
+let filterChangeTimer = null
 
 //#region helpers
-const getMeetingsFilterCard = meeting => {
+const getMeetingsFilterCard = meetingDTO => {
   let card = document.createElement('article')
   card.classList.add(...(MEETINGS_FILTER_CARDS_HTML[0].split(' ')))
   card.style.maxHeight = MEETINGS_FILTER_CARDS_HTML[1]
   card.innerHTML = `<div class="row flex-nowrap">
-  <h5 class="col-7">${meeting.date.toLocaleDateString()}</h5>
-  <p class="col-3 fs-6 text-end">${(meeting.confirmed ? 'Conf.' : 'No conf.')}</p>
-  <p class="col-3 fs-6 text-end">${(meeting.done ? 'Comp.' : 'No comp.')}</p>
+  <h5 class="col-6">${(new Date(meetingDTO.date)).toLocaleDateString()}</h5>
+  <p class="col-3 fs-6 text-nowrap text-end">${(meetingDTO.confirmed ? 'Conf.' : 'No conf.')}</p>
+  <p class="col-3 fs-6 text-nowrap text-end">${(meetingDTO.done ? 'Comp.' : 'No comp.')}</p>
 </div>
 <div class="row d-flex justify-content-between flex-nowrap">
-  <h4 class="col mb-0">${meeting.name}</h4>
-  <p class="col fs-6 text-end text-nowrap mb-0">${meeting.species}</p>
+  <h4 class="col mb-0">${meetingDTO.name}</h4>
+  <p class="col fs-6 text-end text-nowrap mb-0">${meetingDTO.species}</p>
 </div>
 <div class="row my-0 py-0">
-  <p class="col fs-6 fst-italic">${meeting.disease}</p>
+  <p class="col fs-6 fst-italic">${meetingDTO.disease}</p>
 </div>
 <div class="row mw-100">
-  <p class="col fs-6 h-25 text-wrap">${meeting.surgery}</p>
+  <p class="col fs-6 h-25 text-wrap">${meetingDTO.surgery}</p>
 </div>`
+
+  card.addEventListener('click', cardOnClick)
+
   return card
 }
-const showFilterSpinner = () => { 
-  document.getElementById('filterSpinner'.classList.remove('collapse'))
-  document.getElementById('filterSpinner'.classList.remove('hide'))
-  document.getElementById('filterSpinner'.classList.add('show'))
-}
-const hideFilterSpinner = () => { 
-  document.getElementById('filterSpinner'.classList.add('collapse'))
-  document.getElementById('filterSpinner'.classList.add('hide'))
-  document.getElementById('filterSpinner'.classList.remove('show'))
-}
-const getFilteredMeetings = async () => {
-  try {
-    let meetings = api.get('/meetings/dtos/filter')
-  } catch(err) {
-
+const getCategoryField = () => {
+  switch (document.getElementById('meetingsFilterSelect').value) {
+    case '1':
+      return 'name'
+    case '2':
+      return 'date'
+    case '3':
+      return 'disease'
+    case '4':
+      return 'species'
   }
+}
+const getFilteredMeetingsCards = async () => {
+  try {
+    currentPage++
+    let value = encodeURIComponent(document.getElementById('filterMeetingsTextInput').value)
+
+    let meetingsDTOs = (await api.get(
+      `/meetings/dtos/filter`, 
+      {
+        params: {
+          'limit': limit,
+          page: currentPage,
+          [getCategoryField()]: value
+        }
+      })).data
+    console.log(meetingsDTOs)
+    if (!Array.isArray(meetingsDTOs) || meetingsDTOs[0] === 0)
+      return null
+
+    let totalPages = Math.ceil(meetingsDTOs[0] / limit)
+    if (currentPage > totalPages)
+      return null
+    
+    return meetingsDTOs[1].map(dTO => getMeetingsFilterCard(dTO))
+  } catch (err) {
+    console.log(err)
+    alert('Hubo un error intentando filtrar sus citas')
+  }
+}
+const showFilterSpinner = () => {
+  if(SPINNER.classList.contains('collapse')) {
+    SPINNER.classList.remove('collapse')
+    SPINNER.classList.remove('hide')
+    SPINNER.classList.add('show')
+  }
+}
+const hideFilterSpinner = () => {
+  if(!SPINNER.classList.contains('collapse')) {
+    SPINNER.classList.add('collapse')
+    SPINNER.classList.add('hide')
+    SPINNER.classList.remove('show')
+  }
+}
+const clearCards = () => {
+  const cardsContainer = document.getElementById('meetingsFilterDTOsCardsContainer')
+  const currentCards = document.querySelectorAll('#meetingsFilterDTOsCardsContainer > .card')
+  if(currentCards)
+    currentCards.forEach(card => cardsContainer.removeChild(card))
+  
+  return cardsContainer
 }
 //#endregion
 
 //#region events callbacks
+export function cardsFilterOnKeyUp(e) {
+  console.log('filter on key up')
+  currentPage = -1
+  
+  if(e.target.value === '') {
+    lastFilterValue = ''
+    clearTimeout(filterChangeTimer)
+    filterChangeTimer = null
+    clearCards()
+    hideFilterSpinner()
+    return
+  }
+  
+  showFilterSpinner()
+  if(e.target.value !== lastFilterValue) {
+    //user still writing, wait
+    lastFilterValue = e.target.value
+    clearTimeout(filterChangeTimer)
+    filterChangeTimer = setTimeout(() => { cardsFilterOnKeyUp(e) }, FILTER_CHANGE_WAIT_MS)
+    return
+  }
+  console.log('pass')
+  if(filterChangeTimer) {
+    clearTimeout(filterChangeTimer)
+    filterChangeTimer = null
+  }
+  lastFilterValue = e.target.value
+
+  const cardsContainer = clearCards()
+  
+  getFilteredMeetingsCards()
+    .then(res => {
+      console.log('onkeyup cards: ', res)
+      if (!res)
+        return
+      
+      res.forEach(card => {
+        cardsContainer.appendChild(card)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      alert('Hubo un error intentando filtrar sus citas')
+    })
+  hideFilterSpinner()
+}
 export function cardsContainerOnScroll(e) {
   //https://www.javascripttutorial.net/javascript-dom/javascript-infinite-scroll/
   const {
-    scrollTop,
-    scrollHeight,
-    clientHeight
+    scrollLeft,
+    scrollWidth,
+    clientWidth
   } = e.target
+  console.log('left: ', scrollLeft)
 
-  if(scrollTop + clientHeight >= scrollHeight - 5) {
-    currentPage++
+  if (scrollLeft + clientWidth >= scrollWidth - SCROLL_THRESHOLD) {
+    let left = scrollLeft
     showFilterSpinner()
+    getFilteredMeetingsCards()
+      .then(res => {
+        console.log('onkeyup cards: ', res)
+        if (!res)
+          return
+        
+        const cardsContainer = document.getElementById('meetingsFilterDTOsCardsContainer')
+        res.forEach(card => {
+          cardsContainer.appendChild(card)
+        })
+        e.target.scrollLeft = left
+      })
+      .catch(err => {
+        console.log(err)
+        alert('Hubo un error intentando filtrar sus citas')
+      })
+    hideFilterSpinner()
   }
 }
+function cardOnClick(e) {
+
+}
+export function goStartEndButtonOnClick() {
+  let cardsContainer = document.getElementById('meetingsFilterDTOsCardsContainer')
+  if(cardsContainer.scrollLeft === 0)
+    cardsContainer.scrollLeft = cardsContainer.scrollWidth
+  else
+    cardsContainer.scrollLeft = 0
+}
+//export function 
 //#endregion

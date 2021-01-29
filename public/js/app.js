@@ -1,5 +1,5 @@
 import { api, goToHome, MEETINGS_FILTER_CARDS_HTML } from "./helpers/helpers.js";
-import { cardsContainerOnScroll } from "./filter/filterScroll.js";
+import * as FilterScroll from "./filter/filterScroll.js";
 //const flatpickr = require("flatpickr");
 
 api.defaults.headers.common['token'] = localStorage.getItem('token')
@@ -70,6 +70,7 @@ const getMeetingsDateDTOs = (async function () {
         acc[dateString] = [getDecimalTime(date)]
       return acc
     }, {}))
+    console.log('meet DTOs ', meetingsDatesDTOs)
   } catch (err) {
     //TODO => go to a page where the error get shown and explained
     alert('error retrieving meetings dtos: ', err)
@@ -111,6 +112,11 @@ const fillPatientsInputs = patientInputs => {
     patientInputs[inputId].value = patientsDTOs[selectedPatientIndex][inputId.slice(0, -5)]
   }
 }
+const getTimeStringByHalfHours = halfHourIdx => {
+  let hours = pad(Math.floor(halfHourIdx).toString(), 2)
+  let minutes = pad(((halfHourIdx - hours) * 60).toString(), 2)
+  return `${hours}:${minutes}`
+}
 const fillMeetingsTimesList = selectedDate => {
   selectedDate = selectedDate.trim()
   let list = document.getElementById('meetingsTimesList')
@@ -118,11 +124,8 @@ const fillMeetingsTimesList = selectedDate => {
   
   for (let i = FIRST_HOUR; i < LAST_HOUR; i += 0.5) {
     if (!meetingsDatesDTOs.hasOwnProperty(selectedDate) || !meetingsDatesDTOs[selectedDate].includes(i)) {
-      let hours = pad(Math.floor(i).toString(), 2)
-      let minutes = pad(((i - hours) * 60).toString(), 2)
-      let text = `${hours}:${minutes}`
       let option = document.createElement('option')
-      option.innerText = text
+      option.innerText = getTimeStringByHalfHours(i)
       list.appendChild(option)
     }
   }
@@ -314,6 +317,9 @@ window.onload = async function () {
   newMeetingPatientInputs.patientsListInput.addEventListener('change', e => { patientsListInputOnChange(e, newMeetingPatientInputs) })
   newMeetingPatientInputs.patientsListInput.addEventListener('focusout', patientsListInputOnFocusOut)
   document.getElementById('newMetingSaveButton').addEventListener('click', e => { saveMeetingButtonOnClick(newMeetingPatientInputs) })
+  document.getElementById('filterMeetingsTextInput').addEventListener('keyup', e => { FilterScroll.cardsFilterOnKeyUp(e) })
+  document.getElementById('meetingsFilterDTOsCardsContainer').addEventListener('scroll', e => { FilterScroll.cardsContainerOnScroll(e) })
+  document.getElementById('goStartEndButton').addEventListener('click', () => { FilterScroll.goStartEndButtonOnClick()})
 
   //Adding on change event to flatpickr datepicker
   datePicker.config.onChange.push(datepickerOnChange)

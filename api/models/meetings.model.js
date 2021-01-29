@@ -14,7 +14,6 @@ const meetingsSchema = new mongoose.Schema({
   clinic: {type: mongoose.Schema.Types.ObjectId, ref: 'clinics', required: [true, 'Clinic is required']},
   patient: {type: mongoose.Schema.Types.ObjectId, ref: 'patients', required: [true, 'Patient is required']},
   createdAt: { type: Number, default: Date.now() /* Get a timestamp :)*/ }
-  
 })
 
 module.exports = mongoose.model('meetings', meetingsSchema)
