@@ -7,12 +7,14 @@ const {
 
 const {
   getDateDTOs,
+  getFilterDTOs,
   createMeeting,
   deleteMeeting
 } = require('../controllers/meetings.controller')
 
 router
   .get('/dtos/date', authUserOrClinic, getDateDTOs)
+  .get('/dtos/filter', authClinic, getFilterDTOs)
 
 router
   .post('/', authClinic, createMeeting)

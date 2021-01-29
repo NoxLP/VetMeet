@@ -1,4 +1,5 @@
-import { api, goToHome } from "./helpers/helpers.js";
+import { api, goToHome, MEETINGS_FILTER_CARDS_HTML } from "./helpers/helpers.js";
+import { cardsContainerOnScroll } from "./filter/filterScroll.js";
 //const flatpickr = require("flatpickr");
 
 api.defaults.headers.common['token'] = localStorage.getItem('token')
@@ -57,15 +58,7 @@ const getDecimalTime = date => {
   decimal = decimal === 30 ? 0.5 : 0
   return integral + decimal
 }
-const getFormattedDateString = date => {
-  console.log('getFormattedDateString', date)
-  const getFormattedDatePart = part => {
-    part = part.toString().trim()
-    console.log('part: ', part)
-    return part.length === 2 ? part : '0' + part
-  }
-  return `${pad(date.getDate().toString(), 2)}/${pad((date.getMonth() + 1).toString(), 2)}/${date.getFullYear()}`
-}
+const getFormattedDateString = date => `${pad(date.getDate().toString(), 2)}/${pad((date.getMonth() + 1).toString(), 2)}/${date.getFullYear()}`
 const getMeetingsDateDTOs = (async function () {
   try {
     //this endpoint have pagination, need more testing to see if pagination here is needed
@@ -116,6 +109,22 @@ const fillPatientsInputs = patientInputs => {
       continue
     //All inputs id except patientsListInput, are '[nameOfDTOProperty]Input'
     patientInputs[inputId].value = patientsDTOs[selectedPatientIndex][inputId.slice(0, -5)]
+  }
+}
+const fillMeetingsTimesList = selectedDate => {
+  selectedDate = selectedDate.trim()
+  let list = document.getElementById('meetingsTimesList')
+  list.innerHTML = ''
+  
+  for (let i = FIRST_HOUR; i < LAST_HOUR; i += 0.5) {
+    if (!meetingsDatesDTOs.hasOwnProperty(selectedDate) || !meetingsDatesDTOs[selectedDate].includes(i)) {
+      let hours = pad(Math.floor(i).toString(), 2)
+      let minutes = pad(((i - hours) * 60).toString(), 2)
+      let text = `${hours}:${minutes}`
+      let option = document.createElement('option')
+      option.innerText = text
+      list.appendChild(option)
+    }
   }
 }
 const getSelectedPatient = value => {
@@ -169,22 +178,16 @@ const getBDFieldNameByInputId = inputId => {
   }
   return fieldName
 }
-const fillMeetingsTimesList = selectedDate => {
-  selectedDate = selectedDate.trim()
-  console.log('list: ', selectedDate)
-  console.log(meetingsDatesDTOs[selectedDate])
-  let list = document.getElementById('meetingsTimesList')
-  list.innerHTML = ''
-  for (let i = FIRST_HOUR; i < LAST_HOUR; i += 0.5) {
-    if (!meetingsDatesDTOs.hasOwnProperty(selectedDate) || !meetingsDatesDTOs[selectedDate].includes(i)) {
-      let hours = pad(Math.floor(i).toString(), 2)
-      let minutes = pad(((i - hours) * 60).toString(), 2)
-      let text = `${hours}:${minutes}`
-      let option = document.createElement('option')
-      option.innerText = text
-      list.appendChild(option)
-    }
-  }
+const getDateObjectFromDateTimeInputs = () => {
+  let dateSplit = document.getElementById('meetingDateInput').value.split('/')
+  let timeSplit = document.getElementById('meetingTimeInput').value.split(':')
+  return new Date(
+    parseInt(dateSplit[2]),
+    parseInt(dateSplit[1]),
+    parseInt(dateSplit[0]),
+    parseInt(timeSplit[0]),
+    parseInt(timeSplit[1])
+  )
 }
 //#endregion
 
@@ -259,6 +262,36 @@ function datepickerOnChange(selectedDates, dateStr, instance) {
   console.log('datepicker onchange')
   fillMeetingsTimesList(dateStr)
 }
+function saveMeetingButtonOnClick(newMeetingPatientInputs) {
+  //TODO: validation, alerts
+
+  api.post('/meetings', {
+    name: newMeetingPatientInputs.patientsListInput.value.split('-')[0].trim(),
+    patientId: patientsDTOs[selectedPatientIndex],
+    species: newMeetingPatientInputs.speciesInput.value,
+    history: newMeetingPatientInputs.historyInput.value,
+    date: getDateObjectFromDateTimeInputs(),
+    disease: newMeetingPatientInputs.diseaseInput.value
+  })
+    .then(res => {
+      /*let alert = document.getElementById('alertSuccess')
+      alert.innerText = `Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value}.
+Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.
+Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`
+      alert.classList.remove('collapse')
+      alert.classList.add('show')*/
+      alert(`Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value}.
+      Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.
+      Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`)
+    })
+    .catch(err => {
+      /*let alert = document.getElementById('alertDanger')
+      alert.innerText = 'Ha ocurrido un error, no se ha solicitado su cita'
+      alert.classList.remove('collapse')
+      alert.classList.add('show')*/
+      alert('Ha ocurrido un error, no se ha solicitado su cita')
+    })
+}
 //#endregion
 
 window.onload = async function () {
@@ -274,11 +307,13 @@ window.onload = async function () {
     patientsListInput: document.getElementById('patientsListInput'),
     speciesInput: document.getElementById('speciesInput'),
     diseaseInput: document.getElementById('diseaseInput'),
-    historyInput: document.getElementById('historyInput')
+    historyInput: document.getElementById('historyInput'),
+    timeInput: document.getElementById('meetingTimeInput')
   }
 
   newMeetingPatientInputs.patientsListInput.addEventListener('change', e => { patientsListInputOnChange(e, newMeetingPatientInputs) })
   newMeetingPatientInputs.patientsListInput.addEventListener('focusout', patientsListInputOnFocusOut)
+  document.getElementById('newMetingSaveButton').addEventListener('click', e => { saveMeetingButtonOnClick(newMeetingPatientInputs) })
 
   //Adding on change event to flatpickr datepicker
   datePicker.config.onChange.push(datepickerOnChange)

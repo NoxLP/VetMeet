@@ -21,7 +21,7 @@ function loginButtonOnClick() {
 }
 function passwordInputOnKeyUp(e) {
   if (e.key === 'Enter')
-  document.getElementById('loginButton').click()
+    document.getElementById('loginButton').click()
 }
 
 window.onload = () => {

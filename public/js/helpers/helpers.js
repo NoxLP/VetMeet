@@ -5,6 +5,11 @@ export const api = axios.create({
   timeout: 3000
 });
 
+export const MEETINGS_FILTER_CARDS_HTML = [
+  'row container-fluid card shadow-sm px-0 py-2 mx-auto g-0 flex-nowrap overflow-hidden',
+  '180px'
+]
+
 export const goToApp = () => { window.location = APP_URL }
 export const goToHome = () => { window.location = './index.html' }
 

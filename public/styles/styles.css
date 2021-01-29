@@ -1,10 +1,14 @@
 :root {
+  --main-body-bg-color: white;
   --main-prim-color: #966dd0;
   --main-prim-trans-color: #966dd091;
   --main-second-color: #d1f5dc;
   --main-second-trans-color: #D9FFE3;
 }
 
+.bg-body {
+  background-color: var(--main-body-bg-color) !important;
+}
 .bg-prim {
   background-color: var(--main-prim-color);
 }
@@ -16,6 +20,9 @@
 }
 .scrollable {
   overflow-y: scroll;
+}
+.overflow-hidden {
+  overflow-y: hidden;
 }
 .btn-outline-secondary.dropdown-toggle.show {
   background-color: var(--main-prim-trans-color) !important;
