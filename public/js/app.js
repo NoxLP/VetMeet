@@ -1,5 +1,5 @@
-import { api, goToHome, MEETINGS_FILTER_CARDS_HTML } from "./helpers/helpers.js";
-import * as FilterScroll from "./filter/filterScroll.js";
+import { api, goToHome, getFormattedDateString } from "./helpers/helpers.js";
+import * as FilterFiles from "./filter/filter-files.js";
 //const flatpickr = require("flatpickr");
 
 api.defaults.headers.common['token'] = localStorage.getItem('token')
@@ -12,14 +12,6 @@ const meetingsDatesDTOs = {};
 let selectedPatientIndex = -1;
 let newPatient;
 
-const pad = (str, minLength, endStart = 'start', char = '0') => {
-  if (str.length >= minLength)
-    return str
-
-  return endStart === 'start' ?
-    char.repeat(minLength - str.length) + str :
-    str + char.repeat(minLength - str.length)
-}
 //#region Begin the requests to get initial data
 const assignClinicData = (async function () {
   console.log('getting clinic me')
@@ -58,7 +50,7 @@ const getDecimalTime = date => {
   decimal = decimal === 30 ? 0.5 : 0
   return integral + decimal
 }
-const getFormattedDateString = date => `${pad(date.getDate().toString(), 2)}/${pad((date.getMonth() + 1).toString(), 2)}/${date.getFullYear()}`
+
 const getMeetingsDateDTOs = (async function () {
   try {
     //this endpoint have pagination, need more testing to see if pagination here is needed
@@ -317,9 +309,10 @@ window.onload = async function () {
   newMeetingPatientInputs.patientsListInput.addEventListener('change', e => { patientsListInputOnChange(e, newMeetingPatientInputs) })
   newMeetingPatientInputs.patientsListInput.addEventListener('focusout', patientsListInputOnFocusOut)
   document.getElementById('newMetingSaveButton').addEventListener('click', e => { saveMeetingButtonOnClick(newMeetingPatientInputs) })
-  document.getElementById('filterMeetingsTextInput').addEventListener('keyup', e => { FilterScroll.cardsFilterOnKeyUp(e) })
-  document.getElementById('meetingsFilterDTOsCardsContainer').addEventListener('scroll', e => { FilterScroll.cardsContainerOnScroll(e) })
-  document.getElementById('goStartEndButton').addEventListener('click', () => { FilterScroll.goStartEndButtonOnClick()})
+  document.getElementById('filterMeetingsTextInput').addEventListener('keyup', e => { FilterFiles.cardsFilterOnKeyUp(e) })
+  document.getElementById('meetingsFilterDTOsCardsContainer').addEventListener('scroll', e => { FilterFiles.cardsContainerOnScroll(e) })
+  document.getElementById('goStartEndButton').addEventListener('click', () => { FilterFiles.goStartEndButtonOnClick() })
+  document.getElementById('meetingUpdateButton').addEventListener('click', e => { FilterFiles.meetingUpdateButtonOnClick(e) })
 
   //Adding on change event to flatpickr datepicker
   datePicker.config.onChange.push(datepickerOnChange)

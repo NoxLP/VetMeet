@@ -1,13 +1,13 @@
-import { api, MEETINGS_FILTER_CARDS_HTML } from "../helpers/helpers.js";
+import { api, MEETINGS_FILTER_CARDS_HTML, getFormattedDateString, getFormattedTimeString, getMobileCompletedString, getMobileConfirmedString, setInputValueIfNotFalsie } from "../helpers/helpers.js";
 
 const SPINNER = document.getElementById('filterSpinner')
 const FILTER_CHANGE_WAIT_MS = 2500
 const SCROLL_THRESHOLD = 5
 const LIMIT = 2
-const filteredMeetingsIds = []
 let currentPage = -1
 let lastFilterValue
 let filterChangeTimer = null
+let fileMeetingId
 
 //#region helpers
 const getMeetingsFilterCard = meetingDTO => {
@@ -17,8 +17,8 @@ const getMeetingsFilterCard = meetingDTO => {
   card.style.maxHeight = MEETINGS_FILTER_CARDS_HTML[1]
   card.innerHTML = `<div class="row flex-nowrap">
   <h5 class="col-6">${(new Date(meetingDTO.date)).toLocaleDateString()}</h5>
-  <p class="col-3 fs-6 text-nowrap text-end">${(meetingDTO.confirmed ? 'Conf.' : 'No conf.')}</p>
-  <p class="col-3 fs-6 text-nowrap text-end">${(meetingDTO.done ? 'Comp.' : 'No comp.')}</p>
+  <p class="col-3 fs-6 text-nowrap text-end">${getMobileConfirmedString(meetingDTO)}</p>
+  <p class="col-3 fs-6 text-nowrap text-end">${getMobileCompletedString(meetingDTO)}</p>
 </div>
 <div class="row d-flex justify-content-between flex-nowrap">
   <h4 class="col mb-0">${meetingDTO.name}</h4>
@@ -32,7 +32,7 @@ const getMeetingsFilterCard = meetingDTO => {
 </div>`
 
   card.setAttribute('id', meetingDTO._id)
-  card.addEventListener('click', cardOnClick)
+  card.addEventListener('click', cardOnClick, true)
 
   return card
 }
@@ -98,6 +98,43 @@ const clearCards = () => {
   
   return cardsContainer
 }
+const fillMeetingFile = card => {
+  console.log('card: ', card)
+  api.get(`/meetings/${card.getAttribute('id')}`)
+    .then(({ data }) => {
+      let date = new Date(data.date)
+
+      setInputValueIfNotFalsie(document.getElementById('meetingFileDate'), `${getFormattedDateString(date)}\n${getFormattedTimeString(date)}`, 'innerText')
+      setInputValueIfNotFalsie(document.getElementById('meetingFileConfirmed'), getMobileConfirmedString(data), 'innerText')
+      setInputValueIfNotFalsie(document.getElementById('meetingFileCompleted'), getMobileCompletedString(date), 'innerText')
+      setInputValueIfNotFalsie(document.getElementById('meetingFileNameInput'), data.patient.name)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileSpeciesInput'), data.patient.species)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileDiseaseInput'), data.disease)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileTreatmentInput'), data.treatment)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileSurgeryInput'), data.surgery)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileNotesInput'), data.notes)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileHistoryInput'), data.patient.history)
+    })
+    .catch(err => {
+      console.log(err)
+      alert('No se pudo encontrar la cita que buscaba')
+    })
+}
+const getFileUpdateObject = () => {
+  return {
+    meeting: {
+      disease: document.getElementById('meetingFileDiseaseInput').value,
+      treatment: document.getElementById('meetingFileTreatmentInput').value,
+      surgery: document.getElementById('meetingFileSurgeryInput').value,
+      notes: document.getElementById('meetingFileNotesInput').value
+    },
+    patient: {
+      name: document.getElementById('meetingFileNameInput').value,
+      species: document.getElementById('meetingFileSpeciesInput').value,
+      history: document.getElementById('meetingFileHistoryInput').value
+    }
+  }
+}
 //#endregion
 
 //#region events callbacks
@@ -124,7 +161,6 @@ export function cardsFilterOnKeyUp(e) {
   }
   console.log('pass')
 
-  console.log(filteredMeetingsIds)
   if(filterChangeTimer) {
     clearTimeout(filterChangeTimer)
     filterChangeTimer = null
@@ -178,10 +214,15 @@ export function cardsContainerOnScroll(e) {
   }
 }
 function cardOnClick(e) {
+  e.stopPropagation()
   document.querySelectorAll('.tab-pane.active.show').forEach(pane => {
     pane.classList.remove('active', 'show')
   })
   document.getElementById('meetingsFilesContent').classList.add('active', 'show')
+  console.log('e: ', e.path)
+  let card = e.path.find(x => x.classList.contains('card'))
+  fillMeetingFile(card)
+  fileMeetingId = card.id
 }
 export function goStartEndButtonOnClick() {
   let cardsContainer = document.getElementById('meetingsFilterDTOsCardsContainer')
@@ -190,5 +231,15 @@ export function goStartEndButtonOnClick() {
   else
     cardsContainer.scrollLeft = 0
 }
-//export function 
+export function meetingUpdateButtonOnClick(e) {
+  api.put(`/meetings/${fileMeetingId}`, getFileUpdateObject())
+    .then(response => {
+      console.log('ok')
+      //TODO: avisar que la ficha fue guardada con una alerta de bootstrap
+    })
+    .catch(err => {
+      console.log('NOT updated: ', err)
+      alert('Hubo un error al actualizar su cita')
+    })
+}
 //#endregion

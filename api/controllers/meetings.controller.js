@@ -6,6 +6,8 @@ const { handleError } = require('../utils')
 module.exports = {
   getDateDTOs,
   getFilterDTOs,
+  getMeeting,
+  updateMeeting,
   createMeeting,
   deleteMeeting
 }
@@ -178,6 +180,42 @@ async function getFilterDTOs(req, res) {
     }
 
     res.status(200).json(meetings)
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err)
+  }
+}
+
+function getMeeting(req, res) {
+  console.log('getMeeting')
+  meetingsModel.findById(req.params.meetingId)
+    .populate('patient')
+    .then(response => {
+      console.log('ok')
+      res.status(200).json(response)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(404).json(err)
+    })
+}
+
+async function updateMeeting(req, res) {
+  try {
+    let updatedMeeting = await meetingsModel
+      .findByIdAndUpdate(req.params.meetingId, req.body.meeting, { new: true })
+      .populate('patient')
+
+    if(req.body.patient) {
+      for(let fieldName in req.body.patient) {
+        console.log()
+        updatedMeeting.patient[fieldName] = req.body.patient[fieldName]
+      }
+
+      await updatedMeeting.patient.save()
+    }
+
+    res.status(200).json(updatedMeeting)
   } catch (err) {
     console.log(err)
     res.status(400).json(err)
