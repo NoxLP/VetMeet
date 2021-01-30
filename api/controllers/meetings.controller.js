@@ -99,6 +99,7 @@ const mapMeetingsFilterDTOsFromPopulatedPatients = patients => {
     .reduce((acc, patient) => {
       acc = acc.concat(patient.meetings.map(m => {
         return {
+          _id: m._id,
           name: patient.name,
           species: patient.species,
           date: m.date,

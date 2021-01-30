@@ -244,8 +244,62 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="meetingsFilesContent" role="tabpanel" aria-labelledby="list-fichasDeMisCitas">
-
+      <div class="tab-pane fade container-fluid p-0 mt-2" id="meetingsFilesContent" role="tabpanel" aria-labelledby="list-fichasDeMisCitas">
+        <div class="row card container-fluid shadow-sm pe-0 py-2 mx-auto mb-3 g-0">
+          <div class="row justify-content-between align-items-center pe-0">
+            <h5 class="col-6">Ficha de cita</h5>
+            <button id="saveMeetingFileToPDFButton" class="col-2 btn btn-outline-secondary h-25 ms-4" type="button" style="width: 45px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-download my-auto" viewBox="0 0 16 16">
+                <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+              </svg>
+            </button>
+            <button id="meetingUpdateButton" class="col-2 btn btn-outline-secondary h-25" type="button" style="width: 45px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="row pe-0 d-flex flex-nowrap pe-2 mt-2 align-items-end">
+            <h6 class="col-5 text-center">20/10/2020 09:00</h6>
+            <h6 class="col-4 text-end">No conf.</h6>
+            <h6 class="col-4">No comp.</h6>
+          </div>
+        </div>
+          <hr class="row w-75 m-auto mb-3">
+        <div class="row card container-fluid shadow-sm px-2 mx-auto mb-2 g-0 scrollable w-100" style="height: 220px;">
+          <div class="card-body">
+            <label class="row form-label">
+              Nombre
+              <input id="meetingFileNameInput" type="text" class="form-control" placeholder="Nombre del paciente" aria-label="Nombre del paciente" aria-describedby="Nombre del paciente">
+            </label>
+            <label class="row form-label">
+              Especie
+              <input id="meetingFileSpeciesInput" type="text" class="form-control" placeholder="Especie del paciente" aria-label="Especie del paciente" aria-describedby="Especie del paciente">
+            </label>
+            <label class="row form-label">
+              Patología
+              <input id="meetingFileDiseaseInput" type="text" class="form-control" placeholder="Patología observada" aria-label="Patología observada" aria-describedby="Patología observada">
+            </label>
+            <label class="row form-label">
+              Tratamiento
+              <input id="meetingFileTreatmentInput" type="text" class="form-control" placeholder="Tratamiento" aria-label="Tratamiento" aria-describedby="Tratamiento">
+            </label>
+            <label class="row form-label">
+              Intervención
+              <input id="meetingFileTreatmentInput" type="text" class="form-control" placeholder="Intervención" aria-label="Intervención" aria-describedby="Intervención">
+            </label>
+            <label class="row form-label">
+              Notas
+              <input id="meetingFileTreatmentInput" type="text" class="form-control" placeholder="Notas" aria-label="Notas" aria-describedby="Notas">
+            </label>
+            <label class="row form-label">
+              Historial
+              <input id="meetingFileHistoryInput" type="text" class="form-control" placeholder="Historial del paciente" aria-label="Historial del paciente" aria-describedby="Historial del paciente">
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -258,6 +312,7 @@
         <a class="list-group-item list-group-item-action active" id="myClinicTab" data-bs-toggle="list" href="#myClinicContent" role="tab" aria-controls="home">Clínica</a>
         <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list" href="#newMeetingContent" role="tab" aria-controls="home">Nueva cita</a>
         <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#filterMeetingsContent" role="tab" aria-controls="home">Mis citas</a>
+        <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#meetingsFilesContent" role="tab" aria-controls="home">Mis citas</a>
       </div>
     </div>
     <div class="row bg-dark text-white">

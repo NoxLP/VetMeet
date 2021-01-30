@@ -19,7 +19,8 @@
   color: var(--main-prim-color);
 }
 .scrollable {
-  overflow-y: scroll;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
 }
 .overflow-hidden {
   overflow-y: hidden;

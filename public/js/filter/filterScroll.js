@@ -3,13 +3,15 @@ import { api, MEETINGS_FILTER_CARDS_HTML } from "../helpers/helpers.js";
 const SPINNER = document.getElementById('filterSpinner')
 const FILTER_CHANGE_WAIT_MS = 2500
 const SCROLL_THRESHOLD = 5
-let limit = 2
+const LIMIT = 2
+const filteredMeetingsIds = []
 let currentPage = -1
 let lastFilterValue
 let filterChangeTimer = null
 
 //#region helpers
 const getMeetingsFilterCard = meetingDTO => {
+  console.log(meetingDTO)
   let card = document.createElement('article')
   card.classList.add(...(MEETINGS_FILTER_CARDS_HTML[0].split(' ')))
   card.style.maxHeight = MEETINGS_FILTER_CARDS_HTML[1]
@@ -29,6 +31,7 @@ const getMeetingsFilterCard = meetingDTO => {
   <p class="col fs-6 h-25 text-wrap">${meetingDTO.surgery}</p>
 </div>`
 
+  card.setAttribute('id', meetingDTO._id)
   card.addEventListener('click', cardOnClick)
 
   return card
@@ -54,7 +57,7 @@ const getFilteredMeetingsCards = async () => {
       `/meetings/dtos/filter`, 
       {
         params: {
-          'limit': limit,
+          'limit': LIMIT,
           page: currentPage,
           [getCategoryField()]: value
         }
@@ -63,7 +66,7 @@ const getFilteredMeetingsCards = async () => {
     if (!Array.isArray(meetingsDTOs) || meetingsDTOs[0] === 0)
       return null
 
-    let totalPages = Math.ceil(meetingsDTOs[0] / limit)
+    let totalPages = Math.ceil(meetingsDTOs[0] / LIMIT)
     if (currentPage > totalPages)
       return null
     
@@ -101,7 +104,7 @@ const clearCards = () => {
 export function cardsFilterOnKeyUp(e) {
   console.log('filter on key up')
   currentPage = -1
-  
+
   if(e.target.value === '') {
     lastFilterValue = ''
     clearTimeout(filterChangeTimer)
@@ -120,6 +123,8 @@ export function cardsFilterOnKeyUp(e) {
     return
   }
   console.log('pass')
+
+  console.log(filteredMeetingsIds)
   if(filterChangeTimer) {
     clearTimeout(filterChangeTimer)
     filterChangeTimer = null
@@ -151,10 +156,8 @@ export function cardsContainerOnScroll(e) {
     scrollWidth,
     clientWidth
   } = e.target
-  console.log('left: ', scrollLeft)
 
   if (scrollLeft + clientWidth >= scrollWidth - SCROLL_THRESHOLD) {
-    let left = scrollLeft
     showFilterSpinner()
     getFilteredMeetingsCards()
       .then(res => {
@@ -166,7 +169,6 @@ export function cardsContainerOnScroll(e) {
         res.forEach(card => {
           cardsContainer.appendChild(card)
         })
-        e.target.scrollLeft = left
       })
       .catch(err => {
         console.log(err)
@@ -176,7 +178,10 @@ export function cardsContainerOnScroll(e) {
   }
 }
 function cardOnClick(e) {
-
+  document.querySelectorAll('.tab-pane.active.show').forEach(pane => {
+    pane.classList.remove('active', 'show')
+  })
+  document.getElementById('meetingsFilesContent').classList.add('active', 'show')
 }
 export function goStartEndButtonOnClick() {
   let cardsContainer = document.getElementById('meetingsFilterDTOsCardsContainer')
