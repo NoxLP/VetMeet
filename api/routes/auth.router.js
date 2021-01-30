@@ -3,7 +3,8 @@ const {
   usersSignUp,
   usersLogin,
   clinicsSignUp,
-  clinicsLogin
+  clinicsLogin,
+  clinicsGoogleLogin
 } = require('../controllers/auth.controller')
 const { 
   authAdmin
@@ -14,5 +15,6 @@ router
   .post('/users/login', usersLogin)
   .post('/clinics/signup', clinicsSignUp) //body => {name, email, password}
   .post('/clinics/login', clinicsLogin)
+  .post('/clinics/googleLogin', clinicsGoogleLogin)
 
 module.exports = router

@@ -3,6 +3,11 @@ const clinicsModel = require('../models/clinics.model')
 const patientsModel = require('../models/patients.model')
 const { handleError } = require('../utils')
 
+//*************** GOOGLE
+const {google} = require('googleapis');
+const calendar = google.calendar('v3');
+//***************
+
 module.exports = {
   getDateDTOs,
   getFilterDTOs,
@@ -129,6 +134,43 @@ const mapMeetingsFilterDTOs = meetings => {
         specied: m.patient.species
       }
     })
+}
+const createGoogleCalendarEvent = async (meeting, clinic) => {
+  //calendar.calendarList.get('primary')
+  const meetingDatePlusHalfHour = new Date(meeting.date)
+  meetingDatePlusHalfHour.setMinutes(meetingDatePlusHalfHour.getMinutes() + 29)
+
+  const description = `Cita concertada con ${meeting.patient.name} (${meeting.patient.species}) por ${clinic.name}.
+   - ${(meeting.confirmed ? 'Cita confirmada' : 'Pendiente de confirmación')}
+   - Patología observada: ${meeting.disease}
+   - Historial del paciente: ${meeting.patient.history}
+   - Notas de la cita: ${meeting.notes}`
+
+  const event = {
+    summary: `Cita oftalmología con ${meeting.patient.name} en ${clinic.name}`,
+    location: clinic.address,
+    description: description,
+    start: { dateTime: meeting.date },
+    end: { dateTime: meetingDatePlusHalfHour },
+    attendees: [ { email: clinic.email } ],
+    reminders: { useDefault: true },
+    status: 'tentative',
+    organizer: { self: true }
+  }
+
+  try {
+    await calendar.events.insert({
+      calendarId: 'primary',
+      maxAttendees: 2,
+      requestBody: event,
+      sendUpdates: 'true',
+      supportAttachments: true
+    })
+    return true
+  } catch(err) {
+    console.log(err)
+    return false
+  }
 }
 //#endregion
 
@@ -260,6 +302,8 @@ async function createMeeting(req, res) {
 
       await Promise.all([clinic.save(), patient.save()])
     }
+
+    await createGoogleCalendarEvent(meeting, clinic)
 
     res.status(200).json(meeting)
   } catch (err) {

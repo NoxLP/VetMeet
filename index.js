@@ -29,6 +29,17 @@ const app = express()
   .use(express.static(path.join(__dirname, 'public')))
   .use('/api', require('./api/routes'))
 
+// Google service account stuff
+const {google} = require('googleapis');
+
+const auth = new google.auth.GoogleAuth({
+  keyFile: './api/google/quickstart-1612011346735-73ccf36eff64.json',
+  scopes: [
+    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/calendar.events'
+  ],
+});
+
 // Init server
 const PORT = process.env.PORT || 2222
 app.listen(PORT, (err) => {
