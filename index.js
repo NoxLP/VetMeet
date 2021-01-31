@@ -10,16 +10,15 @@ const morgan = require('morgan')
 const path = require('path')
 
 // NONGOOSE
-mongoose.connect(process.env.MONGO_URL,
-  {
-    dbName: process.env.MONGO_DB || 'test',
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-  }, err => {
-    if (err) { throw new Error(err) }
-    console.info('💾 Connected to Mongo Database \n')
-  })
+mongoose.connect(process.env.MONGO_URL, {
+  dbName: process.env.MONGO_DB || 'test',
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+}, err => {
+  if (err) { throw new Error(err) }
+  console.info('💾 Connected to Mongo Database \n')
+})
 
 // ADDING MIDDLEWARES & ROUTER
 const app = express()
@@ -28,17 +27,6 @@ const app = express()
   .use(express.json())
   .use(express.static(path.join(__dirname, 'public')))
   .use('/api', require('./api/routes'))
-
-// Google service account stuff
-const {google} = require('googleapis');
-
-const auth = new google.auth.GoogleAuth({
-  keyFile: './api/google/quickstart-1612011346735-73ccf36eff64.json',
-  scopes: [
-    'https://www.googleapis.com/auth/calendar',
-    'https://www.googleapis.com/auth/calendar.events'
-  ],
-});
 
 // Init server
 const PORT = process.env.PORT || 2222

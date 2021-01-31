@@ -1,4 +1,4 @@
-import { api, goToHome, getFormattedDateString } from "./helpers/helpers.js";
+import { api, pad, goToHome, getFormattedDateString } from "./helpers/helpers.js";
 import * as FilterFiles from "./filter/filter-files.js";
 //const flatpickr = require("flatpickr");
 
@@ -176,13 +176,14 @@ const getBDFieldNameByInputId = inputId => {
 const getDateObjectFromDateTimeInputs = () => {
   let dateSplit = document.getElementById('meetingDateInput').value.split('/')
   let timeSplit = document.getElementById('meetingTimeInput').value.split(':')
-  return new Date(
-    parseInt(dateSplit[2]),
-    parseInt(dateSplit[1]),
-    parseInt(dateSplit[0]),
-    parseInt(timeSplit[0]),
-    parseInt(timeSplit[1])
-  )
+  let date = new Date()
+  date.setFullYear(parseInt(dateSplit[2]))
+  date.setMonth(parseInt(dateSplit[1]) - 1)
+  date.setDate(parseInt(dateSplit[0]))
+  date.setHours(parseInt(timeSplit[0]))
+  date.setMinutes(parseInt(timeSplit[1]))
+  
+  return date
 }
 //#endregion
 
@@ -199,7 +200,7 @@ function updateFieldIfNecessary(e, clinicInputs) {
   //console.log(e)
   let fieldName = getBDFieldNameByInputId(e.target.id)
   let input = clinicInputs[e.target.id]
-  let data = typeof clinicData[fieldName] === 'string' ? clinicData[fieldName] : clinicData[fieldName].toString()
+  let data = typeof clinicData[fieldName] === 'string' ? clinicData[fieldName] : clinicData[fieldName].toString() || ''
 
   if (input.value !== data)
     updateField(input, fieldName)
@@ -263,7 +264,7 @@ function datepickerOnChange(selectedDates, dateStr, instance) {
 }
 function saveMeetingButtonOnClick(newMeetingPatientInputs) {
   //TODO: validation, alerts
-
+  console.log(getDateObjectFromDateTimeInputs())
   api.post('/meetings', {
     name: newMeetingPatientInputs.patientsListInput.value.split('-')[0].trim(),
     patientId: patientsDTOs[selectedPatientIndex],

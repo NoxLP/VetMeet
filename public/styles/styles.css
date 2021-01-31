@@ -7,8 +7,9 @@
 }
 
 .bg-body {
-  background: linear-gradient(white 4%, #c6cedf 120%);
+  /*background: linear-gradient(white 4%, #c6cedf 100%);*/
   /*background-color: var(--main-body-bg-color) !important;*/
+  background-color: #f7fdfd !important;
 }
 .bg-prim {
   background-color: var(--main-prim-color);

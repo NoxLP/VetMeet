@@ -49,7 +49,7 @@ function googleSignOut() {
 }
 function renderButton() {
   gapi.signin2.render('my-signin2', {
-    'scope': 'profile email',
+    'scope': 'profile email https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
     'width': 240,
     'height': 50,
     'longtitle': true,

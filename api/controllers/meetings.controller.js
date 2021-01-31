@@ -4,8 +4,22 @@ const patientsModel = require('../models/patients.model')
 const { handleError } = require('../utils')
 
 //*************** GOOGLE
+// Google service account stuff
 const {google} = require('googleapis');
-const calendar = google.calendar('v3');
+
+const auth = new google.auth.GoogleAuth({
+  keyFile: './api/google/quickstart-1612011346735-98102625f06a.json',
+  scopes: [
+    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/calendar.events'
+  ],
+});
+
+//google calendar
+const calendar = google.calendar({
+  version: 'v3',
+  auth: auth
+});
 //***************
 
 module.exports = {
@@ -163,7 +177,7 @@ const createGoogleCalendarEvent = async (meeting, clinic) => {
       calendarId: 'primary',
       maxAttendees: 2,
       requestBody: event,
-      sendUpdates: 'true',
+      sendUpdates: 'all',
       supportAttachments: true
     })
     return true
