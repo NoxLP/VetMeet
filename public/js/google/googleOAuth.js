@@ -16,7 +16,7 @@ function onSuccess(googleUser) {
       localStorage.setItem('name', res.data.name)
       localStorage.setItem('email', res.data.email)
       localStorage.setItem('googleSign', true)
-      window.location = './citas-app.html'
+      //window.location = './citas-app.html'
     })
     .catch(err => {
       console.log(err)
@@ -35,7 +35,11 @@ function onSuccess(googleUser) {
 function onFailure(error) {
   console.log(error);
 }
-export function googleSignOut() {
+function googleSignOut() {
+  console.log('googleSignOut')
+  if(!localStorage.getItem('googleSign'))
+    return
+
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
@@ -53,4 +57,8 @@ function renderButton() {
     'onsuccess': onSuccess,
     'onfailure': onFailure
   });
+}
+
+window.onload = async function () {
+  document.getElementById('signOutMobile').addEventListener('click', googleSignOut)
 }

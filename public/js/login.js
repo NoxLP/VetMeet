@@ -10,7 +10,7 @@ function loginButtonOnClick() {
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('name', res.data.name)
         localStorage.setItem('email', res.data.email)
-        goToApp()
+        //goToApp()
       } else {
         alert('Email or Password Wrong!')
       }

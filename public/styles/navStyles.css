@@ -14,6 +14,7 @@
   color: rgb(59, 59, 59) !important;
 }
 .nav-link.active {
+  width: 100%;
   background-color: var(--main-second-trans-color) !important;
 }
 .nav-item:hover .nav-link {

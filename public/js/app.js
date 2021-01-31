@@ -1,6 +1,5 @@
 import { api, goToHome, getFormattedDateString } from "./helpers/helpers.js";
 import * as FilterFiles from "./filter/filter-files.js";
-import { googleSignOut } from "./google/googleOAuth.js";
 //const flatpickr = require("flatpickr");
 
 api.defaults.headers.common['token'] = localStorage.getItem('token')
@@ -189,12 +188,12 @@ const getDateObjectFromDateTimeInputs = () => {
 
 //#region event callbacks
 function signOut() {
-  if(localStorage.getItem('googleSign')) {
-    googleSignOut()
-  } else {
-    localStorage.clear()
-    goToHome()
-  }
+  console.log('signOut')
+  if(localStorage.getItem('googleSign'))
+    return
+
+  localStorage.clear()
+  goToHome()
 }
 function updateFieldIfNecessary(e, clinicInputs) {
   //console.log(e)

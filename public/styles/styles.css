@@ -1,5 +1,5 @@
 :root {
-  --main-body-bg-color: white;
+  --main-body-bg-color: #ffebd6;
   --main-prim-color: #966dd0;
   --main-prim-trans-color: #966dd091;
   --main-second-color: #d1f5dc;
@@ -7,7 +7,8 @@
 }
 
 .bg-body {
-  background-color: var(--main-body-bg-color) !important;
+  background: linear-gradient(white 4%, #c6cedf 120%);
+  /*background-color: var(--main-body-bg-color) !important;*/
 }
 .bg-prim {
   background-color: var(--main-prim-color);
@@ -27,4 +28,18 @@
 }
 .btn-outline-secondary.dropdown-toggle.show {
   background-color: var(--main-prim-trans-color) !important;
+}
+.abcRioButtonContentWrapper {
+  padding-top: 1%;
+  padding-left: 1%;
+}
+#my-signin2 {
+  width: 100%;
+}
+#my-signin2 > div {
+  margin: 0 auto;
+  /*background-color: var(--main-prim-color);*/
+  /*color: black;*/
+  font-family: inherit;
+  border-radius: .25rem;
 }

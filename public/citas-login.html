@@ -12,9 +12,9 @@
   <title>Veterinaria oftalmología</title>
 </head>
 
-<body>
+<body class="bg-body">
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <a id="signOutMobile" class="nav-link invisible" href="">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(115, 115, 115)"
@@ -26,8 +26,10 @@
           </svg>
         </a>
         <a class="navbar-brand mx-auto mx-md-0" href="./index.html">
-          <img alt="logo" src="./images/LogoWeb.png" srcset="./images/LogoMobile.png 150w,
-                    ./images/LogoWeb.png 250w" sizes="(max-width: 376px) 150px, 250px">
+          <img alt="logo" src="./images/LogoNewPeq.png" 
+            srcset="./images/LogoNewPeq.png 180w,
+                    ./images/LogoNewPeq.png 250w" 
+            sizes="(max-width: 376px) 180px, 250px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
@@ -63,8 +65,8 @@
     </nav>
   </header>
   <!--Header menu toggler button dropdown when mobile-->
-  <nav class="collapse border-top border-bottom mb-4" id="navbarToggleExternalContent">
-    <ul class="fs-6 ms-3 me-3 px-0 pb-0 pt-2">
+  <nav class="collapse border mb-4 bg-white ms-1" id="navbarToggleExternalContent">
+    <ul class="navbar-nav fs-6 ms-3 me-3 px-0 pb-0 pt-2">
       <li class="nav-item justify-content-start border-bottom">
         <a href="./quienes-somos.html" class="nav-link">
           Quiénes somos
@@ -91,33 +93,34 @@
 
   <!--login for mobile-->
   <section class="container d-md-none">
-    <div class="row justify-content-center">
-      <p class="text-center">Si representas a una clínica veterinaria en Lanzarote, puedes concertar una cita con
-        nosotros aquí.</p>
+    <div class="row justify-content-center mb-0">
+      <p class="text-center">Si representas a una clínica veterinaria en Lanzarote, puedes concertar una cita con nosotros aquí.</p>
     </div>
-    <hr class="row bg-prim mb-4">
-    <div class="row justify-content-center mb-4">
-      <!--<button id="googleButton" class="w-75">Google button</button>-->
-      <div id="my-signin2"></div>
-    </div>
-    <div class="row justify-content-center align-items-center mb-2">
-      <hr class="col-4">
-      <p class="col-2 text-center">o</p>
-      <hr class="col-4">
-    </div>
-    <div class="row justify-content-center align-items-center mb-3">
-      <div class="input-group mb-3">
-        <input id="loginEmail" type="email" class="form-control" placeholder="Email" aria-label="Email"
-          aria-describedby="login-email">
+    <div class="row card container-fluid shadow-sm mx-auto p-0 mt-0">
+      <div class="card-body">
+        <div class="row justify-content-center mb-3">
+          <!--<button id="googleButton" class="w-75">Google button</button>-->
+            <div id="my-signin2" >button</div>
+        </div>
+        <div class="row justify-content-center align-items-center mb-0">
+          <hr class="col-4">
+          <p class="col-2 text-center">o</p>
+          <hr class="col-4">
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <div class="input-group mb-3">
+            <input id="loginEmail" type="email" class="form-control" placeholder="Email" aria-label="Email"
+              aria-describedby="login-email">
+          </div>
+          <div class="input-group mb-3">
+            <input id="loginPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña"
+              aria-describedby="login-password">
+          </div>
+          <button id="loginButton" class="btn btn-success bg-prim border-0 w-50">Log in</button>
+        </div>
       </div>
-      <div class="input-group mb-3">
-        <input id="loginPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña"
-          aria-describedby="login-password">
-      </div>
-      <button id="loginButton" class="btn btn-success bg-prim border-0 w-50">LOG IN</button>
     </div>
-    <div class="row justify-content-center mb-4">
-      <hr class="bg-prim mb-4">
+    <div class="row justify-content-center mb-4 mt-2">
       <p class="text-center">Puedes identificarte con tu cuenta de google o con tu correo electrónico, también puedes
         crear un <a href="./citas-signup.html">nuevo usuario aquí</a> con tu email y contraseña...</p>
       <p class="text-center">¡Sin coste añadido!</p>
