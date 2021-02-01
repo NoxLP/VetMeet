@@ -258,9 +258,9 @@ function patientsListInputOnFocusOut(e, newMeetingPatientInputs) {
     }
   }
 }
-function datepickerOnChange(selectedDates, dateStr, instance) {
+function datepickerOnChange(e) {
   console.log('datepicker onchange')
-  fillMeetingsTimesList(dateStr)
+  fillMeetingsTimesList(e.target.value)
 }
 function saveMeetingButtonOnClick(newMeetingPatientInputs) {
   //TODO: validation, alerts
@@ -318,9 +318,9 @@ window.onload = async function () {
   document.getElementById('meetingsFilterDTOsCardsContainer').addEventListener('scroll', e => { FilterFiles.cardsContainerOnScroll(e) })
   document.getElementById('goStartEndButton').addEventListener('click', () => { FilterFiles.goStartEndButtonOnClick() })
   document.getElementById('meetingUpdateButton').addEventListener('click', e => { FilterFiles.meetingUpdateButtonOnClick(e) })
-
+  document.getElementById('meetingDateInput').addEventListener('change', datepickerOnChange)
   //Adding on change event to flatpickr datepicker
-  datePicker.config.onChange.push(datepickerOnChange)
+  //datePicker.config.onChange.push(datepickerOnChange)
   //**********************************************
 
   signOutButton.classList.remove('invisible')
