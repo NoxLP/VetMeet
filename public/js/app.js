@@ -283,13 +283,16 @@ Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde pued
       alert(`Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value}.
       Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.
       Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`)
+      document.getElementById('alertSuccess').classList.remove('d-none')
+
     })
     .catch(err => {
       /*let alert = document.getElementById('alertDanger')
       alert.innerText = 'Ha ocurrido un error, no se ha solicitado su cita'
       alert.classList.remove('collapse')
       alert.classList.add('show')*/
-      alert('Ha ocurrido un error, no se ha solicitado su cita')
+      document.getElementById('alertDanger').classList.remove('d-none')
+      //alert('Ha ocurrido un error, no se ha solicitado su cita')
     })
 }
 //#endregion

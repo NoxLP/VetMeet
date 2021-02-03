@@ -106,12 +106,7 @@
     </div>
   </section>
   
-  <div id="alertSuccess" class="alert alert-success fade collapse w-50" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  <div id="alertDanger" class="alert alert-danger fade collapse w-50" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+  <!--tab content-->
   <section class="container mt-1">
     <div class="tab-content" id="appNavTabContent">
       <!--Mi clínica-->
@@ -341,6 +336,17 @@
     </div>
   </section>
   
+  <!--alerts-->
+  <aside id="alertsContainer" class="float-end collapse">
+    <div id="alertSuccess" class="alert d-none alert-success fade w-50" role="alert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      Esto no sale
+    </div>
+    <div id="alertDanger" class="alert alert-danger d-none fade show w-50" role="alert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </aside>
+
   <!--footer-->
   <footer class="container-fluid fixed-bottom px-0 py-0">
     <!--mobile bottom menu-->

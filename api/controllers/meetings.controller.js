@@ -1,11 +1,15 @@
 const meetingsModel = require('../models/meetings.model')
 const clinicsModel = require('../models/clinics.model')
 const patientsModel = require('../models/patients.model')
+const {
+  emailBodies,
+  getReplaceCharsObject
+} = require('../utils/emails/emails')
 const { handleError } = require('../utils')
 
 //*************** GOOGLE
 // Google service account stuff
-const {google} = require('googleapis');
+/*const {google} = require('googleapis');
 
 const auth = new google.auth.GoogleAuth({
   keyFile: './api/google/quickstart-1612011346735-98102625f06a.json',
@@ -19,7 +23,12 @@ const auth = new google.auth.GoogleAuth({
 const calendar = google.calendar({
   version: 'v3',
   auth: auth
-});
+});*/
+const send = require('gmail-send')({
+  user: process.env.GMAIL_ACCOUNT,
+  pass: process.env.GMAIL_PWD,
+  to: '...'
+})
 //***************
 
 module.exports = {
@@ -317,7 +326,16 @@ async function createMeeting(req, res) {
       await Promise.all([clinic.save(), patient.save()])
     }
 
-    await createGoogleCalendarEvent(meeting, clinic)
+    //await createGoogleCalendarEvent(meeting, clinic)
+      
+    
+    emailBody.replace()
+
+    await send({
+      to: clinic.email,
+      subject: 'Su cita pendiente de confirmar con veterinaria oftalmología [no responder a este mensaje]',
+      html: emailBodies.meetCreation
+    })
 
     res.status(200).json(meeting)
   } catch (err) {

@@ -9,7 +9,7 @@ mongoose.set('useFindAndModify', false);
 const morgan = require('morgan')
 const path = require('path')
 
-// NONGOOSE
+// MONGOOSE
 mongoose.connect(process.env.MONGO_URL, {
   dbName: process.env.MONGO_DB || 'test',
   useNewUrlParser: true,
