@@ -16,7 +16,7 @@ const getReplaceCharsObject = (meeting, clinic, patient) => {
     }),
     '&patient': patient.name,
     '&disease': meeting.disease,
-    '&myWeb': 'estoesunaprueba.com',
+    '&myWeb': 'https://vet-meet.herokuapp.com/api',
     '&addressSelf': process.env.SELF_ADDRESS
   }
 }
