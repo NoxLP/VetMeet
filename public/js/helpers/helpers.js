@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://tallerbj.herokuapp.com/api'//'http://localhost:3000/api'
+export const BASE_URL = 'https://vet-meet.herokuapp.com/api'//'http://localhost:3000/api'
 export const APP_URL = '../../citas-app.html'
 export const api = axios.create({
   baseURL: BASE_URL,
