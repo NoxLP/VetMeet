@@ -23,6 +23,9 @@ document.getElementById('signupButton').addEventListener('click', e => {
       goToApp()
     })
     .catch(err => {
-      alert('User Already registered!')
+      //TODO: store the real error somewhere
+      showAlert(
+        'Este usuario ya está registrado. Puede loguearse usando este usuario o introducir datos para un nuevo usuario.',
+        false)
     })
 })

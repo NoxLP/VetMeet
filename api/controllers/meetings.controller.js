@@ -113,8 +113,8 @@ const getMeetingsFromQuery = async (req, clinic) => {
   console.log(meetingQuery)
 
   const data = await Promise.all([
-    await meetingsModel.find(meetingQuery).count(),
-    await meetingsModel.find(meetingQuery)
+    meetingsModel.find(meetingQuery).count(),
+    meetingsModel.find(meetingQuery)
       .populate({ path: 'patient', select: 'name species' })
       .limit(req.query.limit)
       .skip(req.query.limit * req.query.page)

@@ -4,34 +4,30 @@ const api = axios.create({
   baseURL: BASE_URL,
   timeout: 3000
 });
-let allowGoogleSign = !localStorage.getItem('email')
 
-if(allowGoogleSign) {
-  function onSuccess(googleUser) {
-    let profile = googleUser.getBasicProfile()
-    console.log('Logged in as: ' + profile.getName());
-    let token = googleUser.getAuthResponse().id_token;
-    console.log(token)
-    api.post('/auth/clinics/googleLogin', { token: token, email: profile.getEmail(), name: profile.getName()})
-      .then(res => {
-        localStorage.setItem('token', res.data.token)
-        localStorage.setItem('name', res.data.name)
-        localStorage.setItem('email', res.data.email)
-        localStorage.setItem('googleSign', true)
+function onSuccess(googleUser) {
+  let profile = googleUser.getBasicProfile()
+  console.log('Logged in as: ' + profile.getName());
+  let token = googleUser.getAuthResponse().id_token;
+  console.log(token)
+  api.post(
+    '/auth/clinics/googleLogin', 
+    { token: token, email: profile.getEmail(), name: profile.getName()})
+    .then(res => {
+      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('name', res.data.name)
+      localStorage.setItem('email', res.data.email)
+      localStorage.setItem('googleSign', true)
 
-        let button = document.getElementById('goToAppButton')
-        button.classList.add('show')
-        button.classList.remove('collapse')
-      })
-      .catch(err => {
-        console.log(err)
-        //TODO: bootstrap alert
-        alert('No se pudo loguear con google')
-      })
-  }
-}
-function onGoogleButtonClick(e) {
-  allowGoogleSign = true
+      let button = document.getElementById('goToAppButton')
+      button.classList.add('show')
+      button.classList.remove('collapse')
+    })
+    .catch(err => {
+      console.log(err)
+      //TODO: bootstrap alert
+      alert('No se pudo loguear con google')
+    })
 }
 function onFailure(error) {
   console.log(error);
@@ -60,11 +56,12 @@ function renderButton() {
   });
 }
 function goToApp() {
+  console.log('gotoapp')
   window.location = '../../citas-app.html'
 }
 
-window.onload = async function () {
-  document.getElementById('my-signin2').addEventListener('click', onGoogleButtonClick)
+window.addEventListener('load', () => {
   document.getElementById('signOutMobile').addEventListener('click', googleSignOut)
-  document.getElementById('goToAppButton').addEventListener('click', goToApp)
-}
+  if(window.location.pathname === '/citas-login.html')
+    document.getElementById('goToAppButton').addEventListener('click', goToApp)
+})

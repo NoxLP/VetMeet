@@ -72,8 +72,10 @@ const getFilteredMeetingsCards = async () => {
     
     return meetingsDTOs[1].map(dTO => getMeetingsFilterCard(dTO))
   } catch (err) {
-    console.log(err)
-    alert('Hubo un error intentando filtrar sus citas')
+    //TODO: store the real error somewhere
+    showAlert(
+      'Hubo un error al intentar filtrar sus citas. Inténtelo de nuevo o contacte con nosotros.',
+      false)
   }
 }
 const showFilterSpinner = () => {

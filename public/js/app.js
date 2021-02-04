@@ -1,4 +1,4 @@
-import { api, pad, goToHome, getFormattedDateString } from "./helpers/helpers.js";
+import { api, pad, goToHome, getFormattedDateString, showAlert } from "./helpers/helpers.js";
 import * as FilterFiles from "./filter/filter-files.js";
 //const flatpickr = require("flatpickr");
 
@@ -18,8 +18,10 @@ const assignClinicData = (async function () {
   try {
     Object.assign(clinicData, (await api.get('/clinics/me')).data)
   } catch (err) {
-    //TODO => go to a page where the error get shown and explained
-    alert(err)
+    //TODO: store the real error somewhere
+    showAlert(
+      'No se pudo encontrar datos de su clínica. Intente volver a loguearse o darse de alta. Si el error persiste, contacte con nosotros.',
+      false)
     goToHome()
   }
 })()
@@ -38,8 +40,10 @@ const getPatientsDTOs = (async function () {
         })
     )
   } catch (err) {
-    //TODO => go to a page where the error get shown and explained
-    alert('error retrieving patients dtos: ', err)
+    //TODO: store the real error somewhere
+    showAlert(
+      'No se pudo encontrar datos de sus pacientes. Intente volver a loguearse o darse de alta. Si el error persiste, contacte con nosotros.',
+      false)
     goToHome()
   }
 })()
@@ -64,8 +68,10 @@ const getMeetingsDateDTOs = (async function () {
     }, {}))
     console.log('meet DTOs ', meetingsDatesDTOs)
   } catch (err) {
-    //TODO => go to a page where the error get shown and explained
-    alert('error retrieving meetings dtos: ', err)
+    //TODO: store the real error somewhere
+    showAlert(
+      'No se pudo encontrar datos de sus citas. Intente volver a loguearse o darse de alta. Si el error persiste, contacte con nosotros.',
+      false)
     goToHome()
   }
 })()
@@ -149,7 +155,10 @@ const updateField = (input, fieldName) => {
         fillClinicNameCard(input.value)
     })
     .catch(err => {
-      alert(`No se pudo actualizar el campo: ${input.placeholder}`)
+      //TODO: store the real error somewhere
+      showAlert(
+        `No se pudo actualizar el campo ${input.placeholder}. Revise si los datos introducidos son correctos. Si el error persiste, contacte con nosotros.`,
+        false)
       input.value = clinicData[fieldName]
     })
 }
@@ -276,25 +285,19 @@ function saveMeetingButtonOnClick(newMeetingPatientInputs) {
     disease: newMeetingPatientInputs.diseaseInput.value
   })
     .then(res => {
-      /*let alert = document.getElementById('alertSuccess')
-      alert.innerText = `Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value}.
-Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.
-Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`
-      alert.classList.remove('collapse')
-      alert.classList.add('show')*/
-      alert(`Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value}.
-      Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.
-      Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`)
-      document.getElementById('alertSuccess').classList.remove('d-none')
-
+      showAlert(
+        `Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value} horas.\n
+      Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.\n
+      Recuerde que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`,
+        true,
+        'Solicitada cita'
+      )
     })
     .catch(err => {
-      /*let alert = document.getElementById('alertDanger')
-      alert.innerText = 'Ha ocurrido un error, no se ha solicitado su cita'
-      alert.classList.remove('collapse')
-      alert.classList.add('show')*/
-      document.getElementById('alertDanger').classList.remove('d-none')
-      //alert('Ha ocurrido un error, no se ha solicitado su cita')
+      showAlert(
+        'Ha ocurrido un error, no se ha solicitado su cita',
+        false
+      )
     })
 }
 //#endregion
@@ -330,9 +333,14 @@ window.onload = async function () {
   document.getElementById('goStartEndButton').addEventListener('click', () => { FilterFiles.goStartEndButtonOnClick() })
   document.getElementById('meetingUpdateButton').addEventListener('click', e => { FilterFiles.meetingUpdateButtonOnClick(e) })
   document.getElementById('meetingDateInput').addEventListener('change', datepickerOnChange)
-  //Adding on change event to flatpickr datepicker
-  //datePicker.config.onChange.push(datepickerOnChange)
-  //**********************************************
+
+  $('#myToast').toast();
+  const toast = document.getElementById('myToast')
+  toast.addEventListener('hidden.bs.toast', function () {
+    document.getElementsByClassName('toast-body')[0].innerHTML = "";
+    document.getElementById('myToast').classList.remove('d-flex')
+    document.getElementById('myToast').classList.add('d-none')
+  })
 
   signOutButton.classList.remove('invisible')
   signOutButton.addEventListener('click', signOut)

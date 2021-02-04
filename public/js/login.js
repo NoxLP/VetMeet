@@ -12,11 +12,17 @@ function loginButtonOnClick() {
         localStorage.setItem('email', res.data.email)
         goToApp()
       } else {
-        alert('Email or Password Wrong!')
+        //TODO: store the real error somewhere
+        showAlert(
+          'Su contraseña o su dirección de correo electrónico es erróneo. Inténtelo de nuevo',
+          false)
       }
     })
     .catch(err => {
-      alert('Email or Password Wrong!')
+      //TODO: store the real error somewhere
+      showAlert(
+        'Su contraseña o su dirección de correo electrónico es erróneo. Inténtelo de nuevo',
+        false)
     });
 }
 function passwordInputOnKeyUp(e) {
@@ -24,11 +30,11 @@ function passwordInputOnKeyUp(e) {
     document.getElementById('loginButton').click()
 }
 
-window.onload = () => {
+window.addEventListener('load', () => {
   if(localStorage.getItem('email')) {
     document.getElementById('loginEmail').value = localStorage.getItem('email')
   }
 
   document.getElementById('loginButton').addEventListener('click', loginButtonOnClick)
   //document.getElementById('loginPassword').addEventListener('keyup', passwordInputOnKeyUp)
-}
+})

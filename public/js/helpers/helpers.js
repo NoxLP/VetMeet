@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://vet-meet.herokuapp.com/api'//'http://localhost:3000/api'
+export const BASE_URL = 'http://localhost:3000/api'//'https://vet-meet.herokuapp.com/api'//
 export const APP_URL = '../../citas-app.html'
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -11,9 +11,9 @@ export const MEETINGS_FILTER_CARDS_HTML = [
 ]
 
 export const goToApp = () => { window.location = APP_URL }
-export const goToHome = () => { 
+export const goToHome = () => {
   console.log('HOME')
-  window.location = '../../index.html' 
+  window.location = '../../index.html'
 }
 export const pad = (str, minLength = 2, endStart = 'start', char = '0') => {
   if (str.length >= minLength)
@@ -34,6 +34,27 @@ export const setInputValueIfNotFalsie = (input, newValue, propertyToSet = 'value
   if (!newValue)
     return
   input[propertyToSet] = newValue
+}
+export const showAlert = (message, success, title) => {
+  console.log('showalert')
+  let alert 
+  if (success) {
+    alert = document.getElementById('myToast')
+    alert.classList.remove('d-none')
+    alert.classList.add('show')
+    document.getElementById('toastTitle').innerText = title
+    document.getElementsByClassName('toast-body')[0].innerHTML = message;
+  } else {
+    alert = document.createElement('div')
+    alert.classList.add('d-none','fade','show','fixed-top', 'bg-white')
+    alert.setAttribute('role', 'alert')
+    alert.innerHTML = `${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+    alert.classList.add('alert', 'alert-danger')
+  }
+
+  document.getElementById('alertsContainer').appendChild(alert)
+  alert.classList.remove('d-none')
 }
 
 const INTERCEPT_AXIOS = false
