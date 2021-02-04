@@ -1,4 +1,4 @@
-import { api, goToApp } from "./helpers/helpers.js";
+import { api, goToApp, showAlert } from "./helpers/helpers.js";
 
 function loginButtonOnClick() {
   api.post('/auth/clinics/login', {
