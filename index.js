@@ -36,4 +36,12 @@ app.listen(PORT, (err) => {
   console.info('💻  VetMeet Live')
   console.info(`📡  PORT: http://localhost:${PORT}`)
   console.info('>'.repeat(40) + '\n')
+  // Emails
+  const { emailsBodies } = require('./api/utils/emails/emails')
+  if (emailsBodies &&
+    Object.values(emailsBodies).length > 0 &&
+    Object.values(emailsBodies).every(x => x && x.length > 0)) {
+    console.info('💾 Emails bodies loaded correctly:')
+    console.info('    ', Object.keys(emailsBodies).join('\n    '), '\n')
+  }
 })

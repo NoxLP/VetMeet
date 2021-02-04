@@ -15,12 +15,12 @@ const getClinicFromInputs = () => {
 document.getElementById('signupButton').addEventListener('click', e => {
   const clinic = getClinicFromInputs()
   
-  Helpers.api.post('/auth/clinics/signup', clinic)
+  api.post('/auth/clinics/signup', clinic)
     .then(res => {
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('name', res.data.name)
       localStorage.setItem('email', res.data.email)
-      Helpers.goToApp()
+      goToApp()
     })
     .catch(err => {
       alert('User Already registered!')

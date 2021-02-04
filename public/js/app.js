@@ -174,12 +174,13 @@ const getBDFieldNameByInputId = inputId => {
   return fieldName
 }
 const getDateObjectFromDateTimeInputs = () => {
-  let dateSplit = document.getElementById('meetingDateInput').value.split('/')
+  let dateSplit = document.getElementById('meetingDateInput').value.split('-')
   let timeSplit = document.getElementById('meetingTimeInput').value.split(':')
+  console.log(dateSplit, timeSplit)
   let date = new Date()
-  date.setFullYear(parseInt(dateSplit[2]))
+  date.setFullYear(parseInt(dateSplit[0]))
   date.setMonth(parseInt(dateSplit[1]) - 1)
-  date.setDate(parseInt(dateSplit[0]))
+  date.setDate(parseInt(dateSplit[2]))
   date.setHours(parseInt(timeSplit[0]))
   date.setMinutes(parseInt(timeSplit[1]))
   
@@ -264,7 +265,7 @@ function datepickerOnChange(e) {
 }
 function saveMeetingButtonOnClick(newMeetingPatientInputs) {
   //TODO: validation, alerts
-  console.log(getDateObjectFromDateTimeInputs())
+  console.log('save meeting ', getDateObjectFromDateTimeInputs())
   api.post('/meetings', {
     name: newMeetingPatientInputs.patientsListInput.value.split('-')[0].trim(),
     patientId: patientsDTOs[selectedPatientIndex],

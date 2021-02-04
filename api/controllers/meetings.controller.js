@@ -2,8 +2,8 @@ const meetingsModel = require('../models/meetings.model')
 const clinicsModel = require('../models/clinics.model')
 const patientsModel = require('../models/patients.model')
 const {
-  emailBodies,
-  getReplaceCharsObject
+  emailsBodies,
+  buildEmailBody
 } = require('../utils/emails/emails')
 const { handleError } = require('../utils')
 
@@ -288,7 +288,7 @@ async function updateMeeting(req, res) {
 }
 
 async function createMeeting(req, res) {
-  console.log('createMeeting')
+  console.log('createMeeting ', req.body)
 
   try {
     let { name, patientId, species, history, date, disease } = req.body
@@ -327,15 +327,17 @@ async function createMeeting(req, res) {
     }
 
     //await createGoogleCalendarEvent(meeting, clinic)
-      
-    
-    emailBody.replace()
 
+    console.log(clinic.email)
     await send({
+      user: process.env.GMAIL_ACCOUNT,
+      pass: process.env.GMAIL_PWD,
       to: clinic.email,
       subject: 'Su cita pendiente de confirmar con veterinaria oftalmología [no responder a este mensaje]',
-      html: emailBodies.meetCreation
+      html: buildEmailBody(emailsBodies.meetCreation, meeting, clinic, patient)
     })
+      .then(response => console.log('email send'))
+      .catch(err => console.log('email err: ', err))
 
     res.status(200).json(meeting)
   } catch (err) {
