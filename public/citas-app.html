@@ -9,7 +9,7 @@
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/navStyles.css">
-  
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./js/protect.js"></script>
   <title>Veterinaria oftalmología</title>
@@ -20,16 +20,17 @@
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <a id="signOutMobile" class="nav-link d-md-none" href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(115, 115, 115)" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="rgb(115, 115, 115)"
+            class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+            <path fill-rule="evenodd"
+              d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
           </svg>
         </a>
         <a class="navbar-brand mx-auto mx-md-0" href="./index.html">
-          <img alt="logo" src="./images/LogoNewPeqWhite.png" 
-            srcset="./images/LogoNewPeqWhite.png 180w,
-                    ./images/LogoNewPeqWhite.png 250w" 
-            sizes="(max-width: 376px) 180px, 250px">
+          <img alt="logo" src="./images/LogoNewPeqWhite.png" srcset="./images/LogoNewPeqWhite.png 180w,
+                    ./images/LogoNewPeqWhite.png 250w" sizes="(max-width: 376px) 180px, 250px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
@@ -93,137 +94,172 @@
   <!--desktop sidebar menu-->
   <nav class="d-none d-md-block float-md-start mt-md-5">
     <div class="list-group fs-5" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="myClinicTab" data-bs-toggle="list" href="#myClinicContent" role="tab" aria-controls="miClinica">Mi Clínica</a>
-      <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list" href="#newMeetingContent" role="tab" aria-controls="newMeeting">Concertar cita</a>
-      <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#filterMeetingsContent" role="tab" aria-controls="filterMeetings">Filtrar mis citas</a>
-      <a class="list-group-item list-group-item-action" id="meetingsFilesTab" data-bs-toggle="list" href="#meetingsFilesContent" role="tab" aria-controls="meetingsFiles">Fichas de mis citas</a>
+      <a class="list-group-item list-group-item-action active" id="myClinicTab" data-bs-toggle="list"
+        href="#myClinicContent" role="tab" aria-controls="miClinica">Mi Clínica</a>
+      <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list"
+        href="#newMeetingContent" role="tab" aria-controls="newMeeting">Concertar cita</a>
+      <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list"
+        href="#filterMeetingsContent" role="tab" aria-controls="filterMeetings">Filtrar mis citas</a>
+      <a class="list-group-item list-group-item-action" id="meetingsFilesTab" data-bs-toggle="list"
+        href="#meetingsFilesContent" role="tab" aria-controls="meetingsFiles">Fichas de mis citas</a>
     </div>
   </nav>
 
-  <section class="card w-75 mt-0 mt-md-5 bg-prim-trans border-0 mx-auto">
-    <div class="card-body p-0 align-content-center align-items-center">
-      <p class="text-center text-wrap fw-bold fs-4 m-0" id="clinicNameCardText"></p>
+  <aside class="px-2">
+    <div class="card w-75 mt-0 mt-md-5 bg-prim-trans border-0 w-100">
+      <div class="card-body p-0 align-content-center align-items-center px-2">
+        <p class="text-center text-nowrap fw-bold fs-4 m-0 w-100 overflow-hidden" id="clinicNameCardText"></p>
+      </div>
     </div>
-  </section>
-  
+  </aside>
+
   <!--tab content-->
   <section class="container mt-1">
     <div class="tab-content" id="appNavTabContent">
       <!--Mi clínica-->
-      <div class="tab-pane card shadow-sm fade show active mt-3" id="myClinicContent" role="tabpanel" aria-labelledby="list-miClinica">
-        <div class="card-body">
-          <label class="form-label w-100 me-2 mb-2">
-            Nombre
-            <input id="myClinicName" type="text" class="form-control" placeholder="Nombre de mi clínica" aria-label="Nombre de mi clínica" aria-describedby="Nombre de mi clínica">
-          </label>
-          <label class="form-label w-100 me-2 mb-2">
-            Dirección
-            <input id="myClinicAddress" type="text" class="form-control" placeholder="Direccion postal" aria-label="Direccion postal" aria-describedby="Direccion postal">
-          </label>
-          <label class="form-label w-100 me-2 mb-2">
-            Email
-            <input id="myClinicEmail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="Email" disabled>
-          </label>
-          <label class="form-label w-100 me-2 mb-2">
-            Número de teléfono
-            <input id="myClinicTelephone" type="number" class="form-control" placeholder="Número de teléfono" aria-label="Teléfono" aria-describedby="Teléfono">
-          </label>
-          <label class="form-label w-100 me-2 mb-2">
-            Persona de contacto
-            <input id="myClinicContactPerson" type="text" class="form-control" placeholder="Persona de contacto" aria-label="Persona de contacto" aria-describedby="Persona de contacto">
-          </label>
+      <div class="tab-pane shadow-sm fade show active mt-3" id="myClinicContent" role="tabpanel" aria-labelledby="list-miClinica">
+        <div class="card g-0">
+          <div class="card-header">
+            <h5 class="pt-2">Mi clínica</h5>
+          </div>
+          <div class="card-body pb-2 pt-1" style="height: 350px;">
+            <label class="form-label w-100 me-2 mb-2">
+              Nombre
+              <input id="myClinicName" type="text" class="form-control" placeholder="Nombre de mi clínica"
+                aria-label="Nombre de mi clínica" aria-describedby="Nombre de mi clínica">
+            </label>
+            <label class="form-label w-100 me-2 mb-2">
+              Dirección
+              <input id="myClinicAddress" type="text" class="form-control" placeholder="Direccion postal"
+                aria-label="Direccion postal" aria-describedby="Direccion postal">
+            </label>
+            <label class="form-label w-100 me-2 mb-2">
+              Email
+              <input id="myClinicEmail" type="email" class="form-control" placeholder="Email" aria-label="Email"
+                aria-describedby="Email" disabled>
+            </label>
+            <label class="form-label w-100 me-2 mb-2">
+              Número de teléfono
+              <input id="myClinicTelephone" type="number" class="form-control" placeholder="Número de teléfono"
+                aria-label="Teléfono" aria-describedby="Teléfono">
+            </label>
+            <label class="form-label w-100 me-2 mb-2">
+              Persona de contacto
+              <input id="myClinicContactPerson" type="text" class="form-control" placeholder="Persona de contacto"
+                aria-label="Persona de contacto" aria-describedby="Persona de contacto">
+            </label>
+          </div>
         </div>
       </div>
       <!--Concertar cita-->
       <div class="tab-pane fade container" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
-        <!--Fila de fecha y hora-->
-        <div class="row p-0 mt-2">
-          <div class="card container d-flex flex-nowrap">
-            <h4 class="row ms-1 mt-1">Concertar cita</h4>
-            <div class="row">
-              <label class="form-label col-6">
-                Fecha
-                <div class="flatpickr input-group" id="mDIGroup">
-                  <input id="meetingDateInput" type="date" class="form-control" placeholder="Fecha" aria-label="Fecha" autocomplete="off">
-                  <!--<button class="btn btn-outline-secondary pb-2" type="button" id="mDIButton" data-toggle>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                    </svg>
-                  </button>-->
-                </div>
-              </label>
-              <label class="form-label col-6">
-                Hora
-                <div class="flatpickr input-group" id="mTIGroup">
-                  <input id="meetingTimeInput" type="text" class="form-control" placeholder="Hora" list="meetingsTimesList" aria-label="Hora" autocomplete="off" data-input>
-                  <datalist id="meetingsTimesList">
-                  </datalist>
-                  <span class="btn btn-outline-secondary pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass" viewBox="0 0 16 16">
-                      <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702c0 .7-.478 1.235-1.011 1.491A3.5 3.5 0 0 0 4.5 13v1h7v-1a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351v-.702c0-.7.478-1.235 1.011-1.491A3.5 3.5 0 0 0 11.5 3V2h-7z"/>
-                    </svg>
-                  </span>
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-        <!--<div class="row mt-3"><hr></div>-->
-        <!--Fila de título y subir-->
-        <div class="row mt-3 pt-0">
-          <div class="card px-0" style="height: 42vh;">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5>Información del paciente</h5>
-              <button id="newMetingSaveButton" class="btn btn-outline-secondary bg-white text-success" type="button" style="width: 45px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                  <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                </svg>
-              </button>
-            </div>
-            <!--Fila de ficha-->
-            <div class="card-body container mt-2 scrollable pt-0">
+        <div class="row p-0 mt-3">
+          <div class="card shadow-sm px-0">
+            <!--Fila de fecha y hora-->
+            <div class="card-header container align-content-center py-1">
               <div class="row">
-                <label class="form-label">
-                  Nombre
-                  <div class="input-group mb-1">
-                    <input class="form-control" list="patientsList" id="patientsListInput" placeholder="Nombre del paciente">
-                    <datalist id="patientsList">
-                    </datalist>
-                    </ul>
+                <h4 class="col-10 mt-1">Concertar cita</h4>
+                <button id="newMetingSaveButton" class="col-2 btn btn-outline-secondary bg-white text-success"
+                  type="button" style="width: 45px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-cloud-upload" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                    <path fill-rule="evenodd"
+                      d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!--form para nueva cita-->
+            <div class="card-body container pt-2">
+              <div class="row flex-nowrap">
+                <label class="form-label col-6">
+                  Fecha
+                  <div class="input-group" id="mDIGroup">
+                    <input id="meetingDateInput" type="date" class="form-control" placeholder="Fecha" aria-label="Fecha" autocomplete="off">
+                  </div>
+                </label>
+                <label class="form-label col-6">
+                  Hora
+                  <div class="input-group" id="mTIGroup">
+                    <select id="meetingTimeInput" type="time" class="form-select" placeholder="--:--" aria-label="Hora">
+
+                    </select>
+                    <span class="btn btn-outline-secondary pb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-hourglass" viewBox="0 0 16 16">
+                        <path
+                          d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702c0 .7-.478 1.235-1.011 1.491A3.5 3.5 0 0 0 4.5 13v1h7v-1a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351v-.702c0-.7.478-1.235 1.011-1.491A3.5 3.5 0 0 0 11.5 3V2h-7z" />
+                      </svg>
+                    </span>
                   </div>
                 </label>
               </div>
-              <div class="row">
-                <label class="form-label">
-                  Especie
-                  <input id="speciesInput" type="text" class="form-control" placeholder="Especie del paciente" aria-label="Especie del paciente" aria-describedby="Especie del paciente">
-                </label>
+              <!--separator-->
+              <div class="row mb-2 me-2 d-flex justify-content-end">
+                <hr class="col-10 me-3 w-75 my-auto">
+                <span class="col-1 btn rounded-pill bg-prim-trans text-white d-flex justify-content-center p-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                </span>
               </div>
-              <div class="row">
-                <label class="form-label">
-                  Patología
-                  <input id="diseaseInput" type="text" class="form-control" placeholder="Patología observada" aria-label="Patología observada" aria-describedby="Patología observada">
-                </label>
-              </div>
-              <div class="row">
-                <label class="form-label">
-                  Historial
-                  <textarea id="historyInput" type="text" class="form-control" placeholder="Historial del paciente" aria-label="Historial del paciente" aria-describedby="Historial del paciente"></textarea>
-                </label>
+              <!--Fila de ficha-->
+              <div class="row mt-0 pt-0 align-self-stretch scrollable" style="height: 205px;">
+                <h5>Información del paciente</h5>
+                <div class="container mt-2 pt-0">
+                  <div class="row">
+                    <label class="form-label">
+                      Nombre
+                      <div class="input-group mb-1">
+                        <input class="form-control" list="patientsList" id="patientsListInput"
+                          placeholder="Nombre del paciente">
+                        <datalist id="patientsList">
+                        </datalist>
+                        </ul>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="row">
+                    <label class="form-label">
+                      Especie
+                      <input id="speciesInput" type="text" class="form-control" placeholder="Especie del paciente"
+                        aria-label="Especie del paciente" aria-describedby="Especie del paciente">
+                    </label>
+                  </div>
+                  <div class="row">
+                    <label class="form-label">
+                      Patología
+                      <input id="diseaseInput" type="text" class="form-control" placeholder="Patología observada"
+                        aria-label="Patología observada" aria-describedby="Patología observada">
+                    </label>
+                  </div>
+                  <div class="row">
+                    <label class="form-label">
+                      Historial
+                      <textarea id="historyInput" type="text" class="form-control" placeholder="Historial del paciente"
+                        aria-label="Historial del paciente" aria-describedby="Historial del paciente"></textarea>
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <!--Filtrar fichas-->
-      <div class="tab-pane fade container-fluid mt-2 p-0" id="filterMeetingsContent" role="tabpanel" aria-labelledby="list-filtrarMisCitas">
+      <div class="tab-pane fade container-fluid mt-2 p-0" id="filterMeetingsContent" role="tabpanel"
+        aria-labelledby="list-filtrarMisCitas">
         <!--fila filtro-->
-        <div class="row container-fluid card shadow-sm px-0 py-2 mx-auto mb-2">
+        <div class="row container-fluid card shadow-sm px-0 py-2 mx-auto mb-3 mt-3">
           <div class="row me-0 pe-0">
             <label class="form-label col me-0 pe-0">
               Filtrar Fichas
-              <input id="filterMeetingsTextInput" type="text" class="form-control" placeholder="Texto a filtrar" aria-label="Texto a filtrar">
+              <input id="filterMeetingsTextInput" type="text" class="form-control" placeholder="Texto a filtrar"
+                aria-label="Texto a filtrar">
             </label>
           </div>
           <div class="row align-items-center me-0 pe-0">
@@ -236,25 +272,34 @@
                 <option value="4">Especie paciente</option>
               </select>
             </label>
-            <button id="saveFilterListToPDFButton" class="col-2 btn btn-outline-secondary h-25 mt-3 ms-2 text-primary" type="button" style="width: 45px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-download my-auto" viewBox="0 0 16 16">
-                <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+            <button id="saveFilterListToPDFButton" class="col-2 btn btn-outline-secondary h-25 mt-3 ms-2 text-primary"
+              type="button" style="width: 45px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-cloud-download my-auto" viewBox="0 0 16 16">
+                <path
+                  d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                <path
+                  d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
               </svg>
             </button>
           </div>
         </div>
         <!--separator-->
-        <div class="row mb-2 me-3 d-flex justify-content-end">
+        <div class="row mb-3 me-3 d-flex justify-content-end">
           <hr class="col-10 me-3 w-75 my-auto">
-          <button id="goStartEndButton" class="col-1 btn rounded-pill bg-prim-trans text-white d-flex justify-content-center p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+          <button id="goStartEndButton"
+            class="col-1 btn rounded-pill bg-prim-trans text-white d-flex justify-content-center p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z" />
             </svg>
           </button>
         </div>
         <!--cards container-->
-        <div id="meetingsFilterDTOsCardsContainer" class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable mb-0" style="max-height: 310px;">
+        <div id="meetingsFilterDTOsCardsContainer"
+          class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable mb-0"
+          style="max-height: 330px;">
         </div>
         <!--spinner-->
         <div class="row justify-content-center">
@@ -264,83 +309,106 @@
         </div>
       </div>
       <!--fichas citas-->
-      <div class="tab-pane fade container-fluid p-0 mt-2" id="meetingsFilesContent" role="tabpanel" aria-labelledby="list-fichasDeMisCitas">
+      <div class="tab-pane fade container-fluid p-0 mt-2" id="meetingsFilesContent" role="tabpanel"
+        aria-labelledby="list-fichasDeMisCitas">
         <!--file header card-->
-        <div class="row card container-fluid shadow-sm pe-0 py-2 mx-auto mb-2 g-0">
+        <div class="row card shadow-sm mx-auto mb-2 mt-3 pe-0 pb-2 g-0">
           <!--title-->
-          <div class="row justify-content-between align-items-center px-3 g-0">
-            <h5 class="col-5 me-0">Ficha de cita</h5>
-            <button id="saveMeetingFileToPDFButton" class="col-2 btn btn-outline-secondary h-25 ms-4 text-primary" type="button" style="width: 45px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-download my-auto" viewBox="0 0 16 16">
-                <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
-              </svg>
-            </button>
-            <button id="meetingUpdateButton" class="col-2 btn btn-outline-secondary h-25 text-success" type="button" style="width: 45px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
-              </svg>
-            </button>
-            <button id="meetingRemoveButton" class="col-2 btn btn-outline-secondary text-danger h-25" type="button" style="width: 45px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-              </svg>
-            </button>
+          <div class="card-header flex-nowrap justify-content-between align-items-center ps-2 pe-0 py-1 g-0 container mb-0">
+            <div class="row pe-0 g-0">
+              <h5 class="col-6 mt-2 me-0">Ficha de cita</h5>
+              <button id="saveMeetingFileToPDFButton" class="col-2 btn btn-outline-secondary h-25 ms-1 text-primary bg-white"
+                type="button" style="width: 45px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                  class="bi bi-cloud-download my-auto" viewBox="0 0 16 16">
+                  <path
+                    d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                  <path
+                    d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z" />
+                </svg>
+              </button>
+              <button id="meetingUpdateButton" class="col-2 btn btn-outline-secondary h-25 text-success bg-white ms-2" type="button"
+                style="width: 45px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                  class="bi bi-cloud-upload" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                  <path fill-rule="evenodd"
+                    d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z" />
+                </svg>
+              </button>
+              <button id="meetingRemoveButton" class="col-2 btn btn-outline-secondary text-danger h-25 bg-white me-1 ms-2" type="button"
+                style="width: 45px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                  class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                </svg>
+              </button>
+            </div>
           </div>
-          <!--date conf comp-->
-          <div class="row pe-0 d-flex flex-nowrap pe-2 mt-2 align-items-end">
-            <h6 id="meetingFileDate" class="col-5 text-center">&nbsp;</h6>
-            <h6 id="meetingFileConfirmed" class="col-4 text-end"></h6>
-            <h6 id="meetingFileCompleted" class="col-4"></h6>
-          </div>
-        </div>
-        <!--separator-->
-        <div class="row mb-2 me-3 d-flex justify-content-end">
-          <hr class="col-10 me-3 w-75 my-auto">
-          <span class="col-1 btn rounded-pill bg-prim-trans text-white d-flex justify-content-center p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-            </svg>
-          </span>
-        </div>
-        <!--other fields-->
-        <div class="row card container-fluid shadow-sm px-2 pt-0 mx-auto mb-2 g-0 scrollable w-100" style="height: 230px;">
-          <div class="card-body">
-            <label class="row form-label">
-              Nombre
-              <input id="meetingFileNameInput" type="text" class="form-control" placeholder="Nombre del paciente" aria-label="Nombre del paciente" aria-describedby="Nombre del paciente">
-            </label>
-            <label class="row form-label">
-              Especie
-              <input id="meetingFileSpeciesInput" type="text" class="form-control" placeholder="Especie del paciente" aria-label="Especie del paciente" aria-describedby="Especie del paciente">
-            </label>
-            <label class="row form-label">
-              Patología
-              <input id="meetingFileDiseaseInput" type="text" class="form-control" placeholder="Patología observada" aria-label="Patología observada" aria-describedby="Patología observada">
-            </label>
-            <label class="row form-label">
-              Tratamiento
-              <textarea id="meetingFileTreatmentInput" class="form-control" placeholder="Tratamiento" aria-label="Tratamiento" aria-describedby="Tratamiento"></textarea>
-            </label>
-            <label class="row form-label">
-              Intervención
-              <textarea id="meetingFileSurgeryInput" class="form-control" placeholder="Intervención" aria-label="Intervención" aria-describedby="Intervención"></textarea>
-            </label>
-            <label class="row form-label">
-              Notas
-              <textarea id="meetingFileNotesInput" class="form-control" placeholder="Notas" aria-label="Notas" aria-describedby="Notas"></textarea>
-            </label>
-            <label class="row form-label">
-              Historial
-              <textarea id="meetingFileHistoryInput" class="form-control" placeholder="Historial del paciente" aria-label="Historial del paciente" aria-describedby="Historial del paciente"></textarea>
-            </label>
+          <div class="card-body container d-flex flex-column flex-nowrap mt-0 pb-1 pe-0">
+            <!--date conf comp-->
+            <div class="row">
+              <h6 id="meetingFileDate" class="col-4 text-center">&nbsp;</h6>
+              <h6 id="meetingFileConfirmed" class="col-4 text-end"></h6>
+              <h6 id="meetingFileCompleted" class="col-4"></h6>
+            </div>
+            <!--separator-->
+            <div class="row mb-2 me-4 d-flex justify-content-end">
+              <hr class="col-10 me-3 w-75 my-auto">
+              <span class="col-1 btn rounded-pill bg-prim-trans text-white d-flex justify-content-center p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
+                </svg>
+              </span>
+            </div>
+            <!--other fields-->
+            <div class="row container-fluid p-0 mx-auto mb-2 g-0 scrollable" style="height: 218px;">
+              <label class="row form-label">
+                Nombre
+                <input id="meetingFileNameInput" type="text" class="form-control" placeholder="Nombre del paciente"
+                  aria-label="Nombre del paciente" aria-describedby="Nombre del paciente">
+              </label>
+              <label class="row form-label">
+                Especie
+                <input id="meetingFileSpeciesInput" type="text" class="form-control" placeholder="Especie del paciente"
+                  aria-label="Especie del paciente" aria-describedby="Especie del paciente">
+              </label>
+              <label class="row form-label">
+                Patología
+                <input id="meetingFileDiseaseInput" type="text" class="form-control" placeholder="Patología observada"
+                  aria-label="Patología observada" aria-describedby="Patología observada">
+              </label>
+              <label class="row form-label">
+                Tratamiento
+                <textarea id="meetingFileTreatmentInput" class="form-control" placeholder="Tratamiento"
+                  aria-label="Tratamiento" aria-describedby="Tratamiento"></textarea>
+              </label>
+              <label class="row form-label">
+                Intervención
+                <textarea id="meetingFileSurgeryInput" class="form-control" placeholder="Intervención"
+                  aria-label="Intervención" aria-describedby="Intervención"></textarea>
+              </label>
+              <label class="row form-label">
+                Notas
+                <textarea id="meetingFileNotesInput" class="form-control" placeholder="Notas" aria-label="Notas"
+                  aria-describedby="Notas"></textarea>
+              </label>
+              <label class="row form-label">
+                Historial
+                <textarea id="meetingFileHistoryInput" class="form-control" placeholder="Historial del paciente"
+                  aria-label="Historial del paciente" aria-describedby="Historial del paciente"></textarea>
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
+
   <!--alerts-->
   <aside id="alertsContainer" class="float-end collapse">
     <div id="alertSuccess" class="alert d-none alert-success fade w-50" role="alert">
@@ -357,29 +425,42 @@
     <!--mobile bottom menu-->
     <div class="row d-md-none">
       <div class="list-group list-group-horizontal fs-6 text-center" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="myClinicTab" data-bs-toggle="list" href="#myClinicContent" role="tab" aria-controls="home">
+        <a class="list-group-item list-group-item-action active ps-4" id="myClinicTab" data-bs-toggle="list"
+          href="#myClinicContent" role="tab">
           <!--Clínica-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
           </svg>
         </a>
-        <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list" href="#newMeetingContent" role="tab" aria-controls="home">
+        <a class="list-group-item list-group-item-action" id="newMeetingTab" data-bs-toggle="list"
+          href="#newMeetingContent" role="tab">
           <!--Nueva cita-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-plus" viewBox="0 0 16 16">
-            <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-plus"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
           </svg>
         </a>
-        <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#filterMeetingsContent" role="tab" aria-controls="home">
+        <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list"
+          href="#filterMeetingsContent" role="tab">
           <!--Filtrar fichas-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
-            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-funnel"
+            viewBox="0 0 16 16">
+            <path
+              d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
           </svg>
         </a>
-        <a class="list-group-item list-group-item-action" id="filterMeetingsTab" data-bs-toggle="list" href="#meetingsFilesContent" role="tab" aria-controls="home">
+        <a class="list-group-item list-group-item-action" id="meetingsFilesTab" data-bs-toggle="list"
+          href="#meetingsFilesContent" role="tab">
           <!--Fichas citas-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder2-open" viewBox="0 0 16 16">
-            <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder2-open"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z" />
           </svg>
         </a>
       </div>
@@ -403,4 +484,5 @@
   <script src="./js/google/googleOAuth.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
+
 </html>

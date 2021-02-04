@@ -111,16 +111,17 @@ const getTimeStringByHalfHours = halfHourIdx => {
 }
 const fillMeetingsTimesList = selectedDate => {
   selectedDate = selectedDate.trim()
-  let list = document.getElementById('meetingsTimesList')
-  list.innerHTML = ''
+  let select = document.getElementById('meetingTimeInput')
+  select.innerHTML = ''
   
   for (let i = FIRST_HOUR; i < LAST_HOUR; i += 0.5) {
     if (!meetingsDatesDTOs.hasOwnProperty(selectedDate) || !meetingsDatesDTOs[selectedDate].includes(i)) {
       let option = document.createElement('option')
       option.innerText = getTimeStringByHalfHours(i)
-      list.appendChild(option)
+      select.appendChild(option)
     }
   }
+  //select.setAttribute('disabled', false)
 }
 const getSelectedPatient = value => {
   /*
@@ -299,6 +300,12 @@ Recuerda que también puede ver sus citas en la pestaña "Mis citas", donde pued
 //#endregion
 
 window.onload = async function () {
+  const tabEl = document.querySelectorAll('a[data-bs-toggle="list"]')
+  tabEl.forEach(x => x.addEventListener('shown.bs.tab', function (event) {
+    console.log('target', event.target) // newly activated tab
+    console.log('related', event.relatedTarget) // previous active tab
+  }))
+
   const signOutButton = document.getElementById('signOutMobile')
   const myClinicInputs = {
     myClinicName: document.getElementById('myClinicName'),

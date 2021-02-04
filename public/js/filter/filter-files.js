@@ -214,11 +214,19 @@ export function cardsContainerOnScroll(e) {
   }
 }
 function cardOnClick(e) {
-  e.stopPropagation()
-  document.querySelectorAll('.tab-pane.active.show').forEach(pane => {
+  e.stopPropagation();
+  //visual
+  let tab = new bootstrap.Tab(document.getElementById('meetingsFilesTab'))
+  console.log(tab)
+  tab.show()
+
+  /*document.querySelectorAll('.tab-pane.active.show').forEach(pane => {
     pane.classList.remove('active', 'show')
-  })
-  document.getElementById('meetingsFilesContent').classList.add('active', 'show')
+  })*/
+  //document.getElementById('meetingsFilesContent').classList.add('active', 'show')
+  document.getElementById('filterMeetingsTab').classList.remove('active')
+  document.getElementById('meetingsFilesTab').classList.add('active')
+  //********************************
   console.log('e: ', e.path)
   let card = e.path.find(x => x.classList.contains('card'))
   fillMeetingFile(card)
