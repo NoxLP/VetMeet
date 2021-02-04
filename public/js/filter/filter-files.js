@@ -1,4 +1,4 @@
-import { api, MEETINGS_FILTER_CARDS_HTML, getFormattedDateString, getFormattedTimeString, getMobileCompletedString, getMobileConfirmedString, setInputValueIfNotFalsie } from "../helpers/helpers.js";
+import { api, MEETINGS_FILTER_CARDS_HTML, getFormattedDateString, getFormattedTimeString, getMobileCompletedString, getMobileConfirmedString, setInputValueIfNotFalsie, showAlert } from "../helpers/helpers.js";
 
 const SPINNER = document.getElementById('filterSpinner')
 const FILTER_CHANGE_WAIT_MS = 2500
@@ -118,8 +118,10 @@ const fillMeetingFile = card => {
       setInputValueIfNotFalsie(document.getElementById('meetingFileHistoryInput'), data.patient.history)
     })
     .catch(err => {
-      console.log(err)
-      alert('No se pudo encontrar la cita que buscaba')
+      //TODO: store the real error somewhere
+      showAlert(
+        'No se pudo encontrar la cita que buscaba. Inténtelo de nuevo o contacte con nosotros.',
+        false)
     })
 }
 const getFileUpdateObject = () => {
@@ -182,8 +184,10 @@ export function cardsFilterOnKeyUp(e) {
       })
     })
     .catch(err => {
-      console.log(err)
-      alert('Hubo un error intentando filtrar sus citas')
+      //TODO: store the real error somewhere
+      showAlert(
+        'Hubo un error al intentar filtrar sus citas. Inténtelo de nuevo o contacte con nosotros.',
+        false)
     })
   hideFilterSpinner()
 }
@@ -209,8 +213,10 @@ export function cardsContainerOnScroll(e) {
         })
       })
       .catch(err => {
-        console.log(err)
-        alert('Hubo un error intentando filtrar sus citas')
+        //TODO: store the real error somewhere
+        showAlert(
+          'Hubo un error al intentar filtrar sus citas. Inténtelo de nuevo o contacte con nosotros.',
+          false)
       })
     hideFilterSpinner()
   }
@@ -248,8 +254,10 @@ export function meetingUpdateButtonOnClick(e) {
       //TODO: avisar que la ficha fue guardada con una alerta de bootstrap
     })
     .catch(err => {
-      console.log('NOT updated: ', err)
-      alert('Hubo un error al actualizar su cita')
+      //TODO: store the real error somewhere
+      showAlert(
+        'Hubo un error al intentar actualziar su cita. Inténtelo de nuevo o contacte con nosotros.',
+        false)
     })
 }
 //#endregion

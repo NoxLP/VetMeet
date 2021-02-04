@@ -24,9 +24,10 @@ function onSuccess(googleUser) {
       button.classList.remove('collapse')
     })
     .catch(err => {
-      console.log(err)
-      //TODO: bootstrap alert
-      alert('No se pudo loguear con google')
+      //TODO: store the real error somewhere
+      showAlert(
+        'No se pudo loguear con google. Inténtelo de nuevo o contacte con nosotros.',
+        false)
     })
 }
 function onFailure(error) {
