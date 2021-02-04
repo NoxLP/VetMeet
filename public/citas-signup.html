@@ -89,35 +89,41 @@
   </nav>
 
   <!--Signup for mobile-->
-  <section class="container d-md-none mt-2">
-    <div class="row justify-content-center">
-      <p class="text-center">Introduce los datos de tu clínica:</p>
-    </div>
-    <div class="row justify-content-center align-items-center mb-3">
-      <div class="input-group mb-3">
-        <input id="nameInput" type="text" class="form-control" placeholder="Nombre de la clínica" aria-label="Nombre" aria-describedby="signup-Nombre">
-        <p class="ms-2">*</p>
+  <section class="d-md-none mt-2 px-2 mb-2">
+    <div class="card pb-2">
+      <div class="card-header justify-content-center">
+        <h5 class="text-center">Introduce los datos de tu clínica:</h5>
       </div>
-      <div class="input-group mb-3">
-        <input id="addressInput" type="text" class="form-control" placeholder="Dirección postal" aria-label="Address" aria-describedby="signup-address"> 
-        <p class="ms-2">*</p>
+      <div class="card-body container justify-content-center align-items-center mb-3 px-3 pb-0">
+        <div class="row">
+          <div class="input-group mb-3">
+            <input id="nameInput" type="text" class="form-control" placeholder="Nombre de la clínica" aria-label="Nombre" aria-describedby="signup-Nombre">
+            <p class="ms-2 text-danger fw-bold">*</p>
+          </div>
+          <div class="input-group mb-3">
+            <input id="addressInput" type="text" class="form-control" placeholder="Dirección postal" aria-label="Address" aria-describedby="signup-address"> 
+            <p class="ms-2 text-danger fw-bold">*</p>
+          </div>
+          <div class="input-group mb-3">
+            <input id="telephoneInput" type="text" class="form-control" placeholder="Número de teléfono" aria-label="telephone" aria-describedby="signup-telephone"> 
+            <p class="ms-2 text-danger fw-bold">*</p>
+          </div>
+          <div class="input-group mb-3">
+            <input id="contactPInput" type="text" class="form-control" placeholder="Persona de contacto" aria-label="contact person" aria-describedby="signup-contact-person">
+          </div>
+          <div class="input-group mb-3">
+            <input id="signupEmail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="signup-email">
+            <p class="ms-2 text-danger fw-bold">*</p>
+          </div>
+          <div class="input-group mb-3">
+            <input id="signupPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="signup-password">
+            <p class="ms-2 text-danger fw-bold">*</p>
+          </div>
+        </div>
+        <div class="row justify-content-center align-items-center mt-3 mb-0 pb-0">
+          <button id="signupButton" class="btn btn-success bg-prim border-0 w-50">SIGN UP</button>
+        </div>
       </div>
-      <div class="input-group mb-3">
-        <input id="telephoneInput" type="text" class="form-control" placeholder="Número de teléfono" aria-label="telephone" aria-describedby="signup-telephone"> 
-        <p class="ms-2">*</p>
-      </div>
-      <div class="input-group mb-3">
-        <input id="contactPInput" type="text" class="form-control" placeholder="Persona de contacto" aria-label="contact person" aria-describedby="signup-contact-person">
-      </div>
-      <div class="input-group mb-3">
-        <input id="signupEmail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="signup-email">
-        <p class="ms-2">*</p>
-      </div>
-      <div class="input-group mb-5">
-        <input id="signupPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="signup-password">
-        <p class="ms-2">*</p>
-      </div>
-      <button id="signupButton" class="btn btn-success bg-prim border-0 w-50">SIGN UP</button>
     </div>
   </section>
   

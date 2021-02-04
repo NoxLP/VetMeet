@@ -1,4 +1,3 @@
-import { localservices } from "googleapis/build/src/apis/localservices";
 import { api, goToApp } from "./helpers/helpers.js";
 
 function loginButtonOnClick() {

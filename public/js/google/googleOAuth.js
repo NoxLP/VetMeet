@@ -4,36 +4,34 @@ const api = axios.create({
   baseURL: BASE_URL,
   timeout: 3000
 });
+let allowGoogleSign = !localStorage.getItem('email')
 
-function onSuccess(googleUser) {
-  let profile = googleUser.getBasicProfile()
-  console.log('Logged in as: ' + profile.getName());
-  let token = googleUser.getAuthResponse().id_token;
-  console.log(token)
-  api.post('/auth/clinics/googleLogin', { token: token, email: profile.getEmail(), name: profile.getName()})
-    .then(res => {
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('name', res.data.name)
-      localStorage.setItem('email', res.data.email)
-      localStorage.setItem('googleSign', true)
+if(allowGoogleSign) {
+  function onSuccess(googleUser) {
+    let profile = googleUser.getBasicProfile()
+    console.log('Logged in as: ' + profile.getName());
+    let token = googleUser.getAuthResponse().id_token;
+    console.log(token)
+    api.post('/auth/clinics/googleLogin', { token: token, email: profile.getEmail(), name: profile.getName()})
+      .then(res => {
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('name', res.data.name)
+        localStorage.setItem('email', res.data.email)
+        localStorage.setItem('googleSign', true)
 
-      let button = document.getElementById('goToAppButton')
-      button.classList.add('show')
-      button.classList.remove('collapse')
-    })
-    .catch(err => {
-      console.log(err)
-      //TODO: bootstrap alert
-      alert('No se pudo loguear con google')
-    })
-
-  /*var xhr = new XMLHttpRequest();
-  xhr.open('POST', `${BASE_URL}/auth/clinics/googleLogin`);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function() {
-    console.log('Signed in as: ' + xhr.responseText);
-  };
-  xhr.send('idtoken=' + token);*/
+        let button = document.getElementById('goToAppButton')
+        button.classList.add('show')
+        button.classList.remove('collapse')
+      })
+      .catch(err => {
+        console.log(err)
+        //TODO: bootstrap alert
+        alert('No se pudo loguear con google')
+      })
+  }
+}
+function onGoogleButtonClick(e) {
+  allowGoogleSign = true
 }
 function onFailure(error) {
   console.log(error);
@@ -66,6 +64,7 @@ function goToApp() {
 }
 
 window.onload = async function () {
+  document.getElementById('my-signin2').addEventListener('click', onGoogleButtonClick)
   document.getElementById('signOutMobile').addEventListener('click', googleSignOut)
   document.getElementById('goToAppButton').addEventListener('click', goToApp)
 }

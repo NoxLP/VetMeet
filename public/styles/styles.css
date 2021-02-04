@@ -17,6 +17,10 @@
 .bg-prim-trans {
   background-color: var(--main-prim-trans-color);
 }
+.card-header {
+  background-color: rgb(79, 136, 202);
+  color: white;
+}
 .color-prim-transp {
   color: var(--main-prim-color);
 }
