@@ -16,7 +16,10 @@ function onSuccess(googleUser) {
       localStorage.setItem('name', res.data.name)
       localStorage.setItem('email', res.data.email)
       localStorage.setItem('googleSign', true)
-      //window.location = './citas-app.html'
+
+      let button = document.getElementById('goToAppButton')
+      button.classList.add('show')
+      button.classList.remove('collapse')
     })
     .catch(err => {
       console.log(err)
@@ -58,7 +61,11 @@ function renderButton() {
     'onfailure': onFailure
   });
 }
+function goToApp() {
+  window.location = '../../citas-app.html'
+}
 
 window.onload = async function () {
   document.getElementById('signOutMobile').addEventListener('click', googleSignOut)
+  document.getElementById('goToAppButton').addEventListener('click', goToApp)
 }

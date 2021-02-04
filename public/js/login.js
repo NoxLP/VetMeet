@@ -1,3 +1,4 @@
+import { localservices } from "googleapis/build/src/apis/localservices";
 import { api, goToApp } from "./helpers/helpers.js";
 
 function loginButtonOnClick() {
@@ -10,7 +11,7 @@ function loginButtonOnClick() {
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('name', res.data.name)
         localStorage.setItem('email', res.data.email)
-        //goToApp()
+        goToApp()
       } else {
         alert('Email or Password Wrong!')
       }
@@ -25,6 +26,10 @@ function passwordInputOnKeyUp(e) {
 }
 
 window.onload = () => {
+  if(localStorage.getItem('email')) {
+    document.getElementById('loginEmail').value = localStorage.getItem('email')
+  }
+
   document.getElementById('loginButton').addEventListener('click', loginButtonOnClick)
-  document.getElementById('loginPassword').addEventListener('keyup', passwordInputOnKeyUp)
+  //document.getElementById('loginPassword').addEventListener('keyup', passwordInputOnKeyUp)
 }

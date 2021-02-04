@@ -1,5 +1,5 @@
 export const BASE_URL = 'http://localhost:3000/api'
-export const APP_URL = './citas-app.html'
+export const APP_URL = '../../citas-app.html'
 export const api = axios.create({
   baseURL: BASE_URL,
   timeout: 3000
@@ -11,7 +11,10 @@ export const MEETINGS_FILTER_CARDS_HTML = [
 ]
 
 export const goToApp = () => { window.location = APP_URL }
-export const goToHome = () => { window.location = './index.html' }
+export const goToHome = () => { 
+  console.log('HOME')
+  window.location = '../../index.html' 
+}
 export const pad = (str, minLength = 2, endStart = 'start', char = '0') => {
   if (str.length >= minLength)
     return str

@@ -191,8 +191,8 @@ const getDateObjectFromDateTimeInputs = () => {
 //#region event callbacks
 function signOut() {
   console.log('signOut')
-  if(localStorage.getItem('googleSign'))
-    return
+  /*if(localStorage.getItem('googleSign'))
+    return*/
 
   localStorage.clear()
   goToHome()
