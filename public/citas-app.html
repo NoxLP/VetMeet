@@ -319,24 +319,24 @@
             </svg>
           </button>
         </div>
-        <!--cards container-->
-        <div id="meetingsFilterDTOsCardsContainer"
-          class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable-horizontal mb-2"
-          style="height: 300px;">
-        </div>
         <!--spinner-->
         <div class="row justify-content-center">
           <div id="filterSpinner" class="spinner-border text-info mx-3 hide collapse" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
+        <!--cards container-->
+        <div id="meetingsFilterDTOsCardsContainer"
+          class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable-horizontal mb-2"
+          style="height: 300px;">
+        </div>
       </div>
       <!--fichas citas-->
       <div class="tab-pane fade container-fluid p-0 mt-2" id="meetingsFilesContent" role="tabpanel"
         aria-labelledby="list-fichasDeMisCitas">
-        <!--file header card-->
+        <!--file card-->
         <div class="row card shadow-sm mx-auto mb-2 mt-3 pe-0 pb-2 g-0">
-          <!--title-->
+          <!--header-->
           <div class="card-header flex-nowrap justify-content-between align-items-center ps-2 pe-0 py-1 g-0 container mb-0">
             <div class="row pe-0 g-0">
               <h5 class="col-6 mt-2 me-0">Ficha de cita</h5>
@@ -370,6 +370,7 @@
               </button>
             </div>
           </div>
+          <!--body-->
           <div class="card-body container d-flex flex-column flex-nowrap mt-0 pb-1 pe-0">
             <!--date conf comp-->
             <div class="row">
@@ -402,17 +403,17 @@
               </label>
               <label class="row form-label">
                 Patología
-                <input id="meetingFileDiseaseInput" type="text" class="form-control" placeholder="Patología observada"
+                <input id="meetingFileDiseaseInput" type="text" class="form-control" disabled
                   aria-label="Patología observada" aria-describedby="Patología observada">
               </label>
               <label class="row form-label">
                 Tratamiento
-                <textarea id="meetingFileTreatmentInput" class="form-control" placeholder="Tratamiento"
+                <textarea id="meetingFileTreatmentInput" class="form-control" disabled
                   aria-label="Tratamiento" aria-describedby="Tratamiento"></textarea>
               </label>
               <label class="row form-label">
                 Intervención
-                <textarea id="meetingFileSurgeryInput" class="form-control" placeholder="Intervención"
+                <textarea id="meetingFileSurgeryInput" class="form-control" disabled
                   aria-label="Intervención" aria-describedby="Intervención"></textarea>
               </label>
               <label class="row form-label">
