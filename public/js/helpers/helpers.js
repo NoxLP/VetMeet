@@ -26,7 +26,7 @@ export const pad = (str, minLength = 2, endStart = 'start', char = '0') => {
 export const getFormattedDateString = date => `${pad(date.getDate().toString())}/${pad((date.getMonth() + 1).toString())}/${date.getFullYear()}`
 export const getFormattedTimeString = date => `${pad(date.getHours().toString())}:${pad(date.getMinutes().toString())}`
 export const getMobileConfirmedString = meeting => meeting.confirmed ? 'Conf.' : 'No conf.'
-export const getMobileCompletedString = meeting => meeting.completed ? 'Comp.' : 'No comp.'
+export const getMobileDoneString = meeting => meeting.done ? 'Comp.' : 'No comp.'
 /**
  * WARNING: it just do if(!value), if one want to set the input value to false, it won't work
  */
