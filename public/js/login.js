@@ -14,14 +14,14 @@ function loginButtonOnClick() {
       } else {
         //TODO: store the real error somewhere
         showAlert(
-          'Su contraseña o su dirección de correo electrónico es erróneo. Inténtelo de nuevo',
+          'Su contraseña o dirección de correo electrónico son erróneos. Inténtelo de nuevo',
           false)
       }
     })
     .catch(err => {
       //TODO: store the real error somewhere
       showAlert(
-        'Su contraseña o su dirección de correo electrónico es erróneo. Inténtelo de nuevo',
+        'Su contraseña o dirección de correo electrónico son erróneos. Inténtelo de nuevo',
         false)
     });
 }

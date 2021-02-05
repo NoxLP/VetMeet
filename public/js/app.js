@@ -153,6 +153,11 @@ const updateField = (input, fieldName) => {
       clinicData[fieldName] = input.value
       if (fieldName === 'name')
         fillClinicNameCard(input.value)
+      showAlert(
+        `Se ha actualizado su perfil correctamente.`,
+        true,
+        'Perfil actualizado'
+      )
     })
     .catch(err => {
       //TODO: store the real error somewhere
@@ -201,8 +206,6 @@ const getDateObjectFromDateTimeInputs = () => {
 //#region event callbacks
 function signOut() {
   console.log('signOut')
-  /*if(localStorage.getItem('googleSign'))
-    return*/
 
   localStorage.clear()
   goToHome()

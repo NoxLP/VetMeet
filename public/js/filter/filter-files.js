@@ -250,8 +250,11 @@ export function goStartEndButtonOnClick() {
 export function meetingUpdateButtonOnClick(e) {
   api.put(`/meetings/${fileMeetingId}`, getFileUpdateObject())
     .then(response => {
-      console.log('ok')
-      //TODO: avisar que la ficha fue guardada con una alerta de bootstrap
+      showAlert(
+        'Su cita ha sido actualizada correctamente',
+        true,
+        'Cita actualizada'
+      )
     })
     .catch(err => {
       //TODO: store the real error somewhere
