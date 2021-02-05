@@ -117,7 +117,7 @@ const fillMeetingFile = card => {
 
       setInputValueIfNotFalsie(document.getElementById('meetingFileDate'), `${getFormattedDateString(date)}\n${getFormattedTimeString(date)}`, 'innerText')
       setInputValueIfNotFalsie(document.getElementById('meetingFileConfirmed'), getMobileConfirmedString(data), 'innerText')
-      document.getElementById('meetingFileDone').innerText = getMobileDoneString(date)
+      setInputValueIfNotFalsie(document.getElementById('meetingFileDone'), getMobileDoneString(data), 'innerText')
       setInputValueIfNotFalsie(document.getElementById('meetingFileNameInput'), data.patient.name)
       setInputValueIfNotFalsie(document.getElementById('meetingFileSpeciesInput'), data.patient.species)
       setInputValueIfNotFalsie(document.getElementById('meetingFileDiseaseInput'), data.disease)
