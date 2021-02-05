@@ -124,6 +124,16 @@
 
       </div>
     </div>
+    <div role="alert" aria-live="assertive" id="confirmationToast" aria-atomic="true" class="toast d-none bg-light bg-gradient" data-bs-autohide="false">
+      <div class="toast-header">
+        <h6 id="confToastTitle"></h6>
+      </div>
+      <div class="toast-body">
+        <p id="confToastText"></p>
+        <button id="confToastAcceptB" type="button" class="btn btn-primary btn-sm">Aceptar</button>
+        <button id="confToastCancelB" type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast" aria-label="Close">Cancelar</button>
+      </div>
+    </div>
   </aside>
 
   <!--tab content-->

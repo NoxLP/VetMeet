@@ -56,6 +56,14 @@ export const showAlert = (message, success, title) => {
   document.getElementById('alertsContainer').appendChild(alert)
   alert.classList.remove('d-none')
 }
+export const askForConfirmation = (message, title, acceptCallback) => {
+  let toast = document.getElementById('confirmationToast')
+  toast.classList.remove('d-none')
+  toast.classList.add('show')
+  document.getElementById('confToastTitle').innerText = title
+  document.getElementById('confToastText').innerText = message
+  document.getElementById('confToastAcceptB').addEventListener('click', acceptCallback)
+}
 
 const INTERCEPT_AXIOS = false
 

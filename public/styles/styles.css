@@ -28,7 +28,7 @@
 }
 .scrollable {
   overflow-y: scroll !important;
-  overflow-x: hidden !important;
+  overflow-x: scroll !important;
 }
 .overflow-hidden {
   overflow-y: hidden;

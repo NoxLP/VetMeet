@@ -1,4 +1,13 @@
-import { api, MEETINGS_FILTER_CARDS_HTML, getFormattedDateString, getFormattedTimeString, getMobileCompletedString, getMobileConfirmedString, setInputValueIfNotFalsie, showAlert } from "../helpers/helpers.js";
+import { 
+  api, 
+  MEETINGS_FILTER_CARDS_HTML, 
+  getFormattedDateString, 
+  getFormattedTimeString, 
+  getMobileCompletedString, 
+  getMobileConfirmedString, 
+  setInputValueIfNotFalsie, 
+  showAlert, 
+  askForConfirmation } from "../helpers/helpers.js";
 
 const SPINNER = document.getElementById('filterSpinner')
 const FILTER_CHANGE_WAIT_MS = 2500
@@ -139,6 +148,22 @@ const getFileUpdateObject = () => {
     }
   }
 }
+const deleteMeeting = () => {
+  api.delete(`/meetings/${fileMeetingId}`)
+    .then(res => {
+      showAlert(
+        'Su cita ha sido borrada correctamente',
+        true,
+        'Cita Borrada'
+      )
+    })
+    .catch(err => {
+      //TODO: store the real error somewhere
+      showAlert(
+        'Hubo un error al intentar borrar su cita. Inténtelo de nuevo o contacte con nosotros.',
+        false)
+    })
+}
 //#endregion
 
 //#region events callbacks
@@ -262,5 +287,16 @@ export function meetingUpdateButtonOnClick(e) {
         'Hubo un error al intentar actualziar su cita. Inténtelo de nuevo o contacte con nosotros.',
         false)
     })
+}
+export function removeMeetingButtonOnClick() {
+  askForConfirmation(
+    'Está a punto de cancelar una cita, borrando todos los datos de la misma. ¿quiere continuar?',
+    '¡Atención!',
+    removeConfirmationButtonOnClick
+  )  
+}
+export function removeConfirmationButtonOnClick() {
+  $('#confirmationToast').hide()
+  deleteMeeting()
 }
 //#endregion

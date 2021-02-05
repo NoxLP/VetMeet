@@ -85,22 +85,6 @@ const fillClinicNameCard = name => {
   if (localStorage.getItem('name') !== name)
     localStorage.setItem('name', name)
 }
-const fillClinicFile = myClinicInputs => {
-  console.log('fillClinicFile: ', clinicData)
-  myClinicInputs.myClinicName.value = clinicData.name
-  myClinicInputs.myClinicAddress.value = clinicData.address
-  myClinicInputs.myClinicEmail.value = clinicData.email
-  myClinicInputs.myClinicTelephone.value = clinicData.telephone
-  myClinicInputs.myClinicContactPerson.value = clinicData.contactPerson || ''
-}
-const fillPatientsList = () => {
-  let list = document.getElementById('patientsList')
-  patientsDTOs.forEach(patient => {
-    let option = document.createElement('option')
-    option.innerHTML = `${patient.name} &nbsp;&nbsp;-&nbsp;&nbsp; ${patient.createdAt}`
-    list.appendChild(option)
-  })
-}
 const fillPatientsInputs = patientInputs => {
   console.log('fillPatientsInputs')
   for (let inputId in patientInputs) {
@@ -305,6 +289,52 @@ function saveMeetingButtonOnClick(newMeetingPatientInputs) {
 }
 //#endregion
 
+//#region onload helpers
+const addAllEventsListeners = (newMeetingPatientInputs) => {
+  newMeetingPatientInputs.patientsListInput.addEventListener('change', e => { patientsListInputOnChange(e, newMeetingPatientInputs) })
+  newMeetingPatientInputs.patientsListInput.addEventListener('focusout', patientsListInputOnFocusOut)
+  document.getElementById('newMetingSaveButton').addEventListener('click', e => { saveMeetingButtonOnClick(newMeetingPatientInputs) })
+  document.getElementById('filterMeetingsTextInput').addEventListener('keyup', e => { FilterFiles.cardsFilterOnKeyUp(e) })
+  document.getElementById('meetingsFilterDTOsCardsContainer').addEventListener('scroll', e => { FilterFiles.cardsContainerOnScroll(e) })
+  document.getElementById('goStartEndButton').addEventListener('click', () => { FilterFiles.goStartEndButtonOnClick() })
+  document.getElementById('meetingUpdateButton').addEventListener('click', e => { FilterFiles.meetingUpdateButtonOnClick(e) })
+  document.getElementById('meetingDateInput').addEventListener('change', datepickerOnChange)
+  document.getElementById('meetingRemoveButton').addEventListener('click', FilterFiles.removeMeetingButtonOnClick)
+}
+const initToasts = () => {
+  $('#myToast').toast();
+  let toast = document.getElementById('myToast')
+  toast.addEventListener('hidden.bs.toast', function () {
+    document.getElementsByClassName('toast-body')[0].innerHTML = "";
+    document.getElementById('myToast').classList.remove('d-flex')
+    document.getElementById('myToast').classList.add('d-none')
+  })
+  $('#confirmationToast').toast();
+  toast = document.getElementById('confirmationToast')
+  toast.addEventListener('hidden.bs.toast', function () {
+    document.getElementsByClassName('toast-body')[0].innerHTML = "";
+    document.getElementById('confirmationToast').classList.remove('d-flex')
+    document.getElementById('confirmationToast').classList.add('d-none')
+  })
+}
+const fillClinicFile = myClinicInputs => {
+  console.log('fillClinicFile: ', clinicData)
+  myClinicInputs.myClinicName.value = clinicData.name
+  myClinicInputs.myClinicAddress.value = clinicData.address
+  myClinicInputs.myClinicEmail.value = clinicData.email
+  myClinicInputs.myClinicTelephone.value = clinicData.telephone
+  myClinicInputs.myClinicContactPerson.value = clinicData.contactPerson || ''
+}
+const fillPatientsList = () => {
+  let list = document.getElementById('patientsList')
+  patientsDTOs.forEach(patient => {
+    let option = document.createElement('option')
+    option.innerHTML = `${patient.name} &nbsp;&nbsp;-&nbsp;&nbsp; ${patient.createdAt}`
+    list.appendChild(option)
+  })
+}
+//#endregion
+
 window.onload = async function () {
   const tabEl = document.querySelectorAll('a[data-bs-toggle="list"]')
   tabEl.forEach(x => x.addEventListener('shown.bs.tab', function (event) {
@@ -328,22 +358,8 @@ window.onload = async function () {
     timeInput: document.getElementById('meetingTimeInput')
   }
 
-  newMeetingPatientInputs.patientsListInput.addEventListener('change', e => { patientsListInputOnChange(e, newMeetingPatientInputs) })
-  newMeetingPatientInputs.patientsListInput.addEventListener('focusout', patientsListInputOnFocusOut)
-  document.getElementById('newMetingSaveButton').addEventListener('click', e => { saveMeetingButtonOnClick(newMeetingPatientInputs) })
-  document.getElementById('filterMeetingsTextInput').addEventListener('keyup', e => { FilterFiles.cardsFilterOnKeyUp(e) })
-  document.getElementById('meetingsFilterDTOsCardsContainer').addEventListener('scroll', e => { FilterFiles.cardsContainerOnScroll(e) })
-  document.getElementById('goStartEndButton').addEventListener('click', () => { FilterFiles.goStartEndButtonOnClick() })
-  document.getElementById('meetingUpdateButton').addEventListener('click', e => { FilterFiles.meetingUpdateButtonOnClick(e) })
-  document.getElementById('meetingDateInput').addEventListener('change', datepickerOnChange)
-
-  $('#myToast').toast();
-  const toast = document.getElementById('myToast')
-  toast.addEventListener('hidden.bs.toast', function () {
-    document.getElementsByClassName('toast-body')[0].innerHTML = "";
-    document.getElementById('myToast').classList.remove('d-flex')
-    document.getElementById('myToast').classList.add('d-none')
-  })
+  addAllEventsListeners(newMeetingPatientInputs)
+  initToasts()
 
   signOutButton.classList.remove('invisible')
   signOutButton.addEventListener('click', signOut)
