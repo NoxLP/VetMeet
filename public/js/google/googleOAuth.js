@@ -5,6 +5,27 @@ const api = axios.create({
   timeout: 3000
 });
 
+const showAlert = (message, success, title) => {
+  console.log('showalert')
+  let alert 
+  if (success) {
+    alert = document.getElementById('myToast')
+    alert.classList.remove('d-none')
+    alert.classList.add('show')
+    document.getElementById('toastTitle').innerText = title
+    document.getElementsByClassName('toast-body')[0].innerHTML = message;
+  } else {
+    alert = document.createElement('div')
+    alert.classList.add('d-none','fade','show','fixed-top', 'bg-white')
+    alert.setAttribute('role', 'alert')
+    alert.innerHTML = `${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+    alert.classList.add('alert', 'alert-danger')
+  }
+
+  document.getElementById('alertsContainer').appendChild(alert)
+  alert.classList.remove('d-none')
+}
 function onSuccess(googleUser) {
   let profile = googleUser.getBasicProfile()
   console.log('Logged in as: ' + profile.getName());
