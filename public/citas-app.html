@@ -116,7 +116,7 @@
   <!--alerts-->
   <aside id="alertsContainer" class="fixed-top index-on-top">
     <div role="alert" aria-live="assertive" id="myToast" aria-atomic="true" class="toast d-none bg-white" data-bs-autohide="false">
-      <div class="toast-header">
+      <div class="toast-header bg-body">
         <h6 id="toastTitle"></h6>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
@@ -125,7 +125,7 @@
       </div>
     </div>
     <div role="alert" aria-live="assertive" id="confirmationToast" aria-atomic="true" class="toast d-none bg-light bg-gradient" data-bs-autohide="false">
-      <div class="toast-header">
+      <div class="toast-header bg-body">
         <h6 id="confToastTitle"></h6>
       </div>
       <div class="toast-body">
@@ -178,7 +178,7 @@
       <div class="tab-pane fade container" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
         <div class="row p-0 mt-3">
           <div class="card shadow-sm px-0">
-            <!--Fila de fecha y hora-->
+            <!--header-->
             <div class="card-header container align-content-center py-1">
               <div class="row">
                 <h4 class="col-10 mt-1">Concertar cita</h4>
@@ -196,18 +196,18 @@
             </div>
             <!--form para nueva cita-->
             <div class="card-body container pt-2">
+              <!--Fila de fecha y hora-->
               <div class="row flex-nowrap">
                 <label class="form-label col-6">
                   Fecha
                   <div class="input-group" id="mDIGroup">
-                    <input id="meetingDateInput" type="date" class="form-control" placeholder="Fecha" aria-label="Fecha" autocomplete="off">
+                    <input id="meetingDateInput" type="date" class="form-control fs-6" placeholder="Fecha" aria-label="Fecha" autocomplete="off">
                   </div>
                 </label>
                 <label class="form-label col-6">
                   Hora
                   <div class="input-group" id="mTIGroup">
-                    <select id="meetingTimeInput" type="time" class="form-select" placeholder="--:--" aria-label="Hora">
-
+                    <select id="meetingTimeInput" type="time" class="form-select" aria-label="Hora">
                     </select>
                     <span class="btn btn-outline-secondary pb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -249,21 +249,21 @@
                   <div class="row">
                     <label class="form-label">
                       Especie
-                      <input id="speciesInput" type="text" class="form-control" placeholder="Especie del paciente"
+                      <input id="speciesInput" type="text" class="form-control" placeholder="Especie del paciente" autocomplete="off"
                         aria-label="Especie del paciente" aria-describedby="Especie del paciente">
                     </label>
                   </div>
                   <div class="row">
                     <label class="form-label">
                       Patología
-                      <input id="diseaseInput" type="text" class="form-control" placeholder="Patología observada"
+                      <input id="diseaseInput" type="text" class="form-control" placeholder="Patología observada" autocomplete="off"
                         aria-label="Patología observada" aria-describedby="Patología observada">
                     </label>
                   </div>
                   <div class="row">
                     <label class="form-label">
                       Historial
-                      <textarea id="historyInput" type="text" class="form-control" placeholder="Historial del paciente"
+                      <textarea id="historyInput" type="text" class="form-control" placeholder="Historial del paciente" autocomplete="off"
                         aria-label="Historial del paciente" aria-describedby="Historial del paciente"></textarea>
                     </label>
                   </div>
@@ -319,24 +319,24 @@
             </svg>
           </button>
         </div>
-        <!--cards container-->
-        <div id="meetingsFilterDTOsCardsContainer"
-          class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable-horizontal mb-2"
-          style="height: 300px;">
-        </div>
         <!--spinner-->
         <div class="row justify-content-center">
           <div id="filterSpinner" class="spinner-border text-info mx-3 hide collapse" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
+        <!--cards container-->
+        <div id="meetingsFilterDTOsCardsContainer"
+          class="row container-fluid d-flex flex-column flex-wrap mx-auto pt-0 pb-2 px-1 scrollable-horizontal mb-2"
+          style="height: 300px;">
+        </div>
       </div>
       <!--fichas citas-->
       <div class="tab-pane fade container-fluid p-0 mt-2" id="meetingsFilesContent" role="tabpanel"
         aria-labelledby="list-fichasDeMisCitas">
-        <!--file header card-->
+        <!--file card-->
         <div class="row card shadow-sm mx-auto mb-2 mt-3 pe-0 pb-2 g-0">
-          <!--title-->
+          <!--header-->
           <div class="card-header flex-nowrap justify-content-between align-items-center ps-2 pe-0 py-1 g-0 container mb-0">
             <div class="row pe-0 g-0">
               <h5 class="col-6 mt-2 me-0">Ficha de cita</h5>
@@ -370,6 +370,7 @@
               </button>
             </div>
           </div>
+          <!--body-->
           <div class="card-body container d-flex flex-column flex-nowrap mt-0 pb-1 pe-0">
             <!--date conf comp-->
             <div class="row">
@@ -402,17 +403,17 @@
               </label>
               <label class="row form-label">
                 Patología
-                <input id="meetingFileDiseaseInput" type="text" class="form-control" placeholder="Patología observada"
+                <input id="meetingFileDiseaseInput" type="text" class="form-control" disabled
                   aria-label="Patología observada" aria-describedby="Patología observada">
               </label>
               <label class="row form-label">
                 Tratamiento
-                <textarea id="meetingFileTreatmentInput" class="form-control" placeholder="Tratamiento"
+                <textarea id="meetingFileTreatmentInput" class="form-control" disabled
                   aria-label="Tratamiento" aria-describedby="Tratamiento"></textarea>
               </label>
               <label class="row form-label">
                 Intervención
-                <textarea id="meetingFileSurgeryInput" class="form-control" placeholder="Intervención"
+                <textarea id="meetingFileSurgeryInput" class="form-control" disabled
                   aria-label="Intervención" aria-describedby="Intervención"></textarea>
               </label>
               <label class="row form-label">
