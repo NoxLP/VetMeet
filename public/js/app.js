@@ -186,7 +186,8 @@ const getDateObjectFromDateTimeInputs = () => {
 const addNewDateToMeetingsDTOs = date => {
   let formatDate = getFormattedDateString(date)
   let decimalTime = getDecimalTime(date)
-  meetingsDatesDTOs[formatDate] = decimalTime
+  meetingsDatesDTOs[formatDate].push(decimalTime)
+  console.log('after adding new meeting: ', meetingsDatesDTOs)
 }
 //#endregion
 
@@ -264,40 +265,44 @@ function patientsListInputOnFocusOut(e, newMeetingPatientInputs) {
   }
 }
 function datepickerOnChange(e) {
-  console.log('datepicker onchange')
+  console.log('datepicker onchange: ', new Date(e.target.value))
   clearMeetingsTimesList()
   fillMeetingsTimesList(getFormattedDateString(new Date(e.target.value)))
 }
-function saveMeetingButtonOnClick(newMeetingPatientInputs) {
+async function saveMeetingButtonOnClick(newMeetingPatientInputs) {
   //TODO: validation, alerts
   console.log('save meeting ', getDateObjectFromDateTimeInputs())
   let date = getDateObjectFromDateTimeInputs()
+  try {
+    await api.post('/meetings', {
+      name: newMeetingPatientInputs.patientsListInput.value.split('-')[0].trim(),
+      patientId: patientsDTOs[selectedPatientIndex],
+      species: newMeetingPatientInputs.speciesInput.value,
+      history: newMeetingPatientInputs.historyInput.value,
+      date: date,
+      disease: newMeetingPatientInputs.diseaseInput.value
+    })
+  } catch(err) {
+    console.log(err)
+    showAlert(
+      'Ha ocurrido un error, no se ha solicitado su cita',
+      false
+    )
+    return
+  }
+
+  showAlert(
+    `Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value} horas.\n
+
+  Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.\n
+
+  Recuerde que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`,
+    true,
+    'Solicitada cita'
+  )
   addNewDateToMeetingsDTOs(date)
-  api.post('/meetings', {
-    name: newMeetingPatientInputs.patientsListInput.value.split('-')[0].trim(),
-    patientId: patientsDTOs[selectedPatientIndex],
-    species: newMeetingPatientInputs.speciesInput.value,
-    history: newMeetingPatientInputs.historyInput.value,
-    date: date,
-    disease: newMeetingPatientInputs.diseaseInput.value
-  })
-    .then(res => {
-      showAlert(
-        `Ha solicitado una cita el ${document.getElementById('meetingDateInput').value} a las ${document.getElementById('meetingTimeInput').value} horas.\n
-      Una vez la cita esté confirmada, recibirá un correo electrónico a la dirección que consta en sus datos.\n
-      Recuerde que también puede ver sus citas en la pestaña "Mis citas", donde puede consultar todas sus citas.`,
-        true,
-        'Solicitada cita'
-      )
-      clearMeetingsTimesList()
-      fillMeetingsTimesList()
-    })
-    .catch(err => {
-      showAlert(
-        'Ha ocurrido un error, no se ha solicitado su cita',
-        false
-      )
-    })
+  clearMeetingsTimesList()
+  fillMeetingsTimesList(getFormattedDateString(date))
 }
 //#endregion
 
