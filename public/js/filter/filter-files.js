@@ -37,7 +37,7 @@ const getMeetingsFilterCard = meetingDTO => {
   <p class="col fs-6 fst-italic">${meetingDTO.disease}</p>
 </div>
 <div class="row mw-100">
-  <p class="col fs-6 h-25 text-wrap">${meetingDTO.surgery}</p>
+  <p class="col fs-6 h-25 text-wrap">${meetingDTO.surgery ? meetingDTO.surgery : ''}</p>
 </div>`
 
   card.setAttribute('id', meetingDTO._id)

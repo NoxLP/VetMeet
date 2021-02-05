@@ -39,6 +39,7 @@ const getPatientsDTOs = (async function () {
           return patient
         })
     )
+    console.log('patients', patientsDTOs)
   } catch (err) {
     //TODO: store the real error somewhere
     showAlert(
@@ -54,7 +55,6 @@ const getDecimalTime = date => {
   decimal = decimal === 30 ? 0.5 : 0
   return integral + decimal
 }
-
 const getMeetingsDateDTOs = (async function () {
   try {
     //this endpoint have pagination, need more testing to see if pagination here is needed

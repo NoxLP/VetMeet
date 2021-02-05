@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://vet-meet.herokuapp.com/api'//'http://localhost:3000/api'
+export const BASE_URL = 'http://localhost:3000/api'//'https://vet-meet.herokuapp.com/api'//
 export const APP_URL = '../../citas-app.html'
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -6,7 +6,7 @@ export const api = axios.create({
 });
 
 export const MEETINGS_FILTER_CARDS_HTML = [
-  'row container-fluid card shadow-sm px-0 py-2 me-3 g-0 flex-nowrap overflow-hidden',
+  'row container-fluid card shadow-sm px-0 py-2 me-3 mb-2 g-0 flex-nowrap overflow-hidden',
   '180px'
 ]
 

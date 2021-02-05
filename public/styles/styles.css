@@ -28,6 +28,10 @@
 }
 .scrollable {
   overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
+.scrollable-horizontal {
+  overflow-y: hidden !important;
   overflow-x: scroll !important;
 }
 .overflow-hidden {
