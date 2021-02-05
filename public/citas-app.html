@@ -116,19 +116,19 @@
   <!--alerts-->
   <aside id="alertsContainer" class="fixed-top index-on-top">
     <div role="alert" aria-live="assertive" id="myToast" aria-atomic="true" class="toast d-none bg-white" data-bs-autohide="false">
-      <div class="toast-header">
+      <div class="toast-header bg-second-trans">
         <h6 id="toastTitle"></h6>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body">
+      <div class="toast-body bg-body">
 
       </div>
     </div>
     <div role="alert" aria-live="assertive" id="confirmationToast" aria-atomic="true" class="toast d-none bg-light bg-gradient" data-bs-autohide="false">
-      <div class="toast-header">
+      <div class="toast-header bg-second-trans">
         <h6 id="confToastTitle"></h6>
       </div>
-      <div class="toast-body">
+      <div class="toast-body bg-body">
         <p id="confToastText"></p>
         <button id="confToastAcceptB" type="button" class="btn btn-primary btn-sm">Aceptar</button>
         <button id="confToastCancelB" type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast" aria-label="Close">Cancelar</button>
@@ -178,7 +178,7 @@
       <div class="tab-pane fade container" id="newMeetingContent" role="tabpanel" aria-labelledby="list-nuevaCita">
         <div class="row p-0 mt-3">
           <div class="card shadow-sm px-0">
-            <!--Fila de fecha y hora-->
+            <!--header-->
             <div class="card-header container align-content-center py-1">
               <div class="row">
                 <h4 class="col-10 mt-1">Concertar cita</h4>
@@ -196,18 +196,18 @@
             </div>
             <!--form para nueva cita-->
             <div class="card-body container pt-2">
+              <!--Fila de fecha y hora-->
               <div class="row flex-nowrap">
                 <label class="form-label col-6">
                   Fecha
                   <div class="input-group" id="mDIGroup">
-                    <input id="meetingDateInput" type="date" class="form-control" placeholder="Fecha" aria-label="Fecha" autocomplete="off">
+                    <input id="meetingDateInput" type="date" class="form-control fs-6" placeholder="Fecha" aria-label="Fecha" autocomplete="off">
                   </div>
                 </label>
                 <label class="form-label col-6">
                   Hora
                   <div class="input-group" id="mTIGroup">
-                    <select id="meetingTimeInput" type="time" class="form-select" placeholder="--:--" aria-label="Hora">
-
+                    <select id="meetingTimeInput" type="time" class="form-select" aria-label="Hora">
                     </select>
                     <span class="btn btn-outline-secondary pb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -249,21 +249,21 @@
                   <div class="row">
                     <label class="form-label">
                       Especie
-                      <input id="speciesInput" type="text" class="form-control" placeholder="Especie del paciente"
+                      <input id="speciesInput" type="text" class="form-control" placeholder="Especie del paciente" autocomplete="off"
                         aria-label="Especie del paciente" aria-describedby="Especie del paciente">
                     </label>
                   </div>
                   <div class="row">
                     <label class="form-label">
                       Patología
-                      <input id="diseaseInput" type="text" class="form-control" placeholder="Patología observada"
+                      <input id="diseaseInput" type="text" class="form-control" placeholder="Patología observada" autocomplete="off"
                         aria-label="Patología observada" aria-describedby="Patología observada">
                     </label>
                   </div>
                   <div class="row">
                     <label class="form-label">
                       Historial
-                      <textarea id="historyInput" type="text" class="form-control" placeholder="Historial del paciente"
+                      <textarea id="historyInput" type="text" class="form-control" placeholder="Historial del paciente" autocomplete="off"
                         aria-label="Historial del paciente" aria-describedby="Historial del paciente"></textarea>
                     </label>
                   </div>

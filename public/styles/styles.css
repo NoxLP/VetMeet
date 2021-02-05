@@ -47,6 +47,19 @@
 .index-on-top {
   z-index: 20000;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /*position: absolute;*/
+  /*top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;*/
+  /*width: 10px;
+  height: 10px;*/
+  /*color: transparent;*/
+  /*background: transparent;*/
+  margin-left: 5px;
+  padding-right: 0;
+}
 #my-signin2 {
   width: 100%;
 }

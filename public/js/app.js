@@ -87,12 +87,8 @@ const fillClinicNameCard = name => {
 }
 const fillPatientsInputs = patientInputs => {
   console.log('fillPatientsInputs')
-  for (let inputId in patientInputs) {
-    if (inputId === 'patientsListInput')
-      continue
-    //All inputs id except patientsListInput, are '[nameOfDTOProperty]Input'
-    patientInputs[inputId].value = patientsDTOs[selectedPatientIndex][inputId.slice(0, -5)]
-  }
+  patientInputs.speciesInput.value = patientsDTOs[selectedPatientIndex]['species']
+  patientInputs.historyInput.value = patientsDTOs[selectedPatientIndex]['history']
 }
 const getTimeStringByHalfHours = halfHourIdx => {
   let hours = pad(Math.floor(halfHourIdx).toString(), 2)
@@ -101,6 +97,7 @@ const getTimeStringByHalfHours = halfHourIdx => {
 }
 const fillMeetingsTimesList = selectedDate => {
   selectedDate = selectedDate.trim()
+  console.log('selDate: ', selectedDate)
   let select = document.getElementById('meetingTimeInput')
   select.innerHTML = ''
   
@@ -113,6 +110,7 @@ const fillMeetingsTimesList = selectedDate => {
   }
   //select.setAttribute('disabled', false)
 }
+const clearMeetingsTimesList = () => document.getElementById('meetingTimeInput').innerHTML = ''
 const getSelectedPatient = value => {
   /*
   - Hay que identificar al paciente no solo por el nombre => nombre y fecha de creación
@@ -184,6 +182,11 @@ const getDateObjectFromDateTimeInputs = () => {
   date.setMinutes(parseInt(timeSplit[1]))
   
   return date
+}
+const addNewDateToMeetingsDTOs = date => {
+  let formatDate = getFormattedDateString(date)
+  let decimalTime = getDecimalTime(date)
+  meetingsDatesDTOs[formatDate] = decimalTime
 }
 //#endregion
 
@@ -262,17 +265,20 @@ function patientsListInputOnFocusOut(e, newMeetingPatientInputs) {
 }
 function datepickerOnChange(e) {
   console.log('datepicker onchange')
-  fillMeetingsTimesList(e.target.value)
+  clearMeetingsTimesList()
+  fillMeetingsTimesList(getFormattedDateString(new Date(e.target.value)))
 }
 function saveMeetingButtonOnClick(newMeetingPatientInputs) {
   //TODO: validation, alerts
   console.log('save meeting ', getDateObjectFromDateTimeInputs())
+  let date = getDateObjectFromDateTimeInputs()
+  addNewDateToMeetingsDTOs(date)
   api.post('/meetings', {
     name: newMeetingPatientInputs.patientsListInput.value.split('-')[0].trim(),
     patientId: patientsDTOs[selectedPatientIndex],
     species: newMeetingPatientInputs.speciesInput.value,
     history: newMeetingPatientInputs.historyInput.value,
-    date: getDateObjectFromDateTimeInputs(),
+    date: date,
     disease: newMeetingPatientInputs.diseaseInput.value
   })
     .then(res => {
@@ -283,6 +289,8 @@ function saveMeetingButtonOnClick(newMeetingPatientInputs) {
         true,
         'Solicitada cita'
       )
+      clearMeetingsTimesList()
+      fillMeetingsTimesList()
     })
     .catch(err => {
       showAlert(
