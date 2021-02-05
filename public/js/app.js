@@ -200,9 +200,9 @@ function updateFieldIfNecessary(e, clinicInputs) {
   let input = clinicInputs[e.target.id]
   let data = clinicData[fieldName] && typeof clinicData[fieldName] === 'string' ? 
     clinicData[fieldName] : 
-    clinicData[fieldName] ?
-    clinicData[fieldName].toString() || '' :
-    ''
+      clinicData[fieldName] ?
+      clinicData[fieldName].toString() || '' :
+      ''
 
   if (input.value !== data)
     updateField(input, fieldName)
