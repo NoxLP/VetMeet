@@ -3,7 +3,7 @@ import {
   MEETINGS_FILTER_CARDS_HTML, 
   getFormattedDateString, 
   getFormattedTimeString, 
-  getMobileCompletedString, 
+  getMobileDoneString, 
   getMobileConfirmedString, 
   setInputValueIfNotFalsie, 
   showAlert, 
@@ -27,7 +27,7 @@ const getMeetingsFilterCard = meetingDTO => {
   card.innerHTML = `<div class="row flex-nowrap">
   <h5 class="col-6">${(new Date(meetingDTO.date)).toLocaleDateString()}</h5>
   <p class="col-3 fs-6 text-nowrap text-end">${getMobileConfirmedString(meetingDTO)}</p>
-  <p class="col-3 fs-6 text-nowrap text-end">${getMobileCompletedString(meetingDTO)}</p>
+  <p class="col-3 fs-6 text-nowrap text-end">${getMobileDoneString(meetingDTO)}</p>
 </div>
 <div class="row d-flex justify-content-between flex-nowrap">
   <h4 class="col mb-0">${meetingDTO.name}</h4>
@@ -117,7 +117,7 @@ const fillMeetingFile = card => {
 
       setInputValueIfNotFalsie(document.getElementById('meetingFileDate'), `${getFormattedDateString(date)}\n${getFormattedTimeString(date)}`, 'innerText')
       setInputValueIfNotFalsie(document.getElementById('meetingFileConfirmed'), getMobileConfirmedString(data), 'innerText')
-      setInputValueIfNotFalsie(document.getElementById('meetingFileCompleted'), getMobileCompletedString(date), 'innerText')
+      setInputValueIfNotFalsie(document.getElementById('meetingFileDone'), getMobileDoneString(date), 'innerText')
       setInputValueIfNotFalsie(document.getElementById('meetingFileNameInput'), data.patient.name)
       setInputValueIfNotFalsie(document.getElementById('meetingFileSpeciesInput'), data.patient.species)
       setInputValueIfNotFalsie(document.getElementById('meetingFileDiseaseInput'), data.disease)
