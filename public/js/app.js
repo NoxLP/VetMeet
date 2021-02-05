@@ -198,7 +198,11 @@ function updateFieldIfNecessary(e, clinicInputs) {
   //console.log(e)
   let fieldName = getBDFieldNameByInputId(e.target.id)
   let input = clinicInputs[e.target.id]
-  let data = clinicData[fieldName] && typeof clinicData[fieldName] === 'string' ? clinicData[fieldName] : clinicData[fieldName].toString() || ''
+  let data = clinicData[fieldName] && typeof clinicData[fieldName] === 'string' ? 
+    clinicData[fieldName] : 
+    clinicData[fieldName] ?
+    clinicData[fieldName].toString() || '' :
+    ''
 
   if (input.value !== data)
     updateField(input, fieldName)
