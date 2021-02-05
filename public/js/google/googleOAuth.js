@@ -1,5 +1,5 @@
 //import { api, goToApp } from "../helpers/helpers.js";
-const BASE_URL = 'http://localhost:3000/api'
+const BASE_URL = 'https://vet-meet.herokuapp.com/api'//'http://localhost:3000/api'
 const api = axios.create({
   baseURL: BASE_URL,
   timeout: 3000
@@ -46,6 +46,7 @@ function onSuccess(googleUser) {
     })
     .catch(err => {
       //TODO: store the real error somewhere
+      console.log(err)
       showAlert(
         'No se pudo loguear con google. Inténtelo de nuevo o contacte con nosotros.',
         false)
