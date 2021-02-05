@@ -13,7 +13,7 @@
 </head>
 
 <body class="bg-body">
-  <header>
+  <header class="mb-md-5">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <a id="signOutMobile" class="nav-link invisible" href="">
@@ -105,35 +105,54 @@
   </aside>
 
   <!--login for mobile-->
-  <section class="container d-md-none">
-    <div class="row justify-content-center mb-0">
+  <section class="container-fluid">
+    <div class="row justify-content-center mb-0 d-md-none">
       <p class="text-center">Si representas a una clínica veterinaria en Lanzarote, puedes concertar una cita con nosotros aquí.</p>
     </div>
-    <div class="row card container-fluid shadow-sm mx-auto p-0 mt-0">
-      <div class="card-body">
-        <div class="row justify-content-center mb-3">
-            <div id="my-signin2">button</div>
-            <button id="goToAppButton" class="btn collapse fade btn-success bg-prim border-0 mt-3" style="width: 280px;" click="goToApp">Seguir con mi cuenta de google</button>
-        </div>
-        <div class="row justify-content-center align-items-center mb-0">
-          <hr class="col-4">
-          <p class="col-2 text-center">o</p>
-          <hr class="col-4">
-        </div>
-        <div class="row justify-content-center align-items-center">
-          <div class="input-group mb-3">
-            <input id="loginEmail" type="email" class="form-control" placeholder="Email" aria-label="Email"
-              aria-describedby="login-email">
+    <div class="row px-2 mt-md-5 mx-md-3 flex-nowrap align-content-center">
+      <div class="col-12 col-md-6 card shadow-sm me-3 mt-0 mt-md-4 mb-md-5 px-md-0 flex-shrink-1 h-md-75">
+        <div class="card-body container ps-md-0 pe-md-5">
+          <div class="row justify-content-center mb-3">
+              <div id="my-signin2">button</div>
+              <button id="goToAppButton" class="btn collapse fade btn-success bg-prim border-0 mt-3" style="width: 280px;" click="goToApp">Seguir con mi cuenta de google</button>
           </div>
-          <div class="input-group mb-3">
-            <input id="loginPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña"
-              aria-describedby="login-password">
+          <div class="row justify-content-center align-items-center mb-0">
+            <hr class="col-4">
+            <p class="col-2 text-center">o</p>
+            <hr class="col-4">
           </div>
-          <button id="loginButton" class="btn btn-success bg-prim border-0 w-50">Log in</button>
+          <div class="row flex-nowrap">
+            <label class="d-none d-md-inline col-md-2 form-label">Email</label>
+              <input id="loginEmail" type="email" class="col col-md-5 form-control" placeholder="Email" aria-label="Email"
+                aria-describedby="login-email">
+          </div>
+          <div class="row flex-nowrap">
+            <label class="d-none d-md-flex col-md-2 form-label">Contraseña</label>
+            <div class="col col-md-10 input-group mb-3">
+              <input id="loginPassword" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña"
+                aria-describedby="login-password">
+            </div>
+          </div>
+          <button id="loginButton" class="row btn btn-success bg-prim border-0 w-50">Log in</button>
         </div>
       </div>
+      <div class="col-0 col-md-6 d-none d-md-flex flex-column flex-shrink-1 ms-md-4">
+        <h4>Si representas a una clínica veterinaria en Lanzarote, puedes concertar una cita con nosotros aquí.</h4>
+        <br>
+        <h4>Puedes identificarte con tu cuenta de google o con tu correo electrónico, también puedes
+          crear un <a href="./citas-signup.html">nuevo usuario aquí</a> con tu email y contraseña...</h4>
+        <br>
+        <h4>¡Sin coste añadido!</h4>
+        <br>
+        <h4>Dispondrás de una web app que te permitirá concertar
+          citas con nosotros y revisar la información de tus
+          citas hasta la fecha.</h4>
+        <br>
+        <h4>Nuestra web app está conectada a la nube, disponible
+          desde cualquier dispositivo móvil...</h4>
+      </div>
     </div>
-    <div class="row justify-content-center mb-4 mt-2">
+    <div class="row d-md-none justify-content-center mb-4 mt-2">
       <p class="text-center">Puedes identificarte con tu cuenta de google o con tu correo electrónico, también puedes
         crear un <a href="./citas-signup.html">nuevo usuario aquí</a> con tu email y contraseña...</p>
       <p class="text-center">¡Sin coste añadido!</p>
@@ -141,12 +160,11 @@
         citas con nosotros y revisar la información de tus
         citas hasta la fecha.</p>
       <p class="text-center">Nuestra web app está conectada a la nube, disponible
-        desde cualquier dispositivo móvil, conectada con tu
-        google calendar...</p>
+        desde cualquier dispositivo móvil...</p>
     </div>
   </section>
 
-  <footer>
+  <footer class="fixed-bottom">
     <div class="container-fluid bg-dark mx-0 px-0 text-white">
       <div class="row">
         <p class="col-7 col-md-3 fs-6 fs-md-5">@Patricia... | Todos los derechos reservados</p>
