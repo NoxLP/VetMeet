@@ -186,7 +186,12 @@ const getDateObjectFromDateTimeInputs = () => {
 const addNewDateToMeetingsDTOs = date => {
   let formatDate = getFormattedDateString(date)
   let decimalTime = getDecimalTime(date)
-  meetingsDatesDTOs[formatDate].push(decimalTime)
+  if(meetingsDatesDTOs[formatDate] && Array.isArray(meetingsDatesDTOs[formatDate])) {
+    meetingsDatesDTOs[formatDate].push(decimalTime)
+  } else {
+    meetingsDatesDTOs[formatDate] = [decimalTime]
+  }
+  
   console.log('after adding new meeting: ', meetingsDatesDTOs)
 }
 //#endregion
