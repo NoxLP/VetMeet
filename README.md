@@ -1,4 +1,4 @@
-# VetWeb
+# VetMeet
 ## Description
 
 Second project of [Reboot Full Stack Web Developer bootcamp](https://www.reboot.academy/bootcamps/) consisting in a web app to manage  
