@@ -154,7 +154,7 @@ const mapMeetingsFilterDTOs = meetings => {
         confirmed: m.confirmed,
         done: m.done,
         name: m.patient.name,
-        specied: m.patient.species
+        species: m.patient.species
       }
     })
 }
