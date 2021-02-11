@@ -9,10 +9,10 @@ to retrieve the data from a non relational [Mongo Atlas database](https://www.mo
 
 The front is mainly bootstrap, with axios to send requests to the back.
 
-All is mixed up with javascript ES6 and html5, among other utilities thath you can found on [npm](https://www.npmjs.com/) like bcrypt,   
+All is mixed up with javascript ES6 and html5, among other utilities that you can find on [npm](https://www.npmjs.com/) like bcrypt,   
 cors, helmet, dotenv, jsonwebtoken and morgan.
 
-The page and web app is currently deployed on [Heroku](https://heroku.com), [here](https://vet-meet.herokuapp.com/) (only mobile version currently).
+The page and web app is currently deployed on [Heroku](https://heroku.com), [here](https://vet-meet.herokuapp.com/) (only mobile version yet, you know, mobile first and what not).
 
 ## Installation
 Simple enough, run `npm install` in your console and you're ready to go.
@@ -51,7 +51,7 @@ The model consists on the 4 collections described below:
 |history|String|
 |clinics|[ObjectId](clinics ref array)|
 |meetings|[ObjectId](meetings ref array)|
-|meetings|[ObjectId]|
+|createdAt|Number(timestamp)|
 
 ### Meetings:
 | Field | Type |
@@ -65,7 +65,7 @@ The model consists on the 4 collections described below:
 |confirmed|Boolean|
 |clinic|ObjectId|
 |patient|ObjectId|
-|confirmed|Boolean|
+|createdAt|Number(timestamp)|
 
 There are some DTOs too that are used along the app witch includes the following 
 fields:
@@ -96,20 +96,23 @@ The endpoints below require to be authenticated as user.
 
 - ### Users (requires to be authenticated as user)
 |Done|Verb|Route|Description|Auth.
-|-|-|-|-|
-|:heavy_check_mark:|GET|**/users/me**|Get current authenticated user's data<a name="fn1"><sup>1</sup></a>|User
-|:heavy_check_mark:|GET|**/users/userId**|Get user data by id<a name="fn1"><sup>1</sup></a>|Admin user
-|:heavy_check_mark:|GET|**/users**|Get all users data<a name="fn1"><sup>1</sup></a>|Admin user
-|:heavy_check_mark:|PUT|**/users/me**|Update current authenticated user's data<a name="fn1"><sup>1</sup></a>|User
-|:heavy_check_mark:|PUT|**/users/userId**|Update user data by id<a name="fn1"><sup>1</sup></a>|Admin user
-||PUT|**/users/userEmail**|Update user data by email<a name="fn1"><sup>1</sup></a>|Admin user
-|:heavy_check_mark:|DELETE|**/users/userId**|Delete an user by id<a name="fn1"><sup>1</sup></a>|Admin user
-||DELETE|**/users/userEmail**|Delete an user by email<a name="fn1"><sup>1</sup></a>|Admin user
+|-|-|-|-|-|
+| :heavy_check_mark: |GET|**/users/me**|Get current authenticated user's data<a name="fn1"><sup>1</sup></a>|User
+| :heavy_check_mark: |GET|**/users/userId**|Get user data by id<a name="fn1"><sup>1</sup></a>|Admin user
+| :heavy_check_mark: |GET|**/users**|Get all users data<a name="fn1"><sup>1</sup></a>|Admin user
+| :heavy_check_mark: |PUT|**/users/me**|Update current authenticated user's data<a name="fn1"><sup>1</sup></a>|User
+| :heavy_check_mark: |PUT|**/users/userId**|Update user data by id<a name="fn1"><sup>1</sup></a>|Admin user
+| |PUT|**/users/userEmail**|Update user data by email<a name="fn1"><sup>1</sup></a>|Admin user
+| :heavy_check_mark: |DELETE|**/users/userId**|Delete an user by id<a name="fn1"><sup>1</sup></a>|Admin user
+| |DELETE|**/users/userEmail**|Delete an user by email<a name="fn1"><sup>1</sup></a>|Admin user
 
 
 ## 
 
 All the endpoints below require to be authenticated as clinic, exceptions are indicated.
+
+Where possible, pagination ("Pag.") is used with limit and page. You know how it goes: limit are the items per page, page is the page to get from 0 to whatever.
+
 
 - ### Clinics
 |Verb|Route|Description|
@@ -119,9 +122,9 @@ All the endpoints below require to be authenticated as clinic, exceptions are in
 
 - ### Patients
 |Done|Verb|Route|Description|Pag.|Auth.
-|-|-|-|-|-|
-|:heavy_check_mark:|GET|**/patients/dtos**|Get all *Patient DTO* objects|Yes|
-|:heavy_check_mark:|POST|**/patients**|Create new patient with data patient's name in the body|User or clinic
+|-|-|-|-|-|-|
+| :heavy_check_mark: |GET|**/patients/dtos**|Get all *Patient DTO* objects|Yes|
+| :heavy_check_mark: |POST|**/patients**|Create new patient with data patient's name in the body| |User or clinic
 ||PUT|**/patients/patientId**|Update patient with id in the parameter with data in the body(maybe will be omitted, since the patient can be updated in other ways)
 ||DELETE|**/patients/patientId**|Remove patient with id in the parameter
 
