@@ -1,4 +1,4 @@
-# VetWeb
+# VetMeet
 ## Description
 
 Second project of [Reboot Full Stack Web Developer bootcamp](https://www.reboot.academy/bootcamps/) consisting in a web app to manage  
@@ -9,10 +9,10 @@ to retrieve the data from a non relational [Mongo Atlas database](https://www.mo
 
 The front is mainly bootstrap, with axios to send requests to the back.
 
-All is mixed up with javascript ES6 and html5, among other utilities thath you can found on [npm](https://www.npmjs.com/) like bcrypt,   
+All is mixed up with javascript ES6 and html5, among other utilities that you can find on [npm](https://www.npmjs.com/) like bcrypt,   
 cors, helmet, dotenv, jsonwebtoken and morgan.
 
-The page and web app is deployed on [Heroku](https://heroku.com), [here]() (nah, not yet... waiting for the first release...).
+The page and web app is currently deployed on [Heroku](https://heroku.com), [here](https://vet-meet.herokuapp.com/) (only mobile version yet, you know, mobile first and what not).
 
 ## Installation
 Simple enough, run `npm install` in your console and you're ready to go.
@@ -35,95 +35,109 @@ The model consists on the 4 collections described below:
 | Field | Type |
 |-------|------|
 |name|String|
-|address|String|
 |email|String|
 |password|String|
+|address|String|
 |telephone|Number|
 |contactPerson|String|
+|patients|[ObjectId](patients ref array)|
 |createdAt|Number(timestamp)|
 
 ### Patients:
 | Field | Type |
 |-------|------|
 |name|String|
-|users|[ObjectId]|
 |species|String|
 |history|String|
-|meetings|[ObjectId]|
+|clinics|[ObjectId](clinics ref array)|
+|meetings|[ObjectId](meetings ref array)|
+|createdAt|Number(timestamp)|
 
 ### Meetings:
 | Field | Type |
 |-------|------|
 |date|Date|
-|user|ObjectId|
-|patient|ObjectId|
 |disease|String|
 |surgery|String|
 |treatment|String|
 |notes|String|
 |done|Boolean|
 |confirmed|Boolean|
+|clinic|ObjectId|
+|patient|ObjectId|
+|createdAt|Number(timestamp)|
 
 There are some DTOs too that are used along the app witch includes the following 
 fields:
 
-- ### Patient DTO
-    Name, species, history
-- ### Meeting date DTO
+- ### Patient DTOs
+    Name, species, history, createdAt
+- ### Meeting date DTOs
     Date
-- ### Meetings/Patients filter DTO
-    - Meetings: date, disease, surgery, confirmed, done
+- ### Filter DTOs
+    - Meetings: \_id, date, disease, surgery, confirmed, done
     - Patients: name, species
 
-## Planned API endpoints @ 23.01.2021
+## API endpoints @ 11.02.2021
 All the endpoints are preceeded by `/api`.
 
 - ### Auth
 |Verb|Route|Description|
 |-|-|-|
-|POST| **/auth/users/login** |Typical log in with data in the body.<a name="fn1"><sup>1</sup></a>
+|POST|**/auth/users/login** |Typical log in with data in the body.<a name="fn1"><sup>1</sup></a>
 |POST|**/auth/users/signup**|More typical sign up with data in the body.<a name="fn1"><sup>1</sup></a>
-|POST| **/auth/clinics/login** |Typical log in with data in the body.
+|POST|**/auth/clinics/login** |Typical log in with data in the body.
 |POST|**/auth/clinics/signup**|More typical sign up with data in the body.|
+|POST|**/auth/clinics/googleLogin**|Login/signup with google. Google token should be provided in the body.
 
 ## 
 
 The endpoints below require to be authenticated as user.
 
 - ### Users (requires to be authenticated as user)
-|Verb|Route|Description|
-|-|-|-|
-|GET|**/users**|Get current authenticated user's data<a name="fn1"><sup>1</sup></a>|
-|PUT|**/users/userEmail**|Update current authenticated user's data<a name="fn1"><sup>1</sup></a>|
-|DELETE|**/users/userEmail**|Delete an user<a name="fn1"><sup>1</sup></a>
+|Done|Verb|Route|Description|Auth.
+|-|-|-|-|-|
+| :heavy_check_mark: |GET|**/users/me**|Get current authenticated user's data<a name="fn1"><sup>1</sup></a>|User
+| :heavy_check_mark: |GET|**/users/userId**|Get user data by id<a name="fn1"><sup>1</sup></a>|Admin user
+| :heavy_check_mark: |GET|**/users**|Get all users data<a name="fn1"><sup>1</sup></a>|Admin user
+| :heavy_check_mark: |PUT|**/users/me**|Update current authenticated user's data<a name="fn1"><sup>1</sup></a>|User
+| :heavy_check_mark: |PUT|**/users/userId**|Update user data by id<a name="fn1"><sup>1</sup></a>|Admin user
+| |PUT|**/users/userEmail**|Update user data by email<a name="fn1"><sup>1</sup></a>|Admin user
+| :heavy_check_mark: |DELETE|**/users/userId**|Delete an user by id<a name="fn1"><sup>1</sup></a>|Admin user
+| |DELETE|**/users/userEmail**|Delete an user by email<a name="fn1"><sup>1</sup></a>|Admin user
+
 
 ## 
 
-All the endpoints below require to be authenticated as clinic or user.
+All the endpoints below require to be authenticated as clinic, exceptions are indicated.
+
+Where possible, pagination ("Pag.") is used with limit and page. You know how it goes: limit are the items per page, page is the page to get from 0 to whatever.
+
 
 - ### Clinics
 |Verb|Route|Description|
 |-|-|-|
-|GET|**/clinics**|Get current authenticated user's data|
-|PUT|**/clinics**|Update current authenticated user's data|
+|GET|**/clinics/me**|Get current authenticated user's data|
+|PUT|**/clinics/me**|Update current authenticated user's data|
 
 - ### Patients
-|Verb|Route|Description|Pag.|
-|-|-|-|-|
-|GET|**/patients/dtos**|Get all *Patient DTO* objects|Yes|
-|POST|**/patients**|Create new patient with data patient's name in the body
-|PUT|**/patients/patientId**|Update patient with id in the parameter with data in the body|
-|DELETE|**/patients/patientId**|Remove patient with id in the parameter
+|Done|Verb|Route|Description|Pag.|Auth.
+|-|-|-|-|-|-|
+| :heavy_check_mark: |GET|**/patients/dtos**|Get all *Patient DTO* objects|Yes|
+| :heavy_check_mark: |POST|**/patients**|Create new patient with data patient's name in the body| |User or clinic
+||PUT|**/patients/patientId**|Update patient with id in the parameter with data in the body(maybe will be omitted, since the patient can be updated in other ways)
+||DELETE|**/patients/patientId**|Remove patient with id in the parameter
 
 
 - ### Meetings
-|Verb|Route|Description|Pag.|
-|-|-|-|-|
-|GET|**/meetings/dtos/date**|Get all *Meeting date DTO* objects|Yes
+|Verb|Route|Description|Pag.|Auth.|
+|-|-|-|-|-|
+|GET|**/meetings/dtos/date**|Get all *Meeting date DTO* objects|Yes|User or clinic
 |GET|**/meetings/dtos/filter**|Get query filtered *Meetings/Patients filter DTO* objects|Yes
-|GET|**/meetings/patientId**|Get meeting and meeting's patient data to show meeting file
-|POST|**/meetings**|Create new meeting with data in the body|
-|PUT|**/meetings/meetingId/patients/patientId**|Update showing file meeting and meeting's patient data
+|GET|**/meetings/meetingId**|Get meeting and meeting's patient data to show meeting file||User or clinic
+|POST|**/meetings**|Create new meeting with data in the body
+|PUT|**/meetings/meetingId**|Update showing file meeting and meeting's patient data
+|DELETE|**/meetings/meetingId**|Remove meeting by id
 
 # 
 
